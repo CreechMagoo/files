@@ -40,6 +40,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Spritefont2.Cnds.CompareInstanceVar,
 		C3.Plugins.Spritefont2.Cnds.IsOnLayer,
 		C3.Plugins.PlatformInfo.Cnds.IsWindowsWebView2Export,
+		C3.Plugins.PlatformInfo.Cnds.IsLinuxCEFExport,
 		C3.Plugins.Spritefont2.Acts.Destroy,
 		C3.Plugins.System.Cnds.CompareBoolVar,
 		C3.Plugins.Audio.Acts.Play,
