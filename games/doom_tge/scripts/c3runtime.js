@@ -510,7 +510,7 @@ const C3=self.C3,C3X=self.C3X,map=new WeakMap,internalApiToken=C3._GetInternalAP
 
 // interfaces/sdk/ISDKWorldInstanceBase.js
 {
-const C3=self.C3,C3X=self.C3X,map=new WeakMap,internalApiToken=C3._GetInternalAPIToken();self.ISDKWorldInstanceBase=class extends self.IWorldInstanceSDKBase{#e;#r=null;#t=null;constructor(e){super(e),this.#e=C3.AddonManager._GetInitObject2(internalApiToken)}_release(){if(super._release(),this.#r){const e=this.#e.GetRuntime().Dispatcher();e.removeEventListener("renderercontextlost",this.#r),e.removeEventListener("renderercontextrestored",this.#t),this.#r=null,this.#t=null}}_handleRendererContextLoss(){if(this.#r)return;this.#r=()=>this._onRendererContextLost(),this.#t=()=>this._onRendererContextRestored();const e=this.#e.GetRuntime().Dispatcher();e.addEventListener("renderercontextlost",this.#r),e.addEventListener("renderercontextrestored",this.#t)}_onRendererContextLost(){}_onRendererContextRestored(){}_draw(e){}};
+const C3=self.C3,C3X=self.C3X,map=new WeakMap,internalApiToken=C3._GetInternalAPIToken();self.ISDKWorldInstanceBase=class extends self.IWorldInstanceSDKBase{#e;#r=null;#t=null;constructor(e){super(e),this.#e=C3.AddonManager._GetInitObject2(internalApiToken)}_release(){if(super._release(),this.#r){const e=this.#e.GetRuntime().Dispatcher();e.removeEventListener("renderercontextlost",this.#r),e.removeEventListener("renderercontextrestored",this.#t),this.#r=null,this.#t=null}}_handleRendererContextLoss(){if(this.#r)return;this.#r=()=>this._onRendererContextLost(),this.#t=()=>this._onRendererContextRestored();const e=this.#e.GetRuntime().Dispatcher();e.addEventListener("renderercontextlost",this.#r),e.addEventListener("renderercontextrestored",this.#t)}_onRendererContextLost(){}_onRendererContextRestored(){}_draw(e){}_rendersToOwnZPlane(){return!0}_mustPreDraw(){return!1}};
 }
 
 // interfaces/sdk/ISDKDOMInstanceBase.js
@@ -545,7 +545,7 @@ const C3=self.C3,C3X=self.C3X;self.ILoopingConditionContext=class{#e;#t;#o;#n;#s
 
 // interfaces/gfx/IRenderer.js
 {
-const C3=self.C3,C3X=self.C3X;let renderer=null,runtime=null;function IsStaticTextureDataType(e){return e instanceof ImageBitmap||"undefined"!=typeof HTMLImageElement&&e instanceof HTMLImageElement||"undefined"!=typeof HTMLCanvasElement&&e instanceof HTMLCanvasElement||"undefined"!=typeof OffscreenCanvas&&e instanceof OffscreenCanvas}const CULL_MODE_ARR=["none","back","front"],FRONT_FACE_WINDING_ARR=["cw","ccw"];self.IRenderer=class{constructor(e,r){runtime=e,renderer=r}setAlphaBlendMode(){renderer.SetAlphaBlend()}setBlendMode(e){renderer.SetNamedBlendMode(e)}setColorFillMode(){renderer.SetColorFillMode()}setTextureFillMode(){renderer.SetTextureFillMode()}setSmoothLineFillMode(){renderer.SetSmoothLineFillMode()}setColor(e){renderer.SetColorRgba(e[0],e[1],e[2],e[3])}setColorRgba(e,r,n,t){renderer.SetColorRgba(e,r,n,t)}resetColor(){renderer.ResetColor()}setOpacity(e){renderer.SetOpacity(e)}setCurrentZ(e){renderer.SetCurrentZ(e)}getCurrentZ(){renderer.GetCurrentZ()}setCullFaceMode(e){const r=CULL_MODE_ARR.indexOf(e);if(-1===r)throw new Error("invalid cull mode");renderer.SetCullFaceMode(r)}getCullFaceMode(){return CULL_MODE_ARR[renderer.GetCullFaceMode()]}setFrontFaceWinding(e){const r=FRONT_FACE_WINDING_ARR.indexOf(e);if(-1===r)throw new Error("invalid front face winding");renderer.SetFrontFaceWinding(r)}getFrontFaceWinding(){return renderer.GetFrontFaceWinding()}rect(e){renderer.Rect2(e.left,e.top,e.right,e.bottom)}rect2(e,r,n,t){renderer.Rect2(e,r,n,t)}quad(e){renderer.Quad(C3.Quad.fromDOMQuad(e))}quad2(e,r,n,t,a,d,i,o){renderer.Quad2(e,r,n,t,a,d,i,o)}quad3(e,r){renderer.Quad3(C3.Quad.fromDOMQuad(e),C3.Rect.fromDOMRect(r))}quad4(e,r){renderer.Quad4(C3.Quad.fromDOMQuad(e),C3.Quad.fromDOMQuad(r))}quad5(e,r,n){renderer.Quad5(C3.Quad.fromDOMQuad(e),C3.Quad.fromDOMQuad(r),n)}quad3D(e,r,n,t,a,d,i,o,u,l,c,s,p){renderer.Quad3D(e,r,n,t,a,d,i,o,u,l,c,s,C3.Rect.fromDOMRect(p))}quad3D2(e,r,n,t,a,d,i,o,u,l,c,s,p){renderer.Quad3D2(e,r,n,t,a,d,i,o,u,l,c,s,C3.Quad.fromDOMQuad(p))}quad3D3(e,r,n,t,a,d,i,o,u,l,c,s,p,f){renderer.Quad3D3(e,r,n,t,a,d,i,o,u,l,c,s,C3.Quad.fromDOMQuad(p),f)}drawMesh(e,r,n,t){renderer.DrawMesh(e,r,n,t)}convexPoly(e){renderer.ConvexPoly(e)}line(e,r,n,t){renderer.Line(e,r,n,t)}texturedLine(e,r,n,t,a,d){renderer.TexturedLine(e,r,n,t,a,d)}lineRect(e,r,n,t){renderer.LineRect(e,r,n,t)}lineRect2(e){renderer.LineRect2(C3.Rect.fromDOMRect(e))}lineQuad(e){renderer.LineQuad(C3.Quad.fromDOMQuad(e))}pushLineWidth(e){renderer.PushLineWidth(e)}popLineWidth(){renderer.PopLineWidth()}pushLineCap(e){renderer.PushLineCap(e)}popLineCap(){renderer.PopLineCap()}setTexture(e){C3X.RequireOptionalInstanceOf(e,self.ITexture);const r=e?runtime._UnwrapScriptInterface(e):null;renderer.SetTexture(r)}loadTextureForImageInfo(e,r){const n=self.IImageInfo._Unwrap(e);if(!n)throw new Error("invalid IImageInfo");return n.LoadStaticTexture(renderer,{wrapX:r?.wrapX??"clamp-to-edge",wrapY:r?.wrapY??"clamp-to-edge",sampling:r?.sampling??"trilinear",mipMap:r?.mipMap??!0})}releaseTextureForImageInfo(e){const r=self.IImageInfo._Unwrap(e);if(!r)throw new Error("invalid IImageInfo");r.ReleaseTexture()}getTextureForImageInfo(e){const r=self.IImageInfo._Unwrap(e);if(!r)throw new Error("invalid IImageInfo");const n=r.GetTexture();return self.ITexture.GetInterface(runtime,n)}createStaticTexture(e,r){if(!IsStaticTextureDataType(e))throw new TypeError("invalid texture data");const n=renderer.CreateStaticTexture(e,{wrapX:r?.wrapX??"clamp-to-edge",wrapY:r?.wrapY??"clamp-to-edge",sampling:r?.sampling??"trilinear",mipMap:r?.mipMap??!0});return self.ITexture.GetInterface(runtime,n)}createDynamicTexture(e,r,n){C3X.RequireFiniteNumber(e),C3X.RequireFiniteNumber(r);const t=renderer.CreateDynamicTexture(e,r,{wrapX:n?.wrapX??"clamp-to-edge",wrapY:n?.wrapY??"clamp-to-edge",sampling:n?.sampling??"trilinear",mipMap:n?.mipMap??!0});return self.ITexture.GetInterface(runtime,t)}updateTexture(e,r,n){C3X.RequireInstanceOf(r,self.ITexture);const t=runtime._UnwrapScriptInterface(r);renderer.UpdateTexture(e,t,{premultiplyAlpha:n?.premultiplyAlpha??!0})}deleteTexture(e){C3X.RequireInstanceOf(e,self.ITexture);const r=runtime._UnwrapScriptInterface(e);renderer.DeleteTexture(r)}createRendererText(){const e=renderer.CreateRendererText();return new self.IRendererText(runtime,e)}setDeviceTransform(){runtime.GetCanvasManager().SetDeviceTransform(renderer)}setLayerTransform(e){C3X.RequireInstanceOf(e,globalThis.ILayer);runtime._UnwrapScriptInterface(e)._SetTransform(renderer)}};
+const C3=self.C3,C3X=self.C3X;let renderer=null,runtime=null;function IsStaticTextureDataType(e){return e instanceof ImageBitmap||"undefined"!=typeof HTMLImageElement&&e instanceof HTMLImageElement||"undefined"!=typeof HTMLCanvasElement&&e instanceof HTMLCanvasElement||"undefined"!=typeof OffscreenCanvas&&e instanceof OffscreenCanvas}const CULL_MODE_ARR=["none","back","front"],FRONT_FACE_WINDING_ARR=["cw","ccw"];self.IRenderer=class{constructor(e,r){runtime=e,renderer=r}setAlphaBlendMode(){renderer.SetAlphaBlend()}setBlendMode(e){renderer.SetNamedBlendMode(e)}setColorFillMode(){renderer.SetColorFillMode()}setTextureFillMode(){renderer.SetTextureFillMode()}setSmoothLineFillMode(){renderer.SetSmoothLineFillMode()}setColor(e){renderer.SetColorRgba(e[0],e[1],e[2],e[3])}setColorRgba(e,r,n,t){renderer.SetColorRgba(e,r,n,t)}resetColor(){renderer.ResetColor()}setOpacity(e){renderer.SetOpacity(e)}setCurrentZ(e){renderer.SetCurrentZ(e)}getCurrentZ(){return renderer.GetCurrentZ()}setCullFaceMode(e){const r=CULL_MODE_ARR.indexOf(e);if(-1===r)throw new Error("invalid cull mode");renderer.SetCullFaceMode(r)}getCullFaceMode(){return CULL_MODE_ARR[renderer.GetCullFaceMode()]}setFrontFaceWinding(e){const r=FRONT_FACE_WINDING_ARR.indexOf(e);if(-1===r)throw new Error("invalid front face winding");renderer.SetFrontFaceWinding(r)}getFrontFaceWinding(){return renderer.GetFrontFaceWinding()}rect(e){renderer.Rect2(e.left,e.top,e.right,e.bottom)}rect2(e,r,n,t){renderer.Rect2(e,r,n,t)}quad(e){renderer.Quad(C3.Quad.fromDOMQuad(e))}quad2(e,r,n,t,a,d,i,o){renderer.Quad2(e,r,n,t,a,d,i,o)}quad3(e,r){renderer.Quad3(C3.Quad.fromDOMQuad(e),C3.Rect.fromDOMRect(r))}quad4(e,r){renderer.Quad4(C3.Quad.fromDOMQuad(e),C3.Quad.fromDOMQuad(r))}quad5(e,r,n){renderer.Quad5(C3.Quad.fromDOMQuad(e),C3.Quad.fromDOMQuad(r),n)}quad3D(e,r,n,t,a,d,i,o,u,l,c,s,p){renderer.Quad3D(e,r,n,t,a,d,i,o,u,l,c,s,C3.Rect.fromDOMRect(p))}quad3D2(e,r,n,t,a,d,i,o,u,l,c,s,p){renderer.Quad3D2(e,r,n,t,a,d,i,o,u,l,c,s,C3.Quad.fromDOMQuad(p))}quad3D3(e,r,n,t,a,d,i,o,u,l,c,s,p,f){renderer.Quad3D3(e,r,n,t,a,d,i,o,u,l,c,s,C3.Quad.fromDOMQuad(p),f)}drawMesh(e,r,n,t){renderer.DrawMesh(e,r,n,t)}convexPoly(e){renderer.ConvexPoly(e)}line(e,r,n,t){renderer.Line(e,r,n,t)}texturedLine(e,r,n,t,a,d){renderer.TexturedLine(e,r,n,t,a,d)}lineRect(e,r,n,t){renderer.LineRect(e,r,n,t)}lineRect2(e){renderer.LineRect2(C3.Rect.fromDOMRect(e))}lineQuad(e){renderer.LineQuad(C3.Quad.fromDOMQuad(e))}pushLineWidth(e){renderer.PushLineWidth(e)}popLineWidth(){renderer.PopLineWidth()}pushLineCap(e){renderer.PushLineCap(e)}popLineCap(){renderer.PopLineCap()}setTexture(e){C3X.RequireOptionalInstanceOf(e,self.ITexture);const r=e?runtime._UnwrapScriptInterface(e):null;renderer.SetTexture(r)}loadTextureForImageInfo(e,r){const n=self.IImageInfo._Unwrap(e);if(!n)throw new Error("invalid IImageInfo");return n.LoadStaticTexture(renderer,{wrapX:r?.wrapX??"clamp-to-edge",wrapY:r?.wrapY??"clamp-to-edge",sampling:r?.sampling??"trilinear",mipMap:r?.mipMap??!0})}releaseTextureForImageInfo(e){const r=self.IImageInfo._Unwrap(e);if(!r)throw new Error("invalid IImageInfo");r.ReleaseTexture()}getTextureForImageInfo(e){const r=self.IImageInfo._Unwrap(e);if(!r)throw new Error("invalid IImageInfo");const n=r.GetTexture();return self.ITexture.GetInterface(runtime,n)}createStaticTexture(e,r){if(!IsStaticTextureDataType(e))throw new TypeError("invalid texture data");const n=renderer.CreateStaticTexture(e,{wrapX:r?.wrapX??"clamp-to-edge",wrapY:r?.wrapY??"clamp-to-edge",sampling:r?.sampling??"trilinear",mipMap:r?.mipMap??!0});return self.ITexture.GetInterface(runtime,n)}createDynamicTexture(e,r,n){C3X.RequireFiniteNumber(e),C3X.RequireFiniteNumber(r);const t=renderer.CreateDynamicTexture(e,r,{wrapX:n?.wrapX??"clamp-to-edge",wrapY:n?.wrapY??"clamp-to-edge",sampling:n?.sampling??"trilinear",mipMap:n?.mipMap??!0});return self.ITexture.GetInterface(runtime,t)}updateTexture(e,r,n){C3X.RequireInstanceOf(r,self.ITexture);const t=runtime._UnwrapScriptInterface(r);renderer.UpdateTexture(e,t,{premultiplyAlpha:n?.premultiplyAlpha??!0})}deleteTexture(e){C3X.RequireInstanceOf(e,self.ITexture);const r=runtime._UnwrapScriptInterface(e);renderer.DeleteTexture(r)}createRendererText(){const e=renderer.CreateRendererText();return new self.IRendererText(runtime,e)}setDeviceTransform(){runtime.GetCanvasManager().SetDeviceTransform(renderer)}setLayerTransform(e){C3X.RequireInstanceOf(e,globalThis.ILayer);runtime._UnwrapScriptInterface(e)._SetTransform(renderer)}};
 }
 
 // interfaces/gfx/ITexture.js
@@ -1010,7 +1010,7 @@ const C3=self.C3;C3.Container=class extends C3.DefendedBase{constructor(e,t){sup
 
 // objects/instance.js
 {
-const C3=self.C3,C3Debugger=self.C3Debugger,IInstance=self.IInstance,originalAddonManager=C3.AddonManager,EMPTY_ARRAY=[];let nextPuid=0;const savedDataMaps=new WeakMap,unsavedDataMaps=new WeakMap,FLAG_DESTROYED=1,FLAG_TILEMAP=2,FLAG_MUST_PREDRAW=4,FLAG_SOLID_ENABLED=8,FLAG_JUMPTHRU_ENABLED=16,FLAG_MUST_MITIGATE_Z_FIGHTING=32,FLAG_IS_DRAWING_WITH_EFFECTS=64;C3.Instance=class extends C3.DefendedBase{constructor(t){if(C3.AddonManager!==originalAddonManager)throw new Error("invalid addon manager");super(),this._runtime=t.runtime,this._objectType=t.objectType,this._worldInfo=null,this._sdkInst=null,this._iScriptInterface=null,this._iid=0,this._uid=t.uid,this._puid=nextPuid++,this._flags=0,this._tagsSet=null;const e=C3.splitStringAndNormalize(t.tags);e.length>0&&(this._tagsSet=new Set(e)),this._instVarValues=EMPTY_ARRAY,this._behaviorInstances=EMPTY_ARRAY;const s=this._objectType.GetBehaviorTypesIncludingInherited();s.length>0&&(this._behaviorInstances=s.map((t,e)=>C3.New(C3.BehaviorInstance,{runtime:this._runtime,behaviorType:t,instance:this,index:e}))),this._siblings=this._objectType.IsInContainer()?[]:null,this._timeScale=-1,this._dispatcher=null;const n=this.GetPlugin();if(n.MustPreDraw()&&(this._flags|=4),n.IsWorldType())if(this._worldInfo=C3.New(C3.WorldInfo,this,t.layer),t.worldData)this._worldInfo.Init(t.worldData);else{this._worldInfo.InitNoData();const[t,e]=this._objectType.GetDefaultInstanceSize();this._worldInfo.SetSize(t,e),this.GetObjectClass().UsesEffects()&&this._worldInfo.GetInstanceEffectList().LoadDefaultEffectParameters()}t.instVarData?this._LoadInstanceVariableData(t.instVarData):this._LoadDefaultInstanceVariables()}Release(){if(this._iScriptInterface&&(this._iScriptInterface._release(),this._iScriptInterface=null),this._behaviorInstances.length>0){for(const t of this._behaviorInstances)t.Release();C3.clearArray(this._behaviorInstances)}this._sdkInst&&(this._sdkInst.Release(),this._sdkInst=null);const t=savedDataMaps.get(this);t&&(t.clear(),savedDataMaps.delete(this));const e=unsavedDataMaps.get(this);e&&(e.clear(),unsavedDataMaps.delete(this)),this._siblings&&C3.clearArray(this._siblings),this._dispatcher&&(this._dispatcher.Release(),this._dispatcher=null),this._tagsSet&&this._tagsSet.clear(),this._tagsSet=null,this._runtime=null,this._objectType=null,this._instVarValues.length>0&&C3.clearArray(this._instVarValues),this._worldInfo&&(this._worldInfo.Release(),this._worldInfo=null)}_LoadInstanceVariableData(t){t.length>0&&(this._instVarValues=[],C3.shallowAssignArray(this._instVarValues,t))}_LoadDefaultInstanceVariables(){const t=this._objectType.GetInstanceVariablesCount();if(0===t)return;this._instVarValues=[];const e=[0,0,""];for(let s=0;s<t;++s)this._instVarValues.push(e[this._objectType.GetInstanceVariableType(s)])}_CreateSdkInstance(t,e){if(this._sdkInst)throw new Error("already got sdk instance");for(let t=0,s=this._behaviorInstances.length;t<s;++t){this._behaviorInstances[t]._CreateSdkInstance(e?e[t]:null)}if(this.GetPlugin().GetSdkVersion()<2){if(this._sdkInst=C3.New(this._objectType.GetInstanceSdkCtor(),this,t),!(this._sdkInst instanceof C3.SDKInstanceBase))throw new Error("sdk type must derive from SDKInstanceBase");!this.GetPlugin().IsWorldType()&&this._objectType._GetUserScriptInstanceClass()&&this.GetInterfaceClass()}else{const e=this.GetPlugin().GetScriptInterfaceClass();this._InitUserScriptInterface(e.Instance,t)}}GetSdkInstance(){return this._sdkInst??this._iScriptInterface}GetWorldInfo(){return this._worldInfo}GetRuntime(){return this._runtime}GetTimeScale(){return this._timeScale}GetActiveTimeScale(){const t=this._timeScale;return-1===t?this.GetRuntime().GetTimeScale():t}SetTimeScale(t){((t=+t)<0||!isFinite(t))&&(t=0),this._timeScale=t,this.GetObjectClass().UsesEffects()&&this._runtime._SetTrackingInstanceTime(this,!0)}RestoreTimeScale(){this._timeScale=-1,this.GetObjectClass().UsesEffects()&&this._runtime._SetTrackingInstanceTime(this,!1)}GetInstanceGameTime(){return this._runtime._GetInstanceGameTime(this)}Dispatcher(){return this._dispatcher||(this._dispatcher=C3.New(C3.Event.Dispatcher)),this._dispatcher}Draw(t){this._sdkInst?this._sdkInst.Draw(t):this._iScriptInterface._draw(this._runtime.GetCanvasManager().GetIRenderer())}OnCreate(t){this._sdkInst.OnCreate(t)}_SetHasTilemap(){this._flags|=2}HasTilemap(){return!!(2&this._flags)}_MarkDestroyed(){this._flags|=1}IsDestroyed(){return!!(1&this._flags)}MustPreDraw(){return!!(4&this._flags)||this._sdkInst.MustPreDraw()}SetMustMitigateZFighting(){this._flags|=32}MustMitigateZFighting(){return!!(32&this._flags)}_IsSolidEnabled(){return!!(8&this._flags)}_SetSolidEnabled(t){t?this._flags|=8:this._flags&=-9}_IsJumpthruEnabled(){return!!(16&this._flags)}_SetJumpthruEnabled(t){t?this._flags|=16:this._flags&=-17}_IsDrawingWithEffects(){return!!(64&this._flags)}_SetIsDrawingWithEffects(t){t?this._flags|=64:this._flags&=-65}SetFlag(t,e){t<<=16,e?this._flags|=t:this._flags&=~t}GetFlag(t){return!!(this._flags&t<<16)}GetCurrentImageInfo(){return this._sdkInst.GetCurrentImageInfo()}GetCurrentSurfaceSize(){return this._sdkInst.GetCurrentSurfaceSize()}GetCurrentTexRect(){return this._sdkInst.GetCurrentTexRect()}GetCurrentTexQuad(){return this._sdkInst.GetCurrentTexQuad()}IsCurrentTexRotated(){return this._sdkInst.IsCurrentTexRotated()}GetImagePoint(t){return this._sdkInst.GetImagePoint(t)}GetObjectClass(){return this._objectType}RendersToOwnZPlane(){return this._sdkInst.RendersToOwnZPlane()}BelongsToObjectClass(t){return t.IsFamily()?t.FamilyHasMember(this.GetObjectClass()):this.GetObjectClass()===t}CollectInstancesToPick(t,e,s){const n=(e,s)=>{const n=s||e.GetObjectClass(),i=t.get(n);i?i.add(e):t.set(n,new Set([e]))};if(n(this,e),this.IsInContainer())for(const t of this.siblings())n(t);if(s)for(const t of this.allChildren())n(t)}VerifySupportsSceneGraph(){if(!this.GetPlugin().SupportsSceneGraph())throw new Error("object does not support scene graph")}HasParent(){return null!==this.GetParent()}GetParent(){const t=this.GetWorldInfo();if(!t)return null;const e=t.GetParent();return e?e.GetInstance():null}GetTopParent(){const t=this.GetWorldInfo();if(!t)return null;const e=t.GetTopParent();return e?e.GetInstance():null}*parents(){const t=this.GetWorldInfo();if(t)for(const e of t.parents())yield e.GetInstance()}HasChild(t){if(!t)return!1;for(const e of this.children())if(e===t)return!0;return!1}HasChildren(){const t=this.GetWorldInfo();return!!t&&t.HasChildren()}GetChildrenOfObjectClass(t){const e=this.GetWorldInfo();if(!e)return[];const s=t.GetName();return e.GetChildren().map(t=>t.GetInstance()).filter(t=>t.GetObjectClass().GetName()===s)}GetChildren(){const t=this.GetWorldInfo();return t?t.GetChildren().map(t=>t.GetInstance()):[]}*children(){const t=this.GetWorldInfo();if(t)for(const e of t.children())yield e.GetInstance()}*allChildren(){const t=this.GetWorldInfo();if(t)for(const e of t.allChildren())yield e.GetInstance()}GetChildCount(){const t=this.GetWorldInfo();return t?t.GetChildCount():0}GetParentCount(){return[...this.parents()].length}GetAllChildCount(){const t=this.GetWorldInfo();return t?t.GetAllChildCount():0}GetChildAt(t){const e=this.GetWorldInfo();if(!e)return null;const s=e.GetChildAt(t);return s?s.GetInstance():null}GetIndexInParent(){const t=this.GetWorldInfo();if(!t)return NaN;const e=t.GetParent();return e?e.GetChildIndex(t):NaN}HasChildWithUID(t){for(const e of this.GetWorldInfo().GetChildren())if(e.GetInstance().GetUID()===t)return!0;return!1}AddChild(t,e){this.VerifySupportsSceneGraph(),t.VerifySupportsSceneGraph(),this.GetWorldInfo().AddChild(t.GetWorldInfo(),e||{})}RemoveChild(t){const e=this.GetWorldInfo();e&&e.RemoveChild(t.GetWorldInfo())}GetDestroyWithParent(){const t=this.GetWorldInfo();return!!t&&t.GetDestroyWithParent()}SetupInitialSceneGraphConnections(){const t=this.GetWorldInfo();if(!t)return;const e=t.GetSceneGraphChildrenExportData();if(e)for(const t of e){const e=this._runtime.GetInstanceByUID(t[2]);if(e){const s=t[3];this.AddChild(e,{transformX:!!(1&s),transformY:!!(s>>1&1),transformWidth:!!(s>>2&1),transformHeight:!!(s>>3&1),transformAngle:!!(s>>4&1),destroyWithParent:!!(s>>5&1),transformZElevation:!!(s>>6&1),transformOpacity:!!(s>>7&1),transformVisibility:!!(s>>8&1)})}}}SetupPersistedSceneGraphConnections(t,e){const s=t.get(this);if(s)for(const t of s["sceneGraphJson"]["children"]){const s=e.get(t["index"]);if(!s)continue;const n=t["flags"];this.AddChild(s,{transformX:!!(1&n),transformY:!!(n>>1&1),transformWidth:!!(n>>2&1),transformHeight:!!(n>>3&1),transformAngle:!!(n>>4&1),destroyWithParent:!!(n>>5&1),transformZElevation:!!(n>>6&1),transformOpacity:!!(n>>7&1),transformVisibility:!!(n>>8&1)})}}GetTemplateName(){const t=this._runtime.GetTemplateManager();return t?t.GetInstanceTemplateName(this):""}IsInContainer(){return null!==this._siblings}_ClearSiblings(){C3.clearArray(this._siblings)}_AddSibling(t){this._siblings.push(t)}GetSiblings(){return this._siblings}HasSibling(t){return!!this.GetSibling(t)}GetSibling(t){const e=this.siblings();if(null===e||0===e.length)return!1;for(const s of e)if(s.GetObjectClass()===t)return s;return null}siblings(){return this._siblings}SetSiblingsSinglePicked(){for(const t of this.siblings())t.GetObjectClass().GetCurrentSol().SetSinglePicked(t)}_PushSiblingsToSolInstances(){for(const t of this.siblings())t.GetObjectClass().GetCurrentSol()._PushInstance(t)}_SetSiblingsToSolInstancesIndex(t){for(const e of this.siblings())e.GetObjectClass().GetCurrentSol()._GetOwnInstances()[t]=e}_PushSiblingsToSolElseInstances(){for(const t of this.siblings())t.GetObjectClass().GetCurrentSol()._PushElseInstance(t)}_SetSiblingsToSolElseInstancesIndex(t){for(const e of this.siblings())e.GetObjectClass().GetCurrentSol()._GetOwnElseInstances()[t]=e}GetPlugin(){return this._objectType.GetPlugin()}_SetIID(t){this._iid=t}GetIID(){return this._objectType._UpdateIIDs(),this._iid}GetUID(){return this._uid}SetUID(t){this._uid=t}GetPUID(){return this._puid}_SetTagsSetFromJson(t){t?this.SetTagsSet(new Set(t)):this._tagsSet=null}SetTagsSet(t){if(0===t.size)this._tagsSet=null;else{this._tagsSet?this._tagsSet.clear():this._tagsSet=new Set;for(const e of t)this._tagsSet.add(e)}}GetTagsSet(){return this._tagsSet??new Set}GetTagsString(){return Array.from(this.GetTagsSet()).join(" ")}GetTagAt(t){t=Math.floor(t);for(const e of this.GetTagsSet()){if(0===t)return e;--t}return""}GetBehaviorInstances(){return this._behaviorInstances}GetBehaviorInstanceFromCtor(t){if(!t)return null;for(const e of this._behaviorInstances)if(e.GetBehavior()instanceof t)return e;return null}GetBehaviorSdkInstanceFromCtor(t){if(!t)return null;const e=this.GetBehaviorInstanceFromCtor(t);return e?e.GetSdkInstance():null}GetBehaviorIndexBySID(t){const e=this._behaviorInstances;for(let s=0,n=e.length;s<n;++s)if(e[s].GetBehaviorType().GetSID()===t)return s;return-1}GetAllInstanceVariableValues(){return this._instVarValues}_GetAllInstanceVariableNames(){return this._objectType._GetAllInstanceVariableNames()}GetInstanceVariableCount(){return this._instVarValues.length}GetInstanceVariableValue(t){t|=0;const e=this._instVarValues;if(t<0||t>=e.length)throw new RangeError("invalid instance variable");return e[t]}_GetInstanceVariableValueUnchecked(t){return this._instVarValues[t]}_GetInstanceVariableTypedValue(t){const e=this._instVarValues[t];return 0===this._objectType.GetInstanceVariableType(t)?!!e:e}SetInstanceVariableValue(t,e){t|=0;const s=this._instVarValues;if(t<0||t>=s.length)throw new RangeError("invalid instance variable");switch(this._objectType.GetInstanceVariableType(t)){case 0:s[t]=e?1:0;break;case 1:s[t]="number"==typeof e?e:parseFloat(e);break;case 2:s[t]="string"==typeof e?e:e.toString();break;default:throw new Error("unknown instance variable type")}}SetInstanceVariableOffset(t,e){if(0===e)return;t|=0;const s=this._instVarValues;if(t<0||t>=s.length)throw new RangeError("invalid instance variable");const n=s[t];if("number"!=typeof n)throw"boolean"==typeof n?new Error("can not set offset of boolean variable"):"string"==typeof n?new Error("can not set offset of string variable"):new Error("unknown instance variable type");s[t]+="number"==typeof e?e:parseFloat(e)}GetSavedDataMap(){let t=savedDataMaps.get(this);return t||(t=new Map,savedDataMaps.set(this,t),t)}GetUnsavedDataMap(){let t=unsavedDataMaps.get(this);return t||(t=new Map,unsavedDataMaps.set(this,t),t)}_HasAnyCreateDestroyHandler(t){const e=this.GetObjectClass();if(e.UserScriptDispatcher().HasAnyHandlerFor(t))return!0;for(const s of e.GetFamilies())if(s.UserScriptDispatcher().HasAnyHandlerFor(t))return!0;return!!this._runtime.UserScriptDispatcher().HasAnyHandlerFor(t)}_TriggerOnCreatedOnSelfAndRelated(t=void 0){const e=t??new Set;if(e.has(this))return;e.add(this);const s=this.GetWorldInfo();if(s&&s.HasChildren())for(const t of this.allChildren())if(e.add(t),t.IsInContainer())for(const s of t.siblings())e.add(s);if(this.IsInContainer())for(const t of this.siblings())t._TriggerOnCreatedOnSelfAndRelated(e);if(!t){for(const t of e.values())t._TriggerOnCreated();this._OnHierarchyReady()}}_OnCreatedCommon(){this._objectType._GetUserScriptInstanceClass()&&this.GetInterfaceClass();for(const t of this._behaviorInstances)t.PostCreate()}_OnCreatedForLoadingSavegame(){this._OnCreatedCommon()}_TriggerOnCreated(){if(this._OnCreatedCommon(),this._HasAnyCreateDestroyHandler("instancecreate")){const t=this.GetObjectClass(),e=new C3.Event("instancecreate");e.instance=this.GetInterfaceClass(),t.DispatchUserScriptEvent(e);for(const s of t.GetFamilies())s.DispatchUserScriptEvent(e);this._runtime.DispatchUserScriptEvent(e)}this._runtime.Trigger(this.GetPlugin().GetConstructor().Cnds.OnCreated,this,null)}_OnHierarchyReady(){if(this.GetPlugin().SupportsSceneGraph()){if(this.DispatchUserScriptEvent(new C3.Event("hierarchyready")),this._HasAnyCreateDestroyHandler("hierarchyready")){const t=this.GetObjectClass(),e=new C3.Event("hierarchyready");e.instance=this.GetInterfaceClass(),t.DispatchUserScriptEvent(e);for(const s of t.GetFamilies())s.DispatchUserScriptEvent(e);this._runtime.DispatchUserScriptEvent(e)}this._runtime.Trigger(this.GetPlugin().GetConstructor().Cnds.OnHierarchyReady,this,null)}}_TriggerOnDestroyed(){this._runtime.Trigger(this.GetPlugin().GetConstructor().Cnds.OnDestroyed,this,null)}_FireDestroyedScriptEvents(t){if(this._iScriptInterface){const e=new C3.Event("destroy");e.isEndingLayout=t,this.DispatchUserScriptEvent(e)}if(!this._HasAnyCreateDestroyHandler("instancedestroy"))return;const e=this.GetObjectClass(),s=new C3.Event("instancedestroy");s.instance=this.GetInterfaceClass(),s.isEndingLayout=t,e.DispatchUserScriptEvent(s);for(const t of e.GetFamilies())t.DispatchUserScriptEvent(s);this._runtime.DispatchUserScriptEvent(s)}_GetDebuggerProperties(){return this._sdkInst?this._sdkInst.GetDebuggerProperties():this._iScriptInterface._getDebuggerProperties()}SaveToJson(t="full",e=null){const s={};"full"===t?s["uid"]=this.GetUID():s["c3"]=!0;const n=this.GetTagsSet();if(n.size>0&&(s["tags"]=Array.from(n)),"visual-state"!==t){const e=savedDataMaps.get(this);if(e&&e.size&&(s["ex"]=C3.ToSuperJSON(e)),-1!==this.GetTimeScale()&&(s["mts"]=this.GetTimeScale()),this._objectType.GetInstanceVariablesCount()>0){const t={},e=this._objectType.GetInstanceVariableSIDs();for(let s=0,n=this._instVarValues.length;s<n;++s)t[e[s].toString()]=this._instVarValues[s];s["ivs"]=t}if(this._behaviorInstances.length){const e={};for(const s of this._behaviorInstances){const n=s.SaveToJson(t);n&&(e[s.GetBehaviorType().GetSID().toString()]=n)}s["behs"]=e}}this._worldInfo&&(s["w"]=this._worldInfo._SaveToJson(t,e));const i=this._sdkInst?this._sdkInst.SaveToJson():this._iScriptInterface._saveToJson();return i&&(s["data"]=i),s}_OnBeforeLoad(t="full",e=null){this._worldInfo&&this._worldInfo._OnBeforeLoad(t)}_OnAfterLoad(t,e="full",s=null){this._worldInfo&&this._worldInfo._OnAfterLoad(t,e,s)}_OnAfterLoad2(t,e="full",s=null){this._worldInfo&&this._worldInfo._OnAfterLoad2(t,e,s)}_SetupSceneGraphConnectionsOnChangeOfLayout(){this.GetPlugin().IsWorldType()&&this._worldInfo._SetupSceneGraphConnectionsOnChangeOfLayout()}LoadFromJson(t,e="full",s=null){if("full"===e)this._uid=t["uid"];else if(!t["c3"])return;if(this._SetTagsSetFromJson(t["tags"]),"visual-state"!==e){let e=savedDataMaps.get(this);e&&(e.clear(),savedDataMaps.delete(this));const s=t["ex"];s&&(e=C3.FromSuperJSON(s),savedDataMaps.set(this,e)),this._timeScale=t.hasOwnProperty("mts")?t["mts"]:-1;const n=t["ivs"];if(n)for(const[t,e]of Object.entries(n)){const s=parseInt(t,10),n=this._objectType.GetInstanceVariableIndexBySID(s);if(n<0||n>=this._instVarValues.length)continue;let i=e;null===i&&(i=NaN),this._instVarValues[n]=i}}if(this.GetPlugin().IsWorldType()){const n=t["w"];if(n){const t=n["l"];if(this._worldInfo.GetLayer().GetSID()!==t){const s=this._worldInfo.GetLayer(),n=s.GetLayout().GetLayerBySID(t);n?(this._worldInfo._SetLayer(n),s._RemoveInstance(this,!0),n._AddInstance(this,!0),n.SetZIndicesChanged(this),this._worldInfo.SetBboxChanged()):"full"===e&&this._runtime.DestroyInstance(this)}this._worldInfo._LoadFromJson(n,e,s)}}if("visual-state"!==e){const s=t["behs"];if(s)for(const[t,n]of Object.entries(s)){const s=parseInt(t,10),i=this.GetBehaviorIndexBySID(s);i<0||i>=this._behaviorInstances.length||this._behaviorInstances[i].LoadFromJson(n,e)}}const n=t["data"];n&&(this._sdkInst?this._sdkInst.LoadFromJson(n,e):this._iScriptInterface._loadFromJson(n))}MoveToLayerWithSID(t){if(this._worldInfo.GetLayer().GetSID()===t)return;const e=this._worldInfo.GetLayer(),s=e.GetLayout().GetLayerBySID(t);s&&(this._worldInfo._SetLayer(s),e._RemoveInstance(this,!0),s._AddInstance(this,!0),s.SetZIndicesChanged(this),this._worldInfo.SetBboxChanged())}GetInterfaceClass(){return this._iScriptInterface||this._InitUserScriptInterface()}HasScriptInterface(){return!!this._iScriptInterface}_InitUserScriptInterface(t,e){const s=this._worldInfo?t?self.ISDKWorldInstanceBase:self.IWorldInstance:t?self.ISDKInstanceBase:self.IInstance,n=t||this._sdkInst.GetScriptInterfaceClass(),i=this._objectType._GetUserScriptInstanceClass(),r=i||n||s,a=this.GetPlugin().GetSdkVersion();if(C3.AddonManager._PushInitObject(this,a),C3.AddonManager._PushInitProperties(e),this._iScriptInterface=new r,C3.AddonManager._PopInitProperties(),C3.AddonManager._PopInitObject(a),n&&!(this._iScriptInterface instanceof s))throw new TypeError(`script interface class '${n.name}' does not extend the right base class '${s.name}'`);if(i){const t=n||s;if(!(this._iScriptInterface instanceof t))throw new TypeError(`setInstanceClass(): class '${i.name}' does not extend the right base class - check it extends the right class, e.g. globalThis.InstanceType.MyObjectName`)}return this._iScriptInterface}_GetInstVarsScriptDescriptor(t){if(0===this._instVarValues.length)return;const e={},s=this._objectType._GetAllInstanceVariableJsPropNames();for(let t=0,n=s.length;t<n;++t)e[s[t]]={configurable:!1,enumerable:!0,get:C3.Instance.prototype._GetInstanceVariableTypedValue.bind(this,t),set:C3.Instance.prototype.SetInstanceVariableValue.bind(this,t)};const n=Object.create(Object.prototype,e);t.instVars={value:n,writable:!1}}_GetBehaviorsScriptDescriptor(t){const e=this._behaviorInstances;if(0===e.length)return;const s={};for(const t of e)s[t.GetBehaviorType().GetJsPropName()]={value:t.GetScriptInterface(),writable:!1};const n=Object.create(Object.prototype,s);t.behaviors={value:n,writable:!1}}DispatchUserScriptEvent(t){if(!this.HasScriptInterface())return;const e=this.GetInterfaceClass();t.instance=e;const s=this._runtime,n=s.IsDebug()&&!s.GetEventSheetManager().IsInEventEngine();n&&C3Debugger.StartMeasuringScriptTime(),e.dispatchEvent(t),n&&C3Debugger.AddScriptTime()}};
+const C3=self.C3,C3Debugger=self.C3Debugger,IInstance=self.IInstance,originalAddonManager=C3.AddonManager,EMPTY_ARRAY=[];let nextPuid=0;const savedDataMaps=new WeakMap,unsavedDataMaps=new WeakMap,FLAG_DESTROYED=1,FLAG_TILEMAP=2,FLAG_MUST_PREDRAW=4,FLAG_SOLID_ENABLED=8,FLAG_JUMPTHRU_ENABLED=16,FLAG_MUST_MITIGATE_Z_FIGHTING=32,FLAG_IS_DRAWING_WITH_EFFECTS=64;C3.Instance=class extends C3.DefendedBase{constructor(t){if(C3.AddonManager!==originalAddonManager)throw new Error("invalid addon manager");super(),this._runtime=t.runtime,this._objectType=t.objectType,this._worldInfo=null,this._sdkInst=null,this._iScriptInterface=null,this._iid=0,this._uid=t.uid,this._puid=nextPuid++,this._flags=0,this._tagsSet=null;const e=C3.splitStringAndNormalize(t.tags);e.length>0&&(this._tagsSet=new Set(e)),this._instVarValues=EMPTY_ARRAY,this._behaviorInstances=EMPTY_ARRAY;const s=this._objectType.GetBehaviorTypesIncludingInherited();s.length>0&&(this._behaviorInstances=s.map((t,e)=>C3.New(C3.BehaviorInstance,{runtime:this._runtime,behaviorType:t,instance:this,index:e}))),this._siblings=this._objectType.IsInContainer()?[]:null,this._timeScale=-1,this._dispatcher=null;const n=this.GetPlugin();if(n.MustPreDraw()&&(this._flags|=4),n.IsWorldType())if(this._worldInfo=C3.New(C3.WorldInfo,this,t.layer),t.worldData)this._worldInfo.Init(t.worldData);else{this._worldInfo.InitNoData();const[t,e]=this._objectType.GetDefaultInstanceSize();this._worldInfo.SetSize(t,e),this.GetObjectClass().UsesEffects()&&this._worldInfo.GetInstanceEffectList().LoadDefaultEffectParameters()}t.instVarData?this._LoadInstanceVariableData(t.instVarData):this._LoadDefaultInstanceVariables()}Release(){if(this._iScriptInterface&&(this._iScriptInterface._release(),this._iScriptInterface=null),this._behaviorInstances.length>0){for(const t of this._behaviorInstances)t.Release();C3.clearArray(this._behaviorInstances)}this._sdkInst&&(this._sdkInst.Release(),this._sdkInst=null);const t=savedDataMaps.get(this);t&&(t.clear(),savedDataMaps.delete(this));const e=unsavedDataMaps.get(this);e&&(e.clear(),unsavedDataMaps.delete(this)),this._siblings&&C3.clearArray(this._siblings),this._dispatcher&&(this._dispatcher.Release(),this._dispatcher=null),this._tagsSet&&this._tagsSet.clear(),this._tagsSet=null,this._runtime=null,this._objectType=null,this._instVarValues.length>0&&C3.clearArray(this._instVarValues),this._worldInfo&&(this._worldInfo.Release(),this._worldInfo=null)}_LoadInstanceVariableData(t){t.length>0&&(this._instVarValues=[],C3.shallowAssignArray(this._instVarValues,t))}_LoadDefaultInstanceVariables(){const t=this._objectType.GetInstanceVariablesCount();if(0===t)return;this._instVarValues=[];const e=[0,0,""];for(let s=0;s<t;++s)this._instVarValues.push(e[this._objectType.GetInstanceVariableType(s)])}_CreateSdkInstance(t,e){if(this._sdkInst)throw new Error("already got sdk instance");for(let t=0,s=this._behaviorInstances.length;t<s;++t){this._behaviorInstances[t]._CreateSdkInstance(e?e[t]:null)}if(this.GetPlugin().GetSdkVersion()<2){if(this._sdkInst=C3.New(this._objectType.GetInstanceSdkCtor(),this,t),!(this._sdkInst instanceof C3.SDKInstanceBase))throw new Error("sdk type must derive from SDKInstanceBase");!this.GetPlugin().IsWorldType()&&this._objectType._GetUserScriptInstanceClass()&&this.GetInterfaceClass()}else{const e=this.GetPlugin().GetScriptInterfaceClass();this._InitUserScriptInterface(e.Instance,t)}}GetSdkInstance(){return this._sdkInst??this._iScriptInterface}GetWorldInfo(){return this._worldInfo}GetRuntime(){return this._runtime}GetTimeScale(){return this._timeScale}GetActiveTimeScale(){const t=this._timeScale;return-1===t?this.GetRuntime().GetTimeScale():t}SetTimeScale(t){((t=+t)<0||!isFinite(t))&&(t=0),this._timeScale=t,this.GetObjectClass().UsesEffects()&&this._runtime._SetTrackingInstanceTime(this,!0)}RestoreTimeScale(){this._timeScale=-1,this.GetObjectClass().UsesEffects()&&this._runtime._SetTrackingInstanceTime(this,!1)}GetInstanceGameTime(){return this._runtime._GetInstanceGameTime(this)}Dispatcher(){return this._dispatcher||(this._dispatcher=C3.New(C3.Event.Dispatcher)),this._dispatcher}Draw(t){this._sdkInst?this._sdkInst.Draw(t):this._iScriptInterface._draw(this._runtime.GetCanvasManager().GetIRenderer())}OnCreate(t){this._sdkInst.OnCreate(t)}_SetHasTilemap(){this._flags|=2}HasTilemap(){return!!(2&this._flags)}_MarkDestroyed(){this._flags|=1}IsDestroyed(){return!!(1&this._flags)}MustPreDraw(){return!!(4&this._flags)||(this._sdkInst?this._sdkInst.MustPreDraw():this._iScriptInterface._mustPreDraw())}SetMustMitigateZFighting(){this._flags|=32}MustMitigateZFighting(){return!!(32&this._flags)}_IsSolidEnabled(){return!!(8&this._flags)}_SetSolidEnabled(t){t?this._flags|=8:this._flags&=-9}_IsJumpthruEnabled(){return!!(16&this._flags)}_SetJumpthruEnabled(t){t?this._flags|=16:this._flags&=-17}_IsDrawingWithEffects(){return!!(64&this._flags)}_SetIsDrawingWithEffects(t){t?this._flags|=64:this._flags&=-65}SetFlag(t,e){t<<=16,e?this._flags|=t:this._flags&=~t}GetFlag(t){return!!(this._flags&t<<16)}GetCurrentImageInfo(){return this._sdkInst?this._sdkInst.GetCurrentImageInfo():null}GetCurrentSurfaceSize(){return this._sdkInst?this._sdkInst.GetCurrentSurfaceSize():null}GetCurrentTexRect(){return this._sdkInst?this._sdkInst.GetCurrentTexRect():null}GetCurrentTexQuad(){return this._sdkInst?this._sdkInst.GetCurrentTexQuad():null}IsCurrentTexRotated(){return!!this._sdkInst&&this._sdkInst.IsCurrentTexRotated()}GetImagePoint(t){return this._sdkInst?this._sdkInst.GetImagePoint(t):[this._iScriptInterface.x,this._iScriptInterface.y,this._iScriptInterface.totalZElevation]}GetObjectClass(){return this._objectType}RendersToOwnZPlane(){return this._sdkInst?this._sdkInst.RendersToOwnZPlane():this._iScriptInterface._rendersToOwnZPlane()}BelongsToObjectClass(t){return t.IsFamily()?t.FamilyHasMember(this.GetObjectClass()):this.GetObjectClass()===t}CollectInstancesToPick(t,e,s){const n=(e,s)=>{const n=s||e.GetObjectClass(),i=t.get(n);i?i.add(e):t.set(n,new Set([e]))};if(n(this,e),this.IsInContainer())for(const t of this.siblings())n(t);if(s)for(const t of this.allChildren())n(t)}VerifySupportsSceneGraph(){if(!this.GetPlugin().SupportsSceneGraph())throw new Error("object does not support scene graph")}HasParent(){return null!==this.GetParent()}GetParent(){const t=this.GetWorldInfo();if(!t)return null;const e=t.GetParent();return e?e.GetInstance():null}GetTopParent(){const t=this.GetWorldInfo();if(!t)return null;const e=t.GetTopParent();return e?e.GetInstance():null}*parents(){const t=this.GetWorldInfo();if(t)for(const e of t.parents())yield e.GetInstance()}HasChild(t){if(!t)return!1;for(const e of this.children())if(e===t)return!0;return!1}HasChildren(){const t=this.GetWorldInfo();return!!t&&t.HasChildren()}GetChildrenOfObjectClass(t){const e=this.GetWorldInfo();if(!e)return[];const s=t.GetName();return e.GetChildren().map(t=>t.GetInstance()).filter(t=>t.GetObjectClass().GetName()===s)}GetChildren(){const t=this.GetWorldInfo();return t?t.GetChildren().map(t=>t.GetInstance()):[]}*children(){const t=this.GetWorldInfo();if(t)for(const e of t.children())yield e.GetInstance()}*allChildren(){const t=this.GetWorldInfo();if(t)for(const e of t.allChildren())yield e.GetInstance()}GetChildCount(){const t=this.GetWorldInfo();return t?t.GetChildCount():0}GetParentCount(){return[...this.parents()].length}GetAllChildCount(){const t=this.GetWorldInfo();return t?t.GetAllChildCount():0}GetChildAt(t){const e=this.GetWorldInfo();if(!e)return null;const s=e.GetChildAt(t);return s?s.GetInstance():null}GetIndexInParent(){const t=this.GetWorldInfo();if(!t)return NaN;const e=t.GetParent();return e?e.GetChildIndex(t):NaN}HasChildWithUID(t){for(const e of this.GetWorldInfo().GetChildren())if(e.GetInstance().GetUID()===t)return!0;return!1}AddChild(t,e){this.VerifySupportsSceneGraph(),t.VerifySupportsSceneGraph(),this.GetWorldInfo().AddChild(t.GetWorldInfo(),e||{})}RemoveChild(t){const e=this.GetWorldInfo();e&&e.RemoveChild(t.GetWorldInfo())}GetDestroyWithParent(){const t=this.GetWorldInfo();return!!t&&t.GetDestroyWithParent()}SetupInitialSceneGraphConnections(){const t=this.GetWorldInfo();if(!t)return;const e=t.GetSceneGraphChildrenExportData();if(e)for(const t of e){const e=this._runtime.GetInstanceByUID(t[2]);if(e){const s=t[3];this.AddChild(e,{transformX:!!(1&s),transformY:!!(s>>1&1),transformWidth:!!(s>>2&1),transformHeight:!!(s>>3&1),transformAngle:!!(s>>4&1),destroyWithParent:!!(s>>5&1),transformZElevation:!!(s>>6&1),transformOpacity:!!(s>>7&1),transformVisibility:!!(s>>8&1)})}}}SetupPersistedSceneGraphConnections(t,e){const s=t.get(this);if(s)for(const t of s["sceneGraphJson"]["children"]){const s=e.get(t["index"]);if(!s)continue;const n=t["flags"];this.AddChild(s,{transformX:!!(1&n),transformY:!!(n>>1&1),transformWidth:!!(n>>2&1),transformHeight:!!(n>>3&1),transformAngle:!!(n>>4&1),destroyWithParent:!!(n>>5&1),transformZElevation:!!(n>>6&1),transformOpacity:!!(n>>7&1),transformVisibility:!!(n>>8&1)})}}GetTemplateName(){const t=this._runtime.GetTemplateManager();return t?t.GetInstanceTemplateName(this):""}IsInContainer(){return null!==this._siblings}_ClearSiblings(){C3.clearArray(this._siblings)}_AddSibling(t){this._siblings.push(t)}GetSiblings(){return this._siblings}HasSibling(t){return!!this.GetSibling(t)}GetSibling(t){const e=this.siblings();if(null===e||0===e.length)return!1;for(const s of e)if(s.GetObjectClass()===t)return s;return null}siblings(){return this._siblings}SetSiblingsSinglePicked(){for(const t of this.siblings())t.GetObjectClass().GetCurrentSol().SetSinglePicked(t)}_PushSiblingsToSolInstances(){for(const t of this.siblings())t.GetObjectClass().GetCurrentSol()._PushInstance(t)}_SetSiblingsToSolInstancesIndex(t){for(const e of this.siblings())e.GetObjectClass().GetCurrentSol()._GetOwnInstances()[t]=e}_PushSiblingsToSolElseInstances(){for(const t of this.siblings())t.GetObjectClass().GetCurrentSol()._PushElseInstance(t)}_SetSiblingsToSolElseInstancesIndex(t){for(const e of this.siblings())e.GetObjectClass().GetCurrentSol()._GetOwnElseInstances()[t]=e}GetPlugin(){return this._objectType.GetPlugin()}_SetIID(t){this._iid=t}GetIID(){return this._objectType._UpdateIIDs(),this._iid}GetUID(){return this._uid}SetUID(t){this._uid=t}GetPUID(){return this._puid}_SetTagsSetFromJson(t){t?this.SetTagsSet(new Set(t)):this._tagsSet=null}SetTagsSet(t){if(0===t.size)this._tagsSet=null;else{this._tagsSet?this._tagsSet.clear():this._tagsSet=new Set;for(const e of t)this._tagsSet.add(e)}}GetTagsSet(){return this._tagsSet??new Set}GetTagsString(){return Array.from(this.GetTagsSet()).join(" ")}GetTagAt(t){t=Math.floor(t);for(const e of this.GetTagsSet()){if(0===t)return e;--t}return""}GetBehaviorInstances(){return this._behaviorInstances}GetBehaviorInstanceFromCtor(t){if(!t)return null;for(const e of this._behaviorInstances)if(e.GetBehavior()instanceof t)return e;return null}GetBehaviorSdkInstanceFromCtor(t){if(!t)return null;const e=this.GetBehaviorInstanceFromCtor(t);return e?e.GetSdkInstance():null}GetBehaviorIndexBySID(t){const e=this._behaviorInstances;for(let s=0,n=e.length;s<n;++s)if(e[s].GetBehaviorType().GetSID()===t)return s;return-1}GetAllInstanceVariableValues(){return this._instVarValues}_GetAllInstanceVariableNames(){return this._objectType._GetAllInstanceVariableNames()}GetInstanceVariableCount(){return this._instVarValues.length}GetInstanceVariableValue(t){t|=0;const e=this._instVarValues;if(t<0||t>=e.length)throw new RangeError("invalid instance variable");return e[t]}_GetInstanceVariableValueUnchecked(t){return this._instVarValues[t]}_GetInstanceVariableTypedValue(t){const e=this._instVarValues[t];return 0===this._objectType.GetInstanceVariableType(t)?!!e:e}SetInstanceVariableValue(t,e){t|=0;const s=this._instVarValues;if(t<0||t>=s.length)throw new RangeError("invalid instance variable");switch(this._objectType.GetInstanceVariableType(t)){case 0:s[t]=e?1:0;break;case 1:s[t]="number"==typeof e?e:parseFloat(e);break;case 2:s[t]="string"==typeof e?e:e.toString();break;default:throw new Error("unknown instance variable type")}}SetInstanceVariableOffset(t,e){if(0===e)return;t|=0;const s=this._instVarValues;if(t<0||t>=s.length)throw new RangeError("invalid instance variable");const n=s[t];if("number"!=typeof n)throw"boolean"==typeof n?new Error("can not set offset of boolean variable"):"string"==typeof n?new Error("can not set offset of string variable"):new Error("unknown instance variable type");s[t]+="number"==typeof e?e:parseFloat(e)}GetSavedDataMap(){let t=savedDataMaps.get(this);return t||(t=new Map,savedDataMaps.set(this,t),t)}GetUnsavedDataMap(){let t=unsavedDataMaps.get(this);return t||(t=new Map,unsavedDataMaps.set(this,t),t)}_HasAnyCreateDestroyHandler(t){const e=this.GetObjectClass();if(e.UserScriptDispatcher().HasAnyHandlerFor(t))return!0;for(const s of e.GetFamilies())if(s.UserScriptDispatcher().HasAnyHandlerFor(t))return!0;return!!this._runtime.UserScriptDispatcher().HasAnyHandlerFor(t)}_TriggerOnCreatedOnSelfAndRelated(t=void 0){const e=t??new Set;if(e.has(this))return;e.add(this);const s=this.GetWorldInfo();if(s&&s.HasChildren())for(const t of this.allChildren())if(e.add(t),t.IsInContainer())for(const s of t.siblings())e.add(s);if(this.IsInContainer())for(const t of this.siblings())t._TriggerOnCreatedOnSelfAndRelated(e);if(!t){for(const t of e.values())t._TriggerOnCreated();this._OnHierarchyReady()}}_OnCreatedCommon(){this._objectType._GetUserScriptInstanceClass()&&this.GetInterfaceClass();for(const t of this._behaviorInstances)t.PostCreate()}_OnCreatedForLoadingSavegame(){this._OnCreatedCommon()}_TriggerOnCreated(){if(this._OnCreatedCommon(),this._HasAnyCreateDestroyHandler("instancecreate")){const t=this.GetObjectClass(),e=new C3.Event("instancecreate");e.instance=this.GetInterfaceClass(),t.DispatchUserScriptEvent(e);for(const s of t.GetFamilies())s.DispatchUserScriptEvent(e);this._runtime.DispatchUserScriptEvent(e)}this._runtime.Trigger(this.GetPlugin().GetConstructor().Cnds.OnCreated,this,null)}_OnHierarchyReady(){if(this.GetPlugin().SupportsSceneGraph()){if(this.DispatchUserScriptEvent(new C3.Event("hierarchyready")),this._HasAnyCreateDestroyHandler("hierarchyready")){const t=this.GetObjectClass(),e=new C3.Event("hierarchyready");e.instance=this.GetInterfaceClass(),t.DispatchUserScriptEvent(e);for(const s of t.GetFamilies())s.DispatchUserScriptEvent(e);this._runtime.DispatchUserScriptEvent(e)}this._runtime.Trigger(this.GetPlugin().GetConstructor().Cnds.OnHierarchyReady,this,null)}}_TriggerOnDestroyed(){this._runtime.Trigger(this.GetPlugin().GetConstructor().Cnds.OnDestroyed,this,null)}_FireDestroyedScriptEvents(t){if(this._iScriptInterface){const e=new C3.Event("destroy");e.isEndingLayout=t,this.DispatchUserScriptEvent(e)}if(!this._HasAnyCreateDestroyHandler("instancedestroy"))return;const e=this.GetObjectClass(),s=new C3.Event("instancedestroy");s.instance=this.GetInterfaceClass(),s.isEndingLayout=t,e.DispatchUserScriptEvent(s);for(const t of e.GetFamilies())t.DispatchUserScriptEvent(s);this._runtime.DispatchUserScriptEvent(s)}_GetDebuggerProperties(){return this._sdkInst?this._sdkInst.GetDebuggerProperties():this._iScriptInterface._getDebuggerProperties()}SaveToJson(t="full",e=null){const s={};"full"===t?s["uid"]=this.GetUID():s["c3"]=!0;const n=this.GetTagsSet();if(n.size>0&&(s["tags"]=Array.from(n)),"visual-state"!==t){const e=savedDataMaps.get(this);if(e&&e.size&&(s["ex"]=C3.ToSuperJSON(e)),-1!==this.GetTimeScale()&&(s["mts"]=this.GetTimeScale()),this._objectType.GetInstanceVariablesCount()>0){const t={},e=this._objectType.GetInstanceVariableSIDs();for(let s=0,n=this._instVarValues.length;s<n;++s)t[e[s].toString()]=this._instVarValues[s];s["ivs"]=t}if(this._behaviorInstances.length){const e={};for(const s of this._behaviorInstances){const n=s.SaveToJson(t);n&&(e[s.GetBehaviorType().GetSID().toString()]=n)}s["behs"]=e}}this._worldInfo&&(s["w"]=this._worldInfo._SaveToJson(t,e));const i=this._sdkInst?this._sdkInst.SaveToJson():this._iScriptInterface._saveToJson();return i&&(s["data"]=i),s}_OnBeforeLoad(t="full",e=null){this._worldInfo&&this._worldInfo._OnBeforeLoad(t)}_OnAfterLoad(t,e="full",s=null){this._worldInfo&&this._worldInfo._OnAfterLoad(t,e,s)}_OnAfterLoad2(t,e="full",s=null){this._worldInfo&&this._worldInfo._OnAfterLoad2(t,e,s)}_SetupSceneGraphConnectionsOnChangeOfLayout(){this.GetPlugin().IsWorldType()&&this._worldInfo._SetupSceneGraphConnectionsOnChangeOfLayout()}LoadFromJson(t,e="full",s=null){if("full"===e)this._uid=t["uid"];else if(!t["c3"])return;if(this._SetTagsSetFromJson(t["tags"]),"visual-state"!==e){let e=savedDataMaps.get(this);e&&(e.clear(),savedDataMaps.delete(this));const s=t["ex"];s&&(e=C3.FromSuperJSON(s),savedDataMaps.set(this,e)),this._timeScale=t.hasOwnProperty("mts")?t["mts"]:-1;const n=t["ivs"];if(n)for(const[t,e]of Object.entries(n)){const s=parseInt(t,10),n=this._objectType.GetInstanceVariableIndexBySID(s);if(n<0||n>=this._instVarValues.length)continue;let i=e;null===i&&(i=NaN),this._instVarValues[n]=i}}if(this.GetPlugin().IsWorldType()){const n=t["w"];if(n){const t=n["l"];if(this._worldInfo.GetLayer().GetSID()!==t){const s=this._worldInfo.GetLayer(),n=s.GetLayout().GetLayerBySID(t);n?(this._worldInfo._SetLayer(n),s._RemoveInstance(this,!0),n._AddInstance(this,!0),n.SetZIndicesChanged(this),this._worldInfo.SetBboxChanged()):"full"===e&&this._runtime.DestroyInstance(this)}this._worldInfo._LoadFromJson(n,e,s)}}if("visual-state"!==e){const s=t["behs"];if(s)for(const[t,n]of Object.entries(s)){const s=parseInt(t,10),i=this.GetBehaviorIndexBySID(s);i<0||i>=this._behaviorInstances.length||this._behaviorInstances[i].LoadFromJson(n,e)}}const n=t["data"];n&&(this._sdkInst?this._sdkInst.LoadFromJson(n,e):this._iScriptInterface._loadFromJson(n))}MoveToLayerWithSID(t){if(this._worldInfo.GetLayer().GetSID()===t)return;const e=this._worldInfo.GetLayer(),s=e.GetLayout().GetLayerBySID(t);s&&(this._worldInfo._SetLayer(s),e._RemoveInstance(this,!0),s._AddInstance(this,!0),s.SetZIndicesChanged(this),this._worldInfo.SetBboxChanged())}GetInterfaceClass(){return this._iScriptInterface||this._InitUserScriptInterface()}HasScriptInterface(){return!!this._iScriptInterface}_InitUserScriptInterface(t,e){const s=this._worldInfo?t?self.ISDKWorldInstanceBase:self.IWorldInstance:t?self.ISDKInstanceBase:self.IInstance,n=t||this._sdkInst.GetScriptInterfaceClass(),i=this._objectType._GetUserScriptInstanceClass(),r=i||n||s,a=this.GetPlugin().GetSdkVersion();if(C3.AddonManager._PushInitObject(this,a),C3.AddonManager._PushInitProperties(e),this._iScriptInterface=new r,C3.AddonManager._PopInitProperties(),C3.AddonManager._PopInitObject(a),n&&!(this._iScriptInterface instanceof s))throw new TypeError(`script interface class '${n.name}' does not extend the right base class '${s.name}'`);if(i){const t=n||s;if(!(this._iScriptInterface instanceof t))throw new TypeError(`setInstanceClass(): class '${i.name}' does not extend the right base class - check it extends the right class, e.g. globalThis.InstanceType.MyObjectName`)}return this._iScriptInterface}_GetInstVarsScriptDescriptor(t){if(0===this._instVarValues.length)return;const e={},s=this._objectType._GetAllInstanceVariableJsPropNames();for(let t=0,n=s.length;t<n;++t)e[s[t]]={configurable:!1,enumerable:!0,get:C3.Instance.prototype._GetInstanceVariableTypedValue.bind(this,t),set:C3.Instance.prototype.SetInstanceVariableValue.bind(this,t)};const n=Object.create(Object.prototype,e);t.instVars={value:n,writable:!1}}_GetBehaviorsScriptDescriptor(t){const e=this._behaviorInstances;if(0===e.length)return;const s={};for(const t of e)s[t.GetBehaviorType().GetJsPropName()]={value:t.GetScriptInterface(),writable:!1};const n=Object.create(Object.prototype,s);t.behaviors={value:n,writable:!1}}DispatchUserScriptEvent(t){if(!this.HasScriptInterface())return;const e=this.GetInterfaceClass();t.instance=e;const s=this._runtime,n=s.IsDebug()&&!s.GetEventSheetManager().IsInEventEngine();n&&C3Debugger.StartMeasuringScriptTime(),e.dispatchEvent(t),n&&C3Debugger.AddScriptTime()}};
 }
 
 // objects/sceneGraphInfo.js
@@ -1091,6 +1091,21 @@ const C3=self.C3;C3.JobSchedulerRuntime=class extends C3.DefendedBase{constructo
 // scripts/shaders.js
 {
 self["C3_Shaders"] = {};
+self["C3_Shaders"]["hsladjust"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nprecision mediump float;\nuniform float huerotate;\nuniform float satadjust;\nuniform float lumadjust;\nvec3 rgb_to_hsl(vec3 color)\n{\nvec3 hsl = vec3(0.0, 0.0, 0.0);\nfloat fmin = min(min(color.r, color.g), color.b);\nfloat fmax = max(max(color.r, color.g), color.b);\nfloat delta = fmax - fmin;\nhsl.z = (fmax + fmin) / 2.0;\nif (delta == 0.0)\n{\nhsl.x = 0.0;\nhsl.y = 0.0;\n}\nelse\n{\nif (hsl.z < 0.5)\nhsl.y = delta / (fmax + fmin);\nelse\nhsl.y = delta / (2.0 - fmax - fmin);\nfloat dR = (((fmax - color.r) / 6.0) + (delta / 2.0)) / delta;\nfloat dG = (((fmax - color.g) / 6.0) + (delta / 2.0)) / delta;\nfloat dB = (((fmax - color.b) / 6.0) + (delta / 2.0)) / delta;\nif (color.r == fmax)\nhsl.x = dB - dG;\nelse if (color.g == fmax)\nhsl.x = (1.0 / 3.0) + dR - dB;\nelse if (color.b == fmax)\nhsl.x = (2.0 / 3.0) + dG - dR;\nif (hsl.x < 0.0)\nhsl.x += 1.0;\nelse if (hsl.x > 1.0)\nhsl.x -= 1.0;\n}\nreturn hsl;\n}\nfloat hue_to_rgb(float f1, float f2, float hue)\n{\nif (hue < 0.0)\nhue += 1.0;\nelse if (hue > 1.0)\nhue -= 1.0;\nfloat ret;\nif ((6.0 * hue) < 1.0)\nret = f1 + (f2 - f1) * 6.0 * hue;\nelse if ((2.0 * hue) < 1.0)\nret = f2;\nelse if ((3.0 * hue) < 2.0)\nret = f1 + (f2 - f1) * ((2.0 / 3.0) - hue) * 6.0;\nelse\nret = f1;\nreturn ret;\n}\nvec3 hsl_to_rgb(vec3 hsl)\n{\nvec3 rgb = vec3(hsl.z);\nif (hsl.y != 0.0)\n{\nfloat f2;\nif (hsl.z < 0.5)\nf2 = hsl.z * (1.0 + hsl.y);\nelse\nf2 = (hsl.z + hsl.y) - (hsl.y * hsl.z);\nfloat f1 = 2.0 * hsl.z - f2;\nrgb.r = hue_to_rgb(f1, f2, hsl.x + (1.0 / 3.0));\nrgb.g = hue_to_rgb(f1, f2, hsl.x);\nrgb.b = hue_to_rgb(f1, f2, hsl.x - (1.0 / 3.0));\n}\nreturn rgb;\n}\nvoid main(void)\n{\nvec4 front = texture2D(samplerFront, vTex);\nvec3 rgb = rgb_to_hsl(front.rgb) + vec3((huerotate > 0.5 ? huerotate - 1.0 : huerotate), 0, (lumadjust - 1.0) * front.a);\nrgb.y *= satadjust;\nrgb = hsl_to_rgb(rgb);\ngl_FragColor = vec4(rgb, front.a);\n}",
+	glslWebGL2: "",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nhuerotate : f32,\nsatadjust : f32,\nlumadjust : f32\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3_UTILITY_FUNCTIONS%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@fragment\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar huerotate : f32 = shaderParams.huerotate;\nif (huerotate > 0.5)\n{\nhuerotate = huerotate - 1.0;\n}\nvar rgb : vec3<f32> = c3_RGBtoHSL(front.rgb) + vec3<f32>(huerotate, 0.0, (shaderParams.lumadjust - 1.0) * front.a);\nrgb.y = rgb.y * shaderParams.satadjust;\nrgb = c3_HSLtoRGB(rgb);\nvar output : FragmentOutput;\noutput.color = vec4<f32>(rgb, front.a);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: true,
+	supports3dDirectRendering: false,
+	animated: false,
+	parameters: [["huerotate",0,"percent"],["satadjust",0,"percent"],["lumadjust",0,"percent"]]
+};
 self["C3_Shaders"]["brightness"] = {
 	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform lowp float brightness;\nvoid main(void)\n{\nlowp vec4 front = texture2D(samplerFront, vTex);\nlowp float a = front.a;\nif (a != 0.0)\nfront.rgb /= front.a;\nfront.rgb += (brightness - 1.0);\nfront.rgb *= a;\ngl_FragColor = front;\n}",
 	glslWebGL2: "",
@@ -1105,6 +1120,21 @@ self["C3_Shaders"]["brightness"] = {
 	supports3dDirectRendering: false,
 	animated: false,
 	parameters: [["brightness",0,"percent"]]
+};
+self["C3_Shaders"]["grayscale"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform lowp float intensity;\nvoid main(void)\n{\nlowp vec4 front = texture2D(samplerFront, vTex);\nlowp float gray = front.r * 0.299 + front.g * 0.587 + front.b * 0.114;\ngl_FragColor = mix(front, vec4(gray, gray, gray, front.a), intensity);\n}",
+	glslWebGL2: "",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nintensity : f32\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3_UTILITY_FUNCTIONS%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@fragment\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar gray : f32 = c3_grayscale(front.rgb);\nvar output : FragmentOutput;\noutput.color = mix(front, vec4<f32>(gray, gray, gray, front.a), shaderParams.intensity);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: true,
+	supports3dDirectRendering: false,
+	animated: false,
+	parameters: [["intensity",0,"percent"]]
 };
 self["C3_Shaders"]["replacecolor"] = {
 	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform lowp vec3 sourceColor;\nuniform lowp vec3 destColor;\nuniform lowp float tolerance;\nvoid main(void)\n{\nlowp vec4 front = texture2D(samplerFront, vTex);\nlowp float a = front.a;\nif (a != 0.0)\nfront.rgb /= a;\nlowp float diff = length(front.rgb - sourceColor);\nif (diff <= tolerance)\n{\nfront.rgb = mix(front.rgb, destColor, 1.0 - diff / tolerance);\n}\nfront.rgb *= a;\ngl_FragColor = front;\n}",
@@ -1121,20 +1151,20 @@ self["C3_Shaders"]["replacecolor"] = {
 	animated: false,
 	parameters: [["sourceColor",0,"color"],["destColor",0,"color"],["tolerance",0,"percent"]]
 };
-self["C3_Shaders"]["warpobject"] = {
-	glsl: "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nvarying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform mediump vec2 srcStart;\nuniform mediump vec2 srcEnd;\nuniform mediump vec2 srcOriginStart;\nuniform mediump vec2 srcOriginEnd;\nuniform highmedp float seconds;\nuniform mediump vec2 pixelSize;\nuniform mediump float devicePixelRatio;\nuniform mediump float layerScale;\nuniform mediump float freqX;\nuniform mediump float freqY;\nuniform mediump float ampX;\nuniform mediump float ampY;\nuniform mediump float speedX;\nuniform mediump float speedY;\nvoid main(void)\n{\nmediump float _2pi = 2.0 * 3.14159265359;\nmediump vec2 srcOriginSize = srcOriginEnd - srcOriginStart;\nmediump vec2 n = ((vTex - srcOriginStart) / srcOriginSize);\nmediump vec2 p = vTex;\np.x += cos(n.y * _2pi * freqY + seconds * speedY * _2pi) * ampY * pixelSize.x * devicePixelRatio * layerScale;\np.y += sin(n.x * _2pi * freqX + seconds * speedX * _2pi) * ampX * pixelSize.y * devicePixelRatio * layerScale;\np = clamp(p, min(srcStart, srcEnd), max(srcStart, srcEnd));\ngl_FragColor = texture2D(samplerFront, p);\n}",
-	glslWebGL2: "",
-	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nfreqX : f32,\nfreqY : f32,\nampX : f32,\nampY : f32,\nspeedX : f32,\nspeedY : f32\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3PARAMS_STRUCT%%\n%%C3_UTILITY_FUNCTIONS%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\nconst pi2 : f32 = 6.283185307179586;\n@fragment\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar pixelSize : vec2<f32> = c3_getPixelSize(textureFront);\nvar n : vec2<f32> = c3_srcOriginToNorm(input.fragUV);\nvar p : vec2<f32> = input.fragUV + vec2<f32>(\ncos(n.y * pi2 * shaderParams.freqY + c3Params.seconds * shaderParams.speedY * pi2) * shaderParams.ampY * pixelSize.x * c3Params.devicePixelRatio * c3Params.layerScale,\nsin(n.x * pi2 * shaderParams.freqX + c3Params.seconds * shaderParams.speedX * pi2) * shaderParams.ampX * pixelSize.y * c3Params.devicePixelRatio * c3Params.layerScale\n);\np = c3_clampToSrc(p);\nvar output : FragmentOutput;\noutput.color = textureSample(textureFront, samplerFront, p);\nreturn output;\n}",
+self["C3_Shaders"]["skymen_BetterOutline"] = {
+	glsl: "uniform lowp vec3 outlinecolor;\nuniform lowp float width;\nuniform lowp float precisionStep;\nuniform lowp float samples;\nuniform lowp float outlineOpacity;\nvarying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform mediump vec2 srcStart;\nuniform mediump vec2 srcEnd;\nuniform mediump vec2 srcOriginStart;\nuniform mediump vec2 srcOriginEnd;\nuniform mediump vec2 layoutStart;\nuniform mediump vec2 layoutEnd;\nuniform lowp sampler2D samplerBack;\nuniform mediump vec2 destStart;\nuniform mediump vec2 destEnd;\nuniform mediump float seconds;\nuniform mediump vec2 pixelSize;\nuniform mediump float layerScale;\nuniform mediump float layerAngle;\n#define PI 3.14159265359\n#define SAMPLES 96\n#define PASSES 64\nvoid main(void)\n{\nif (width <= 0.0 || outlineOpacity <= 0.0) {\ngl_FragColor = texture2D( samplerFront, vTex );\nreturn;\n}\nmediump float outlineAlpha = 0.0;\nmediump vec2 actualWidth;\nmediump float widthCopy = width;\nmediump vec4 color = vec4(outlinecolor.x, outlinecolor.y, outlinecolor.z, 1.0);\nmediump float angle;\nmediump vec2 layoutSize = abs(vec2(layoutEnd.x-layoutStart.x,(layoutEnd.y-layoutStart.y)));\nmediump vec2 texelSize = abs(srcOriginEnd-srcOriginStart)/layoutSize;\nmediump vec4 fragColor;\nmediump vec2 testPoint;\nmediump float sampledAlpha;\nint passes = int(clamp(width / precisionStep, 1.0, float(PASSES)));\nfor (int j=0; j<PASSES; j++) {\nif (j >= passes ) break;\nwidthCopy = mix(0.0, width, float(j)/float(passes));\nactualWidth = widthCopy * texelSize;\nangle = 0.0;\nfor( int i=0; i<SAMPLES; i++ ){\nif (i >= int(samples)) break;\nangle += 1.0/(clamp(samples, 0.0, float(SAMPLES))/2.0) * PI;\ntestPoint = vTex + actualWidth * vec2(cos(angle), sin(angle));\nsampledAlpha = texture2D( samplerFront,  testPoint ).a;\noutlineAlpha = max( outlineAlpha, sampledAlpha );\n}\n}\nfragColor = color * outlineAlpha * outlineOpacity;\nmediump vec4 tex0 = texture2D( samplerFront, vTex );\ngl_FragColor = fragColor * (1. - tex0.a) + tex0;\n}",
+	glslWebGL2: "#version 300 es\nin mediump vec2 vTex;\nout lowp vec4 outColor;\n#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision lowp float;\nuniform lowp sampler2D samplerFront;\nuniform mediump vec2 srcStart;\nuniform mediump vec2 srcEnd;\nuniform mediump vec2 srcOriginStart;\nuniform mediump vec2 srcOriginEnd;\nuniform mediump vec2 layoutStart;\nuniform mediump vec2 layoutEnd;\nuniform lowp sampler2D samplerBack;\nuniform lowp sampler2D samplerDepth;\nuniform mediump vec2 destStart;\nuniform mediump vec2 destEnd;\nuniform highmedp float seconds;\nuniform mediump vec2 pixelSize;\nuniform mediump float layerScale;\nuniform mediump float layerAngle;\nuniform mediump float devicePixelRatio;\nuniform mediump float zNear;\nuniform mediump float zFar;\nuniform lowp vec3 outlinecolor;\nuniform lowp float width;\nuniform lowp float precisionStep;\nuniform lowp float samples;\nuniform lowp float outlineOpacity;\n#define PI 3.14159265359\n#define SAMPLES 96\n#define PASSES 64\nvoid main(void)\n{\nif (width <= 0.0 || outlineOpacity <= 0.0) {\noutColor = texture( samplerFront, vTex );\nreturn;\n}\nmediump float outlineAlpha = 0.0;\nmediump vec2 actualWidth;\nmediump float widthCopy = width;\nmediump vec4 color = vec4(outlinecolor.x, outlinecolor.y, outlinecolor.z, 1.0);\nmediump float angle;\nmediump vec2 layoutSize = abs(vec2(layoutEnd.x-layoutStart.x,(layoutEnd.y-layoutStart.y)));\nmediump vec2 texelSize = abs(srcOriginEnd-srcOriginStart)/layoutSize;\nmediump vec4 fragColor;\nmediump vec2 testPoint;\nmediump float sampledAlpha;\nint passes = int(clamp(width / precisionStep, 1.0, float(PASSES)));\nint sampleCount = int(clamp(samples, 0.0, float(SAMPLES)));\nfor (int j = 0; j <= passes; j++) {\nwidthCopy = mix(0.0, width, float(j)/float(passes));\nactualWidth = widthCopy * texelSize;\nangle = 0.0;\nfor( int i = 0; i < sampleCount; i++ ) {\nangle += 1.0/(float(sampleCount)/2.0) * PI;\ntestPoint = vTex + actualWidth * vec2(cos(angle), sin(angle));\nsampledAlpha = texture( samplerFront,  testPoint ).a;\noutlineAlpha = max( outlineAlpha, sampledAlpha );\n}\n}\nfragColor = color * outlineAlpha * outlineOpacity;\nmediump vec4 tex0 = texture( samplerFront, vTex );\noutColor = fragColor * (1. - tex0.a) + tex0;\n}",
+	wgsl: "%%FRAGMENTINPUT_STRUCT%%\n/* input struct contains the following fields:\nfragUV : vec2<f32>\nfragPos : vec4<f32>\nfn c3_getBackUV(fragPos : vec2<f32>, texBack : texture_2d<f32>) -> vec2<f32>\nfn c3_getDepthUV(fragPos : vec2<f32>, texDepth : texture_depth_2d) -> vec2<f32>\n*/\n%%FRAGMENTOUTPUT_STRUCT%%\n%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\noutlinecolor : vec3<f32>,\nwidth : f32,\nprecisionStep : f32,\nsamples : f32,\noutlineOpacity : f32\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3PARAMS_STRUCT%%\n/* c3Params struct contains the following fields:\nsrcStart : vec2<f32>,\nsrcEnd : vec2<f32>,\nsrcOriginStart : vec2<f32>,\nsrcOriginEnd : vec2<f32>,\nlayoutStart : vec2<f32>,\nlayoutEnd : vec2<f32>,\ndestStart : vec2<f32>,\ndestEnd : vec2<f32>,\ndevicePixelRatio : f32,\nlayerScale : f32,\nlayerAngle : f32,\nseconds : f32,\nzNear : f32,\nzFar : f32,\nisSrcTexRotated : u32\nfn c3_srcToNorm(p : vec2<f32>) -> vec2<f32>\nfn c3_normToSrc(p : vec2<f32>) -> vec2<f32>\nfn c3_srcOriginToNorm(p : vec2<f32>) -> vec2<f32>\nfn c3_normToSrcOrigin(p : vec2<f32>) -> vec2<f32>\nfn c3_clampToSrc(p : vec2<f32>) -> vec2<f32>\nfn c3_clampToSrcOrigin(p : vec2<f32>) -> vec2<f32>\nfn c3_getLayoutPos(p : vec2<f32>) -> vec2<f32>\nfn c3_srcToDest(p : vec2<f32>) -> vec2<f32>\nfn c3_clampToDest(p : vec2<f32>) -> vec2<f32>\nfn c3_linearizeDepth(depthSample : f32) -> f32\n*/\n/*\nfn c3_premultiply(c : vec4<f32>) -> vec4<f32>\nfn c3_unpremultiply(c : vec4<f32>) -> vec4<f32>\nfn c3_grayscale(rgb : vec3<f32>) -> f32\nfn c3_getPixelSize(t : texture_2d<f32>) -> vec2<f32>\nfn c3_RGBtoHSL(color : vec3<f32>) -> vec3<f32>\nfn c3_HSLtoRGB(hsl : vec3<f32>) -> vec3<f32>\n*/\nconst PI:f32 = 3.14159265359;\nconst SAMPLES:i32 = 96;\nconst PASSES:i32 = 64;\n@fragment\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar output : FragmentOutput;\nif (shaderParams.width <= 0.0 || shaderParams.outlineOpacity <= 0.0) {\noutput.color = textureSample(textureFront, samplerFront, input.fragUV );\nreturn output;\n}\nvar outlineAlpha: f32 = 0.0;\nvar actualWidth: vec2<f32>;\nvar widthCopy: f32 = shaderParams.width;\nvar color: vec4<f32> = vec4<f32>(shaderParams.outlinecolor.x, shaderParams.outlinecolor.y, shaderParams.outlinecolor.z, 1.0);\nvar angle: f32;\nlet layoutSize: vec2<f32> = abs(vec2<f32>(c3Params.layoutEnd.x - c3Params.layoutStart.x, c3Params.layoutEnd.y - c3Params.layoutStart.y));\nlet texelSize: vec2<f32> = abs(c3Params.srcOriginEnd - c3Params.srcOriginStart) / layoutSize;\nvar fragColor: vec4<f32>;\nvar testPoint: vec2<f32>;\nvar sampledAlpha: f32;\nlet passes: u32 = u32(clamp(shaderParams.width / shaderParams.precisionStep, 1.0, f32(SAMPLES)));\nlet sampleCount: u32 = u32(clamp(shaderParams.samples, 0.0, f32(SAMPLES)));\nfor (var j: u32 = 0u; j <= passes; j = j + 1u) {\nwidthCopy = mix(0.0, shaderParams.width, f32(j) / f32(passes));\nactualWidth = widthCopy * texelSize;\nangle = 0.0;\nfor (var i: u32 = 0u; i < sampleCount; i = i + 1u) {\nangle = angle + 1.0 / (f32(sampleCount) / 2.0) * PI;\ntestPoint = input.fragUV + actualWidth * vec2<f32>(cos(angle), sin(angle));\nsampledAlpha = textureSample(textureFront, samplerFront, testPoint).a; // Assuming 'samplerFrontSampler' is the sampler associated with 'samplerFront'\noutlineAlpha = max(outlineAlpha, sampledAlpha);\n}\n}\nfragColor = color * outlineAlpha * shaderParams.outlineOpacity;\nvar tex0 : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV );\noutput.color = fragColor * (1. - tex0.a) + tex0;\nreturn output;\n}",
 	blendsBackground: false,
 	usesDepth: false,
-	extendBoxHorizontal: 30,
-	extendBoxVertical: 30,
-	crossSampling: false,
-	mustPreDraw: false,
+	extendBoxHorizontal: 50,
+	extendBoxVertical: 50,
+	crossSampling: true,
+	mustPreDraw: true,
 	preservesOpaqueness: false,
 	supports3dDirectRendering: false,
-	animated: true,
-	parameters: [["freqX",0,"float"],["freqY",0,"float"],["ampX",0,"float"],["ampY",0,"float"],["speedX",0,"float"],["speedY",0,"float"]]
+	animated: false,
+	parameters: [["outlinecolor",0,"color"],["width",0,"float"],["precisionStep",0,"float"],["samples",0,"float"],["outlineOpacity",0,"percent"]]
 };
 self["C3_Shaders"]["fogexponential"] = {
 	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform mediump vec2 srcStart;\nuniform mediump vec2 srcEnd;\nuniform lowp sampler2D samplerDepth;\nuniform mediump vec2 destStart;\nuniform mediump vec2 destEnd;\nuniform mediump float zNear;\nuniform mediump float zFar;\nuniform lowp vec3 fogColor;\nuniform mediump float fogDensity;\nuniform mediump float nearDist;\nvoid main(void)\n{\nmediump float log2 = 1.442695;\nlowp vec4 front = texture2D(samplerFront, vTex);\nmediump vec2 tex = (vTex - srcStart) / (srcEnd - srcStart);\nmediump float depthSample = texture2D(samplerDepth, mix(destStart, destEnd, tex)).r;\nmediump float zLinear = zNear * zFar / (zFar + depthSample * (zNear - zFar));\nmediump float fogDist = max(zLinear - nearDist, 0.0);\nmediump float fogAmount = clamp(1.0 - exp2(-fogDensity * fogDensity * fogDist * fogDist * log2), 0.0, 1.0);\ngl_FragColor = mix(front, vec4(fogColor * front.a, front.a), fogAmount);\n}",
@@ -1196,7 +1226,7 @@ const C3=self.C3;function CloneDrawable(e){const t=C3.CreateCanvas(e.width,e.hei
 
 // scripts/plugins/Shape3D/c3runtime/runtime.js
 {
-{const e=self.C3;e.Plugins.Shape3D=class extends e.SDKPluginBase{constructor(e){super(e)}Release(){super.Release()}}}{const t=self.C3;t.Plugins.Shape3D.Type=class extends t.SDKTypeBase{constructor(e){super(e),this._animations=e.GetAnimations()}Release(){t.clearArray(this._animations),super.Release()}OnCreate(){for(const e of this._animations)e.LoadAllAssets(this._runtime)}LoadTextures(e){const t={sampling:this._runtime.GetSampling()};return Promise.all(this._animations.map(i=>i.LoadAllTextures(e,t)))}ReleaseTextures(){for(const e of this._animations)e.ReleaseAllTextures()}FinishCondition(e){t.Plugins.Shape3D.FinishCollisionCondition(this,e)}}}{const i=self.C3,s=self.C3X,a=0,n=1,r=2,c=3,o=4,l=5,h=6,g=7,u=8,_=9,d=10,m=11,F=12,f=13,b=14,T=15,I=16,p=[];let D=0;for(let w=0;w<6;w++)p.push({i:0,tlx:NaN,tly:NaN,tlz:NaN,trx:NaN,try_:NaN,trz:NaN,brx:NaN,bry:NaN,brz:NaN,blx:NaN,bly:NaN,blz:NaN,shape:0,minCamDist:NaN,midCamDist:NaN,enable:!1});function SortFacesToDrawByDist(e,t){return e.minCamDist===t.minCamDist?t.midCamDist-e.midCamDist:t.minCamDist-e.minCamDist}const G=i.New(i.Quad);i.New(i.Vector2);function sqDistanceTo3D(e,t,i,s,a,n){const r=s-e,c=a-t,o=n-i;return r*r+c*c+o*o}function distanceTo3D(e,t,s,a,n,r,c){return i.hypot3DFast(a-e,n-t,(r-s)*c)}function lerp3d(e,t,s,a,n,r,c){return[i.lerp(e,a,c),i.lerp(t,n,c),i.lerp(s,r,c)]}function lerp3d2(e,t,i,s,a,n,r,c,o,l,h){const[g,u,_]=lerp3d(e,t,i,s,a,n,l);return lerp3d(g,u,_,g+(r-e),u+(c-t),_+(o-i),h)}i.Plugins.Shape3D.Instance=class extends i.SDKWorldInstanceBase{constructor(e,t){super(e),this._shape=0,this._zHeight=15;let i=!0;this._showBackFace=!1,this._showFrontFace=!0,this._showLeftFace=!0,this._showRightFace=!0,this._showTopFace=!0,this._showBottomFace=!0,this._isBackFaceCulling=!1,this._animation=this._objectClass.GetAnimations()[0],this._faceVisibility=[!1,!0,!0,!0,!0,!0],this._faceImages=[0,1,2,3,4,5],this._zTilingFactor=8,this._faceObjects=[null,null,null,null,null,null],t&&(this._shape=t[a],this._zHeight=t[n],i=!!t[r],this._faceVisibility[0]=!!t[c],this._faceVisibility[1]=!!t[o],this._faceVisibility[2]=!!t[l],this._faceVisibility[3]=!!t[h],this._faceVisibility[4]=!!t[g],this._faceVisibility[5]=!!t[u],this._isBackFaceCulling=t[_],this._zTilingFactor=t[d],this._SetFaceObjectClass(0,this._runtime.GetObjectClassBySID(t[m])),this._SetFaceObjectClass(1,this._runtime.GetObjectClassBySID(t[F])),this._SetFaceObjectClass(2,this._runtime.GetObjectClassBySID(t[f])),this._SetFaceObjectClass(3,this._runtime.GetObjectClassBySID(t[b])),this._SetFaceObjectClass(4,this._runtime.GetObjectClassBySID(t[T])),this._SetFaceObjectClass(5,this._runtime.GetObjectClassBySID(t[I])));const s=this.GetWorldInfo();s.SetBackFaceCulling(this._isBackFaceCulling),s.SetDepth(this._zHeight),this._bquadRef=s.GetBoundingQuad(),s.SetVisible(i);const p=this.GetBaseAnimationFrame();s.SetOriginX(p.GetOriginX()),s.SetOriginY(p.GetOriginY()),s.SetBboxChanged()}Release(){super.Release()}GetBaseAnimationFrame(){return this._animation.GetFrameAt(0)}GetCurrentImageInfo(){return this.GetBaseAnimationFrame().GetImageInfo()}IsOriginalSizeKnown(){return!0}_AddFaceToDraw(e,t,i,s,a,n,r,c,o,l,h,g,u,_){const d=p[e];d.i=e,d.tlx=t,d.tly=i,d.tlz=s,d.trx=a,d.try_=n,d.trz=r,d.brx=c,d.bry=o,d.brz=l,d.blx=h,d.bly=g,d.blz=u,d.shape=_,d.enable=!0,D++}Draw(e){const t=this.GetWorldInfo(),i=this._faceVisibility;let s=i[0],a=i[1],n=i[2],r=i[3],c=i[4],o=i[5];if(t.IsDrawBackFaceOnly()?(a=!1,n=!1,r=!1,c=!1,o=!1):t.IsDrawNonBackFacesOnly()&&(s=!1),!(s||a||n||r||c||o))return;let l=this._bquadRef;this._runtime.IsPixelRoundingEnabled()&&(l=t.PixelRoundQuad(l));const h=l.getTlx(),g=l.getTly(),u=l.getTrx(),_=l.getTry(),d=l.getBrx(),m=l.getBry(),F=l.getBlx(),f=l.getBly(),b=this._shape,T=this._zHeight;D=0;for(let e=0;e<6;e++)p[e].enable=!1;if(s&&this._AddFaceToDraw(0,u,_,0,h,g,0,F,f,0,d,m,0,5),0===b)n&&this._AddFaceToDraw(2,h,g,T,F,f,T,F,f,0,h,g,0,0),r&&this._AddFaceToDraw(3,d,m,T,u,_,T,u,_,0,d,m,0,0),c&&this._AddFaceToDraw(4,u,_,T,h,g,T,h,g,0,u,_,0,0),o&&this._AddFaceToDraw(5,F,f,T,d,m,T,d,m,0,F,f,0,0),a&&this._AddFaceToDraw(1,h,g,T,u,_,T,d,m,T,F,f,T,0);else if(1===b){const e=(h+F)/2,t=(g+f)/2,i=(u+d)/2,s=(_+m)/2;n&&this._AddFaceToDraw(2,e,t,T,e,t,T,F,f,0,h,g,0,4),r&&this._AddFaceToDraw(3,i,s,T,i,s,T,u,_,0,d,m,0,4),c&&this._AddFaceToDraw(4,i,s,T,e,t,T,h,g,0,u,_,0,0),o&&this._AddFaceToDraw(5,e,t,T,i,s,T,d,m,0,F,f,0,0)}else if(2===b)n&&this._AddFaceToDraw(2,u,_,T,d,m,T,F,f,0,h,g,0,0),r&&this._AddFaceToDraw(3,d,m,T,u,_,T,u,_,0,d,m,0,0),c&&this._AddFaceToDraw(4,u,_,T,u,_,T,h,g,0,u,_,0,2),o&&this._AddFaceToDraw(5,d,m,T,d,m,T,d,m,0,F,f,0,3);else if(3===b){const e=l.midX(),t=l.midY();n&&this._AddFaceToDraw(2,e,t,T,e,t,T,F,f,0,h,g,0,4),r&&this._AddFaceToDraw(3,e,t,T,e,t,T,u,_,0,d,m,0,4),c&&this._AddFaceToDraw(4,e,t,T,e,t,T,h,g,0,u,_,0,4),o&&this._AddFaceToDraw(5,e,t,T,e,t,T,d,m,0,F,f,0,4)}else 4===b?(n&&this._AddFaceToDraw(2,u,_,T,u,_,T,F,f,0,h,g,0,2),r&&this._AddFaceToDraw(3,u,_,T,u,_,T,u,_,0,d,m,0,3),c&&this._AddFaceToDraw(4,u,_,T,u,_,T,h,g,0,u,_,0,2),o&&this._AddFaceToDraw(5,u,_,T,u,_,T,d,m,0,F,f,0,3)):5===b&&(n&&this._AddFaceToDraw(2,h,g,T,h,g,T,F,f,0,h,g,0,2),r&&this._AddFaceToDraw(3,d,m,T,u,_,T,u,_,0,d,m,0,0),c&&this._AddFaceToDraw(4,u,_,T,h,g,T,h,g,0,u,_,0,0),o&&this._AddFaceToDraw(5,d,m,T,d,m,T,d,m,0,F,f,0,3),a&&this._AddFaceToDraw(1,h,g,T,u,_,T,d,m,T,F,f,0,1));if(D>1){const[e,i,s]=t.GetLayer().GetCameraPosition();for(let t=0;t<6;++t){const a=p[t];a.enable&&(a.minCamDist=Math.min(sqDistanceTo3D(e,i,s,a.tlx,a.tly,a.tlz),sqDistanceTo3D(e,i,s,a.trx,a.try_,a.trz),sqDistanceTo3D(e,i,s,a.brx,a.bry,a.brz),sqDistanceTo3D(e,i,s,a.blx,a.bly,a.blz)),a.midCamDist=sqDistanceTo3D(e,i,s,(a.tlx+a.trx+a.brx+a.blx)/4,(a.tly+a.try_+a.bry+a.bly)/4,(a.tlz+a.trz+a.brz+a.blz)/4))}p.sort(SortFacesToDrawByDist)}const I=e.GetProgram();for(let t=0;t<6;++t){const i=p[t];i.enable&&(e.SetProgram(I),this._DrawFace(e,i.i,i.tlx,i.tly,i.tlz,i.trx,i.try_,i.trz,i.brx,i.bry,i.brz,i.blx,i.bly,i.blz,i.shape))}}_DrawFace(e,t,s,a,n,r,c,o,l,h,g,u,_,d,m){let F=null,f=null,b=!1;const T=this._faceObjects[t];if(null!==T){const t=T.GetPairedInstance(this.GetInstance());if(!t)return;const I=t.GetSdkInstance();if(i.Plugins.Sprite&&I instanceof i.Plugins.Sprite.Instance){if(F=I.GetTexture(),null===F)return;f=I.GetTexQuad()}else{if(!(i.Plugins.TiledBg&&I instanceof i.Plugins.TiledBg.Instance||i.Plugins.NinePatch&&I instanceof i.Plugins.NinePatch.Instance))return;{let t=0,f=0;const T=this._zTilingFactor;switch(m){case 0:case 5:case 1:t=distanceTo3D(s,a,n,r,c,o,T),f=distanceTo3D(r,c,o,l,h,g,T);break;case 2:t=distanceTo3D(u,_,d,l,h,g,T),f=distanceTo3D(s,a,n,u,_,d,T);break;case 3:t=distanceTo3D(u,_,d,l,h,g,T),f=distanceTo3D(r,c,o,l,h,g,T);break;case 4:t=distanceTo3D(u,_,d,l,h,g,T),f=distanceTo3D(s,a,n,(u+l)/2,(_+h)/2,(d+g)/2,T)}if(!(i.Plugins.TiledBg&&I instanceof i.Plugins.TiledBg.Instance)){if(0!==m&&5!==m)return;return I._Set3DCallback((i,l)=>{i.divide(t,f);const h=i.getLeft(),g=i.getTop(),m=i.getRight(),F=i.getBottom(),[b,T,I]=lerp3d2(s,a,n,r,c,o,u,_,d,h,g),[p,D,G]=lerp3d2(s,a,n,r,c,o,u,_,d,m,g),[S,y,C]=lerp3d2(s,a,n,r,c,o,u,_,d,m,F),[w,P,x]=lerp3d2(s,a,n,r,c,o,u,_,d,h,F);e.Quad3D(b,T,I,p,D,G,S,y,C,w,P,x,l)}),I._Draw(e,0,0,t,f),void I._Set3DCallback(null)}if(F=I.GetTexture(),null===F)return;I.CalculateTextureCoordsFor3DFace(t,f,G),b=!0,I.SetTilingShaderProgram(e,!1)}}}else{t=this._faceImages[t];const e=this._animation.GetFrameAt(t).GetImageInfo();if(F=e.GetTexture(),null===F)return;f=e.GetTexQuad()}e.SetTexture(F),m>=3||b?(b||G.copy(f),3===m?(G.setTlx(G.getTrx()),G.setTly(G.getTly())):4===m?(G.setTlx((G.getTlx()+G.getTrx())/2),G.setTly((G.getTly()+G.getTry())/2)):5===m&&G.mirror(),e.Quad3D2(s,a,n,r,c,o,l,h,g,u,_,d,G)):e.Quad3D2(s,a,n,r,c,o,l,h,g,u,_,d,f)}MustPreDraw(){for(const e of this._faceObjects){if(!e)continue;const t=e.GetPairedInstance(this.GetInstance());if(!t)continue;const s=t.GetSdkInstance();if(i.Plugins.TiledBg&&s instanceof i.Plugins.TiledBg.Instance&&s._IsTileRandomizationEnabled())return!0}return!1}RendersToOwnZPlane(){return this._IsFaceVisible(0)}GetImagePointCount(){return this._GetFaceImagePointCount(0)}GetImagePoint(e){return this._GetFaceImagePoint(0,e)}_GetFaceQuad3DForImagePoint(e){const t=this._bquadRef,i=t.getTlx(),s=t.getTly(),a=t.getTrx(),n=t.getTry(),r=t.getBrx(),c=t.getBry(),o=t.getBlx(),l=t.getBly(),h=this._shape,g=this.GetWorldInfo().GetTotalZElevation(),u=g+this._zHeight;if(1===h||3===h){let t=(i+o)/2,_=(s+l)/2,d=(a+r)/2,m=(n+c)/2;switch(e){case 4:return[d,m,u,t,_,u,i,s,g,a,n,g];case 5:return[t,_,u,d,m,u,r,c,g,o,l,g]}if(3===h)switch(t=(i+a)/2,_=(s+n)/2,d=(o+r)/2,m=(l+c)/2,e){case 2:return[t,_,u,d,m,u,o,l,g,i,s,g];case 3:return[d,m,u,t,_,u,a,n,g,r,c,g]}}else if(2===h&&2===e)return[a,n,u,r,c,u,o,l,g,i,s,g];switch(e){case 0:return[i,s,g,a,n,g,r,c,g,o,l,g];case 1:return[i,s,u,a,n,u,r,c,u,o,l,u];case 2:return[i,s,u,o,l,u,o,l,g,i,s,g];case 3:return[r,c,u,a,n,u,a,n,g,r,c,g];case 4:return[a,n,u,i,s,u,i,s,g,a,n,g];case 5:return[o,l,u,r,c,u,r,c,g,o,l,g];default:return[0,0,0,0,0,0,0,0,0,0,0,0]}}_GetFaceImagePoint(e,t){const i=this.GetWorldInfo();if((e=Math.floor(e))<0||e>5)return[i.GetX(),i.GetY(),i.GetZElevation()];const s=this._animation.GetFrameAt(e);let a=null;"string"==typeof t?a=s.GetImagePointByName(t):"number"==typeof t&&(a=s.GetImagePointByIndex(t-1));let n=.5,r=.5;a?(n=a.GetX(),r=a.GetY()):0===e&&(n=s.GetOriginX(),r=s.GetOriginY()),i.GetBoundingBox();const c=this._GetFaceQuad3DForImagePoint(e);return lerp3d2(c[0],c[1],c[2],c[3],c[4],c[5],c[9],c[10],c[11],n,r)}_GetFaceImagePointCount(e){this.GetWorldInfo();if((e=Math.floor(e))<0||e>5)return 0;return this._animation.GetFrameAt(e).GetImagePointCount()}_SetShape(e){this._shape!==e&&(this._shape=e,this._runtime.UpdateRender())}_GetShape(){return this._shape}_SetZHeight(e){e=Math.max(e,0),this._zHeight!==e&&(this._zHeight=e,this.GetWorldInfo().SetDepth(e),this._runtime.UpdateRender())}_GetZHeight(){return this._zHeight}_SetFaceVisible(e,t){t=!!t,this._faceVisibility[e]!==t&&(this._faceVisibility[e]=t,this._runtime.UpdateRender())}_IsFaceVisible(e){return this._faceVisibility[e]}_SetBackFaceCulling(e){e=!!e,this._isBackFaceCulling!==e&&(this._isBackFaceCulling=e,this.GetWorldInfo().SetBackFaceCulling(e),this._runtime.UpdateRender())}_GetBackFaceCulling(){return this._isBackFaceCulling}_SetFaceImage(e,t){const i=this._faceImages,s=this._faceObjects;i[e]===t&&null===s[e]||(i[e]=t,s[e]=null,this._runtime.UpdateRender())}_SetFaceObjectClass(e,t){null!==t&&t.IsFamily()&&(t=t.GetFamilyMembers()[0]);const i=this._faceObjects;i[e]!==t&&(i[e]=t,this._runtime.UpdateRender())}_SetZTilingFactor(e){this._zTilingFactor!==e&&(this._zTilingFactor=e,this._runtime.UpdateRender())}_GetZTilingFactor(){return this._zTilingFactor}SaveToJson(){return{"s":this._shape,"zh":this._zHeight,"fv":this._faceVisibility,"fi":this._faceImages,"fo":this._faceObjects.map(e=>e?e.GetSID():-1),"zf":this._zTilingFactor}}LoadFromJson(e){this._shape=e["s"],this._zHeight=e["zh"],this.GetWorldInfo().SetDepth(this._zHeight),this._faceVisibility=e["fv"].slice(0),this._faceImages=e["fi"].slice(0),e.hasOwnProperty("fo")&&(this._faceObjects=e["fo"].map(e=>this._runtime.GetObjectClassBySID(e))),e.hasOwnProperty("zf")&&(this._zTilingFactor=e["zf"])}GetPropertyValueByIndex(e){}SetPropertyValueByIndex(e,t){}GetDebuggerProperties(){const e="plugins.shape3d";return[{title:e+".name",properties:[{name:e+".properties.z-height.name",value:this._GetZHeight(),onedit:e=>this._SetZHeight(e)}]}]}GetScriptInterfaceClass(){return self.I3DShapeInstance}};const S=new WeakMap,y=["box","prism","wedge","pyramid","corner-out","corner-in"],C=["back","front","left","right","top","bottom"];self.I3DShapeInstance=class extends self.IWorldInstance{constructor(){super(),S.set(this,self.IInstance._GetInitInst().GetSdkInstance())}getImagePointCount(){return S.get(this).GetImagePointCount()}getImagePointX(e){return this.getImagePoint(e)[0]}getImagePointY(e){return this.getImagePoint(e)[1]}getImagePoint(e){if("string"!=typeof e&&"number"!=typeof e)throw new TypeError("expected string or number");return S.get(this).GetImagePoint(e)}getFaceImagePointCount(e){const t=C.indexOf(e);if(t<0)throw new Error("invalid face");return S.get(this)._GetFaceImagePointCount(t)}getFaceImagePointX(e,t){return this.getFaceImagePoint(e,t)[0]}getFaceImagePointY(e,t){return this.getFaceImagePoint(e,t)[1]}getFaceImagePointZ(e,t){return this.getFaceImagePoint(e,t)[2]}getFaceImagePoint(e,t){const i=C.indexOf(e);if(i<0)throw new Error("invalid face");if("string"!=typeof t&&"number"!=typeof t)throw new TypeError("expected string or number");return S.get(this)._GetFaceImagePoint(i,t)}set zHeight(e){s.RequireFiniteNumber(e),S.get(this)._SetZHeight(e)}get zHeight(){return S.get(this)._GetZHeight()}set shape(e){s.RequireString(e);const t=y.indexOf(e);if(-1===t)throw new TypeError("invalid shape");S.get(this)._SetShape(t)}get shape(){return y[S.get(this)._GetShape()]}setFaceVisible(e,t){const i=C.indexOf(e);if(i<0)throw new Error("invalid face");S.get(this)._SetFaceVisible(i,!!t)}isFaceVisible(e){const t=C.indexOf(e);if(t<0)throw new Error("invalid face");return S.get(this)._IsFaceVisible(t)}set isBackFaceCulling(e){S.get(this)._SetBackFaceCulling(e)}get isBackFaceCulling(){return S.get(this)._GetBackFaceCulling()}setFaceImage(e,t){const i=C.indexOf(e),s=C.indexOf(t);if(i<0||s<0)throw new Error("invalid face");S.get(this)._SetFaceImage(i,s)}get zTilingFactor(){return S.get(this)._GetZTilingFactor()}set zTilingFactor(e){s.RequireFiniteNumber(e),S.get(this)._SetZTilingFactor(e)}setFaceObject(e,t){const i=C.indexOf(e);if(i<0)throw new Error("invalid face");const s=S.get(this),a=s.GetRuntime()._UnwrapIObjectClass(t);s._SetFaceObjectClass(i,a)}}}{const P=self.C3;P.Plugins.Shape3D.Cnds={CompareShape(e){return this._GetShape()===e},CompareZHeight(e,t){return P.compare(this._GetZHeight(),e,t)},IsFaceVisible(e){return this._IsFaceVisible(e)}}}self.C3.Plugins.Shape3D.Acts={SetShape(e){this._SetShape(e)},SetZHeight(e){this._SetZHeight(e)},SetFaceVisible(e,t){this._SetFaceVisible(e,t)},SetBackFaceCulling(e){this._SetBackFaceCulling(e)},SetFaceImage(e,t){this._SetFaceImage(e,t)},SetZTilingFactor(e){this._SetZTilingFactor(e)},SetFaceObject(e,t){this._SetFaceObjectClass(e,t)}};self.C3.Plugins.Shape3D.Exps={ZHeight(){return this._GetZHeight()},ZTilingFactor(){return this._GetZTilingFactor()},FaceImagePointX(e,t){return this._GetFaceImagePoint(e,t)[0]},FaceImagePointY(e,t){return this._GetFaceImagePoint(e,t)[1]},FaceImagePointZ(e,t){return this._GetFaceImagePoint(e,t)[2]},FaceImagePointCount(e){return this._GetFaceImagePointCount(e)}};
+{const e=self.C3;e.Plugins.Shape3D=class extends e.SDKPluginBase{constructor(e){super(e)}Release(){super.Release()}}}{const t=self.C3;t.Plugins.Shape3D.Type=class extends t.SDKTypeBase{constructor(e){super(e),this._animations=e.GetAnimations()}Release(){t.clearArray(this._animations),super.Release()}OnCreate(){for(const e of this._animations)e.LoadAllAssets(this._runtime)}LoadTextures(e){const t={sampling:this._runtime.GetSampling()};return Promise.all(this._animations.map(i=>i.LoadAllTextures(e,t)))}ReleaseTextures(){for(const e of this._animations)e.ReleaseAllTextures()}FinishCondition(e){t.Plugins.Shape3D.FinishCollisionCondition(this,e)}}}{const i=self.C3,s=self.C3X,a=0,n=1,r=2,c=3,o=4,l=5,h=6,g=7,u=8,_=9,d=10,m=11,F=12,f=13,T=14,b=15,I=16,p=[];let D=0;for(let w=0;w<6;w++)p.push({i:0,tlx:NaN,tly:NaN,tlz:NaN,trx:NaN,try_:NaN,trz:NaN,brx:NaN,bry:NaN,brz:NaN,blx:NaN,bly:NaN,blz:NaN,shape:0,minCamDist:NaN,midCamDist:NaN,enable:!1});function SortFacesToDrawByDist(e,t){return e.minCamDist===t.minCamDist?t.midCamDist-e.midCamDist:t.minCamDist-e.minCamDist}const G=i.New(i.Quad);i.New(i.Vector2);function sqDistanceTo3D(e,t,i,s,a,n){const r=s-e,c=a-t,o=n-i;return r*r+c*c+o*o}function distanceTo3D(e,t,s,a,n,r,c){return i.hypot3DFast(a-e,n-t,(r-s)*c)}function lerp3d(e,t,s,a,n,r,c){return[i.lerp(e,a,c),i.lerp(t,n,c),i.lerp(s,r,c)]}function lerp3d2(e,t,i,s,a,n,r,c,o,l,h){const[g,u,_]=lerp3d(e,t,i,s,a,n,l);return lerp3d(g,u,_,g+(r-e),u+(c-t),_+(o-i),h)}i.Plugins.Shape3D.Instance=class extends i.SDKWorldInstanceBase{constructor(e,t){super(e),this._shape=0,this._zHeight=15;let i=!0;this._showBackFace=!1,this._showFrontFace=!0,this._showLeftFace=!0,this._showRightFace=!0,this._showTopFace=!0,this._showBottomFace=!0,this._isBackFaceCulling=!1,this._animation=this._objectClass.GetAnimations()[0],this._faceVisibility=[!1,!0,!0,!0,!0,!0],this._faceImages=[0,1,2,3,4,5],this._zTilingFactor=8,this._faceObjects=[null,null,null,null,null,null],t&&(this._shape=t[a],this._zHeight=t[n],i=!!t[r],this._faceVisibility[0]=!!t[c],this._faceVisibility[1]=!!t[o],this._faceVisibility[2]=!!t[l],this._faceVisibility[3]=!!t[h],this._faceVisibility[4]=!!t[g],this._faceVisibility[5]=!!t[u],this._isBackFaceCulling=t[_],this._zTilingFactor=t[d],this._SetFaceObjectClass(0,this._runtime.GetObjectClassBySID(t[m])),this._SetFaceObjectClass(1,this._runtime.GetObjectClassBySID(t[F])),this._SetFaceObjectClass(2,this._runtime.GetObjectClassBySID(t[f])),this._SetFaceObjectClass(3,this._runtime.GetObjectClassBySID(t[T])),this._SetFaceObjectClass(4,this._runtime.GetObjectClassBySID(t[b])),this._SetFaceObjectClass(5,this._runtime.GetObjectClassBySID(t[I])));const s=this.GetWorldInfo();s.SetBackFaceCulling(this._isBackFaceCulling),s.SetDepth(this._zHeight),this._bquadRef=s.GetBoundingQuad(),s.SetVisible(i);const p=this.GetBaseAnimationFrame();s.SetOriginX(p.GetOriginX()),s.SetOriginY(p.GetOriginY()),s.SetBboxChanged()}Release(){super.Release()}GetBaseAnimationFrame(){return this._animation.GetFrameAt(0)}GetCurrentImageInfo(){return this.GetBaseAnimationFrame().GetImageInfo()}IsOriginalSizeKnown(){return!0}_AddFaceToDraw(e,t,i,s,a,n,r,c,o,l,h,g,u,_){const d=p[e];d.i=e,d.tlx=t,d.tly=i,d.tlz=s,d.trx=a,d.try_=n,d.trz=r,d.brx=c,d.bry=o,d.brz=l,d.blx=h,d.bly=g,d.blz=u,d.shape=_,d.enable=!0,D++}Draw(e){const t=this.GetWorldInfo(),i=this._faceVisibility;let s=i[0],a=i[1],n=i[2],r=i[3],c=i[4],o=i[5];if(t.IsDrawBackFaceOnly()?(a=!1,n=!1,r=!1,c=!1,o=!1):t.IsDrawNonBackFacesOnly()&&(s=!1),!(s||a||n||r||c||o))return;let l=this._bquadRef;this._runtime.IsPixelRoundingEnabled()&&(l=t.PixelRoundQuad(l));const h=l.getTlx(),g=l.getTly(),u=l.getTrx(),_=l.getTry(),d=l.getBrx(),m=l.getBry(),F=l.getBlx(),f=l.getBly(),T=this._shape,b=this._zHeight;D=0;for(let e=0;e<6;e++)p[e].enable=!1;if(s&&this._AddFaceToDraw(0,u,_,0,h,g,0,F,f,0,d,m,0,5),0===T)n&&this._AddFaceToDraw(2,h,g,b,F,f,b,F,f,0,h,g,0,0),r&&this._AddFaceToDraw(3,d,m,b,u,_,b,u,_,0,d,m,0,0),c&&this._AddFaceToDraw(4,u,_,b,h,g,b,h,g,0,u,_,0,0),o&&this._AddFaceToDraw(5,F,f,b,d,m,b,d,m,0,F,f,0,0),a&&this._AddFaceToDraw(1,h,g,b,u,_,b,d,m,b,F,f,b,0);else if(1===T){const e=(h+F)/2,t=(g+f)/2,i=(u+d)/2,s=(_+m)/2;n&&this._AddFaceToDraw(2,e,t,b,e,t,b,F,f,0,h,g,0,4),r&&this._AddFaceToDraw(3,i,s,b,i,s,b,u,_,0,d,m,0,4),c&&this._AddFaceToDraw(4,i,s,b,e,t,b,h,g,0,u,_,0,0),o&&this._AddFaceToDraw(5,e,t,b,i,s,b,d,m,0,F,f,0,0)}else if(2===T)n&&this._AddFaceToDraw(2,u,_,b,d,m,b,F,f,0,h,g,0,0),r&&this._AddFaceToDraw(3,d,m,b,u,_,b,u,_,0,d,m,0,0),c&&this._AddFaceToDraw(4,u,_,b,u,_,b,h,g,0,u,_,0,2),o&&this._AddFaceToDraw(5,d,m,b,d,m,b,d,m,0,F,f,0,3);else if(3===T){const e=l.midX(),t=l.midY();n&&this._AddFaceToDraw(2,e,t,b,e,t,b,F,f,0,h,g,0,4),r&&this._AddFaceToDraw(3,e,t,b,e,t,b,u,_,0,d,m,0,4),c&&this._AddFaceToDraw(4,e,t,b,e,t,b,h,g,0,u,_,0,4),o&&this._AddFaceToDraw(5,e,t,b,e,t,b,d,m,0,F,f,0,4)}else 4===T?(n&&this._AddFaceToDraw(2,u,_,b,u,_,b,F,f,0,h,g,0,2),r&&this._AddFaceToDraw(3,u,_,b,u,_,b,u,_,0,d,m,0,3),c&&this._AddFaceToDraw(4,u,_,b,u,_,b,h,g,0,u,_,0,2),o&&this._AddFaceToDraw(5,u,_,b,u,_,b,d,m,0,F,f,0,3)):5===T&&(n&&this._AddFaceToDraw(2,h,g,b,h,g,b,F,f,0,h,g,0,2),r&&this._AddFaceToDraw(3,d,m,b,u,_,b,u,_,0,d,m,0,0),c&&this._AddFaceToDraw(4,u,_,b,h,g,b,h,g,0,u,_,0,0),o&&this._AddFaceToDraw(5,d,m,b,d,m,b,d,m,0,F,f,0,3),a&&this._AddFaceToDraw(1,h,g,b,u,_,b,d,m,b,F,f,0,1));if(D>1){const[e,i,s]=t.GetLayer().GetCameraPosition();for(let t=0;t<6;++t){const a=p[t];a.enable&&(a.minCamDist=Math.min(sqDistanceTo3D(e,i,s,a.tlx,a.tly,a.tlz),sqDistanceTo3D(e,i,s,a.trx,a.try_,a.trz),sqDistanceTo3D(e,i,s,a.brx,a.bry,a.brz),sqDistanceTo3D(e,i,s,a.blx,a.bly,a.blz)),a.midCamDist=sqDistanceTo3D(e,i,s,(a.tlx+a.trx+a.brx+a.blx)/4,(a.tly+a.try_+a.bry+a.bly)/4,(a.tlz+a.trz+a.brz+a.blz)/4))}p.sort(SortFacesToDrawByDist)}const I=e.GetProgram();for(let t=0;t<6;++t){const i=p[t];i.enable&&(e.SetProgram(I),this._DrawFace(e,i.i,i.tlx,i.tly,i.tlz,i.trx,i.try_,i.trz,i.brx,i.bry,i.brz,i.blx,i.bly,i.blz,i.shape))}}_DrawFace(e,t,s,a,n,r,c,o,l,h,g,u,_,d,m){let F=null,f=null,T=!1;const b=this._faceObjects[t];if(null!==b){const t=b.GetPairedInstance(this.GetInstance());if(!t)return;const I=t.GetSdkInstance();if(i.Plugins.Sprite&&I instanceof i.Plugins.Sprite.Instance){if(F=I.GetTexture(),null===F)return;f=I.GetTexQuad()}else{if(!(i.Plugins.TiledBg&&I instanceof i.Plugins.TiledBg.Instance||i.Plugins.NinePatch&&I instanceof i.Plugins.NinePatch.Instance))return;{let t=0,f=0;const b=this._zTilingFactor;switch(m){case 0:case 5:case 1:t=distanceTo3D(s,a,n,r,c,o,b),f=distanceTo3D(r,c,o,l,h,g,b);break;case 2:t=distanceTo3D(u,_,d,l,h,g,b),f=distanceTo3D(s,a,n,u,_,d,b);break;case 3:t=distanceTo3D(u,_,d,l,h,g,b),f=distanceTo3D(r,c,o,l,h,g,b);break;case 4:t=distanceTo3D(u,_,d,l,h,g,b),f=distanceTo3D(s,a,n,(u+l)/2,(_+h)/2,(d+g)/2,b)}if(!(i.Plugins.TiledBg&&I instanceof i.Plugins.TiledBg.Instance)){if(0!==m&&5!==m)return;return I._Set3DCallback((i,l)=>{i.divide(t,f);const h=i.getLeft(),g=i.getTop(),m=i.getRight(),F=i.getBottom(),[T,b,I]=lerp3d2(s,a,n,r,c,o,u,_,d,h,g),[p,D,G]=lerp3d2(s,a,n,r,c,o,u,_,d,m,g),[S,y,C]=lerp3d2(s,a,n,r,c,o,u,_,d,m,F),[w,P,x]=lerp3d2(s,a,n,r,c,o,u,_,d,h,F);e.Quad3D(T,b,I,p,D,G,S,y,C,w,P,x,l)}),I._Draw(e,0,0,t,f),void I._Set3DCallback(null)}if(F=I.GetTexture(),null===F)return;I.CalculateTextureCoordsFor3DFace(t,f,G),T=!0,I.SetTilingShaderProgram(e,!1)}}}else{t=this._faceImages[t];const e=this._animation.GetFrameAt(t).GetImageInfo();if(F=e.GetTexture(),null===F)return;f=e.GetTexQuad()}e.SetTexture(F),m>=3||T?(T||G.copy(f),3===m?(G.setTlx(G.getTrx()),G.setTly(G.getTly())):4===m?(G.setTlx((G.getTlx()+G.getTrx())/2),G.setTly((G.getTly()+G.getTry())/2)):5===m&&G.mirror(),e.Quad3D2(s,a,n,r,c,o,l,h,g,u,_,d,G)):e.Quad3D2(s,a,n,r,c,o,l,h,g,u,_,d,f)}MustPreDraw(){for(const e of this._faceObjects){if(!e)continue;const t=e.GetPairedInstance(this.GetInstance());if(!t)continue;const s=t.GetSdkInstance();if(i.Plugins.TiledBg&&s instanceof i.Plugins.TiledBg.Instance&&s._IsTileRandomizationEnabled())return!0}return!1}RendersToOwnZPlane(){return this._IsFaceVisible(0)}GetImagePointCount(){return this._GetFaceImagePointCount(0)}GetImagePoint(e){return this._GetFaceImagePoint(0,e)}_GetFaceQuad3DForImagePoint(e){const t=this._bquadRef,i=t.getTlx(),s=t.getTly(),a=t.getTrx(),n=t.getTry(),r=t.getBrx(),c=t.getBry(),o=t.getBlx(),l=t.getBly(),h=this._shape,g=this.GetWorldInfo().GetTotalZElevation(),u=g+this._zHeight;if(1===h||3===h){let t=(i+o)/2,_=(s+l)/2,d=(a+r)/2,m=(n+c)/2;switch(e){case 4:return[d,m,u,t,_,u,i,s,g,a,n,g];case 5:return[t,_,u,d,m,u,r,c,g,o,l,g]}if(3===h)switch(t=(i+a)/2,_=(s+n)/2,d=(o+r)/2,m=(l+c)/2,e){case 2:return[t,_,u,d,m,u,o,l,g,i,s,g];case 3:return[d,m,u,t,_,u,a,n,g,r,c,g]}}else if(2===h&&2===e)return[a,n,u,r,c,u,o,l,g,i,s,g];switch(e){case 0:return[i,s,g,a,n,g,r,c,g,o,l,g];case 1:return[i,s,u,a,n,u,r,c,u,o,l,u];case 2:return[i,s,u,o,l,u,o,l,g,i,s,g];case 3:return[r,c,u,a,n,u,a,n,g,r,c,g];case 4:return[a,n,u,i,s,u,i,s,g,a,n,g];case 5:return[o,l,u,r,c,u,r,c,g,o,l,g];default:return[0,0,0,0,0,0,0,0,0,0,0,0]}}_GetFaceImagePoint(e,t){const i=this.GetWorldInfo();if((e=Math.floor(e))<0||e>5)return[i.GetX(),i.GetY(),i.GetTotalZElevation()];const s=this._animation.GetFrameAt(e);let a=null;"string"==typeof t?a=s.GetImagePointByName(t):"number"==typeof t&&(a=s.GetImagePointByIndex(t-1));let n=.5,r=.5;a?(n=a.GetX(),r=a.GetY()):0===e&&(n=s.GetOriginX(),r=s.GetOriginY()),i.GetBoundingBox();const c=this._GetFaceQuad3DForImagePoint(e);return lerp3d2(c[0],c[1],c[2],c[3],c[4],c[5],c[9],c[10],c[11],n,r)}_GetFaceImagePointCount(e){this.GetWorldInfo();if((e=Math.floor(e))<0||e>5)return 0;return this._animation.GetFrameAt(e).GetImagePointCount()}_SetShape(e){this._shape!==e&&(this._shape=e,this._runtime.UpdateRender())}_GetShape(){return this._shape}_SetZHeight(e){e=Math.max(e,0),this._zHeight!==e&&(this._zHeight=e,this.GetWorldInfo().SetDepth(e),this._runtime.UpdateRender())}_GetZHeight(){return this._zHeight}_SetFaceVisible(e,t){t=!!t,this._faceVisibility[e]!==t&&(this._faceVisibility[e]=t,this._runtime.UpdateRender())}_IsFaceVisible(e){return this._faceVisibility[e]}_SetBackFaceCulling(e){e=!!e,this._isBackFaceCulling!==e&&(this._isBackFaceCulling=e,this.GetWorldInfo().SetBackFaceCulling(e),this._runtime.UpdateRender())}_GetBackFaceCulling(){return this._isBackFaceCulling}_SetFaceImage(e,t){const i=this._faceImages,s=this._faceObjects;i[e]===t&&null===s[e]||(i[e]=t,s[e]=null,this._runtime.UpdateRender())}_SetFaceObjectClass(e,t){null!==t&&t.IsFamily()&&(t=t.GetFamilyMembers()[0]);const i=this._faceObjects;i[e]!==t&&(i[e]=t,this._runtime.UpdateRender())}_SetZTilingFactor(e){this._zTilingFactor!==e&&(this._zTilingFactor=e,this._runtime.UpdateRender())}_GetZTilingFactor(){return this._zTilingFactor}SaveToJson(){return{"s":this._shape,"zh":this._zHeight,"fv":this._faceVisibility,"fi":this._faceImages,"fo":this._faceObjects.map(e=>e?e.GetSID():-1),"zf":this._zTilingFactor}}LoadFromJson(e){this._shape=e["s"],this._zHeight=e["zh"],this.GetWorldInfo().SetDepth(this._zHeight),this._faceVisibility=e["fv"].slice(0),this._faceImages=e["fi"].slice(0),e.hasOwnProperty("fo")&&(this._faceObjects=e["fo"].map(e=>this._runtime.GetObjectClassBySID(e))),e.hasOwnProperty("zf")&&(this._zTilingFactor=e["zf"])}GetPropertyValueByIndex(e){}SetPropertyValueByIndex(e,t){}GetDebuggerProperties(){const e="plugins.shape3d";return[{title:e+".name",properties:[{name:e+".properties.z-height.name",value:this._GetZHeight(),onedit:e=>this._SetZHeight(e)}]}]}GetScriptInterfaceClass(){return self.I3DShapeInstance}};const S=new WeakMap,y=["box","prism","wedge","pyramid","corner-out","corner-in"],C=["back","front","left","right","top","bottom"];self.I3DShapeInstance=class extends self.IWorldInstance{constructor(){super(),S.set(this,self.IInstance._GetInitInst().GetSdkInstance())}getImagePointCount(){return S.get(this).GetImagePointCount()}getImagePointX(e){return this.getImagePoint(e)[0]}getImagePointY(e){return this.getImagePoint(e)[1]}getImagePoint(e){if("string"!=typeof e&&"number"!=typeof e)throw new TypeError("expected string or number");return S.get(this).GetImagePoint(e)}getFaceImagePointCount(e){const t=C.indexOf(e);if(t<0)throw new Error("invalid face");return S.get(this)._GetFaceImagePointCount(t)}getFaceImagePointX(e,t){return this.getFaceImagePoint(e,t)[0]}getFaceImagePointY(e,t){return this.getFaceImagePoint(e,t)[1]}getFaceImagePointZ(e,t){return this.getFaceImagePoint(e,t)[2]}getFaceImagePoint(e,t){const i=C.indexOf(e);if(i<0)throw new Error("invalid face");if("string"!=typeof t&&"number"!=typeof t)throw new TypeError("expected string or number");return S.get(this)._GetFaceImagePoint(i,t)}set zHeight(e){s.RequireFiniteNumber(e),S.get(this)._SetZHeight(e)}get zHeight(){return S.get(this)._GetZHeight()}set shape(e){s.RequireString(e);const t=y.indexOf(e);if(-1===t)throw new TypeError("invalid shape");S.get(this)._SetShape(t)}get shape(){return y[S.get(this)._GetShape()]}setFaceVisible(e,t){const i=C.indexOf(e);if(i<0)throw new Error("invalid face");S.get(this)._SetFaceVisible(i,!!t)}isFaceVisible(e){const t=C.indexOf(e);if(t<0)throw new Error("invalid face");return S.get(this)._IsFaceVisible(t)}set isBackFaceCulling(e){S.get(this)._SetBackFaceCulling(e)}get isBackFaceCulling(){return S.get(this)._GetBackFaceCulling()}setFaceImage(e,t){const i=C.indexOf(e),s=C.indexOf(t);if(i<0||s<0)throw new Error("invalid face");S.get(this)._SetFaceImage(i,s)}get zTilingFactor(){return S.get(this)._GetZTilingFactor()}set zTilingFactor(e){s.RequireFiniteNumber(e),S.get(this)._SetZTilingFactor(e)}setFaceObject(e,t){const i=C.indexOf(e);if(i<0)throw new Error("invalid face");const s=S.get(this),a=s.GetRuntime()._UnwrapIObjectClass(t);s._SetFaceObjectClass(i,a)}}}{const P=self.C3;P.Plugins.Shape3D.Cnds={CompareShape(e){return this._GetShape()===e},CompareZHeight(e,t){return P.compare(this._GetZHeight(),e,t)},IsFaceVisible(e){return this._IsFaceVisible(e)}}}self.C3.Plugins.Shape3D.Acts={SetShape(e){this._SetShape(e)},SetZHeight(e){this._SetZHeight(e)},SetFaceVisible(e,t){this._SetFaceVisible(e,t)},SetBackFaceCulling(e){this._SetBackFaceCulling(e)},SetFaceImage(e,t){this._SetFaceImage(e,t)},SetZTilingFactor(e){this._SetZTilingFactor(e)},SetFaceObject(e,t){this._SetFaceObjectClass(e,t)}};self.C3.Plugins.Shape3D.Exps={ZHeight(){return this._GetZHeight()},ZTilingFactor(){return this._GetZTilingFactor()},FaceImagePointX(e,t){return this._GetFaceImagePoint(e,t)[0]},FaceImagePointY(e,t){return this._GetFaceImagePoint(e,t)[1]},FaceImagePointZ(e,t){return this._GetFaceImagePoint(e,t)[2]},FaceImagePointCount(e){return this._GetFaceImagePointCount(e)}};
 }
 
 // scripts/plugins/Spritefont2/c3runtime/runtime.js
@@ -1299,3489 +1329,6 @@ const C3=self.C3,GESTURE_HOLD_THRESHOLD=15,GESTURE_HOLD_TIMEOUT=500,GESTURE_TAP_
 !function(){function t(t){this.mode=r.MODE_8BIT_BYTE,this.data=t,this.parsedData=[];for(var e=0,o=this.data.length;e<o;e++){var n=[],i=this.data.charCodeAt(e);i>65536?(n[0]=240|(1835008&i)>>>18,n[1]=128|(258048&i)>>>12,n[2]=128|(4032&i)>>>6,n[3]=128|63&i):i>2048?(n[0]=224|(61440&i)>>>12,n[1]=128|(4032&i)>>>6,n[2]=128|63&i):i>128?(n[0]=192|(1984&i)>>>6,n[1]=128|63&i):n[0]=i,this.parsedData.push(n)}this.parsedData=Array.prototype.concat.apply([],this.parsedData),this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function e(t,e){this.typeNumber=t,this.errorCorrectLevel=e,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}t.prototype={getLength:function(t){return this.parsedData.length},write:function(t){for(var e=0,r=this.parsedData.length;e<r;e++)t.put(this.parsedData[e],8)}},e.prototype={addData:function(e){var r=new t(e);this.dataList.push(r),this.dataCache=null},isDark:function(t,e){if(t<0||this.moduleCount<=t||e<0||this.moduleCount<=e)throw new Error(t+","+e);return this.modules[t][e]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(t,r){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var o=0;o<this.moduleCount;o++){this.modules[o]=new Array(this.moduleCount);for(var n=0;n<this.moduleCount;n++)this.modules[o][n]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(t,r),this.typeNumber>=7&&this.setupTypeNumber(t),null==this.dataCache&&(this.dataCache=e.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,r)},setupPositionProbePattern:function(t,e){for(var r=-1;r<=7;r++)if(!(t+r<=-1||this.moduleCount<=t+r))for(var o=-1;o<=7;o++)e+o<=-1||this.moduleCount<=e+o||(this.modules[t+r][e+o]=0<=r&&r<=6&&(0==o||6==o)||0<=o&&o<=6&&(0==r||6==r)||2<=r&&r<=4&&2<=o&&o<=4)},getBestMaskPattern:function(){for(var t=0,e=0,r=0;r<8;r++){this.makeImpl(!0,r);var o=g.getLostPoint(this);(0==r||t>o)&&(t=o,e=r)}return e},createMovieClip:function(t,e,r){var o=t.createEmptyMovieClip(e,r);this.make();for(var n=0;n<this.modules.length;n++)for(var i=1*n,a=0;a<this.modules[n].length;a++){var s=1*a;this.modules[n][a]&&(o.beginFill(0,100),o.moveTo(s,i),o.lineTo(s+1,i),o.lineTo(s+1,i+1),o.lineTo(s,i+1),o.endFill())}return o},setupTimingPattern:function(){for(var t=8;t<this.moduleCount-8;t++)null==this.modules[t][6]&&(this.modules[t][6]=t%2==0);for(var e=8;e<this.moduleCount-8;e++)null==this.modules[6][e]&&(this.modules[6][e]=e%2==0)},setupPositionAdjustPattern:function(){for(var t=g.getPatternPosition(this.typeNumber),e=0;e<t.length;e++)for(var r=0;r<t.length;r++){var o=t[e],n=t[r];if(null==this.modules[o][n])for(var i=-2;i<=2;i++)for(var a=-2;a<=2;a++)this.modules[o+i][n+a]=-2==i||2==i||-2==a||2==a||0==i&&0==a}},setupTypeNumber:function(t){for(var e=g.getBCHTypeNumber(this.typeNumber),r=0;r<18;r++){var o=!t&&1==(e>>r&1);this.modules[Math.floor(r/3)][r%3+this.moduleCount-8-3]=o}for(r=0;r<18;r++){o=!t&&1==(e>>r&1);this.modules[r%3+this.moduleCount-8-3][Math.floor(r/3)]=o}},setupTypeInfo:function(t,e){for(var r=this.errorCorrectLevel<<3|e,o=g.getBCHTypeInfo(r),n=0;n<15;n++){var i=!t&&1==(o>>n&1);n<6?this.modules[n][8]=i:n<8?this.modules[n+1][8]=i:this.modules[this.moduleCount-15+n][8]=i}for(n=0;n<15;n++){i=!t&&1==(o>>n&1);n<8?this.modules[8][this.moduleCount-n-1]=i:n<9?this.modules[8][15-n-1+1]=i:this.modules[8][15-n-1]=i}this.modules[this.moduleCount-8][8]=!t},mapData:function(t,e){for(var r=-1,o=this.moduleCount-1,n=7,i=0,a=this.moduleCount-1;a>0;a-=2)for(6==a&&a--;;){for(var s=0;s<2;s++)if(null==this.modules[o][a-s]){var h=!1;i<t.length&&(h=1==(t[i]>>>n&1)),g.getMask(e,o,a-s)&&(h=!h),this.modules[o][a-s]=h,-1==--n&&(i++,n=7)}if((o+=r)<0||this.moduleCount<=o){o-=r,r=-r;break}}}},e.PAD0=236,e.PAD1=17,e.createData=function(t,r,o){for(var n=m.getRSBlocks(t,r),i=new C,a=0;a<o.length;a++){var s=o[a];i.put(s.mode,4),i.put(s.getLength(),g.getLengthInBits(s.mode,t)),s.write(i)}var h=0;for(a=0;a<n.length;a++)h+=n[a].dataCount;if(i.getLengthInBits()>8*h)throw new Error("code length overflow. ("+i.getLengthInBits()+">"+8*h+")");for(i.getLengthInBits()+4<=8*h&&i.put(0,4);i.getLengthInBits()%8!=0;)i.putBit(!1);for(;!(i.getLengthInBits()>=8*h||(i.put(e.PAD0,8),i.getLengthInBits()>=8*h));)i.put(e.PAD1,8);return e.createBytes(i,n)},e.createBytes=function(t,e){for(var r=0,o=0,n=0,i=new Array(e.length),a=new Array(e.length),s=0;s<e.length;s++){var h=e[s].dataCount,u=e[s].totalCount-h;o=Math.max(o,h),n=Math.max(n,u),i[s]=new Array(h);for(var l=0;l<i[s].length;l++)i[s][l]=255&t.buffer[l+r];r+=h;var f=g.getErrorCorrectPolynomial(u),c=new p(i[s],f.getLength()-1).mod(f);a[s]=new Array(f.getLength()-1);for(l=0;l<a[s].length;l++){var d=l+c.getLength()-a[s].length;a[s][l]=d>=0?c.get(d):0}}var m=0;for(l=0;l<e.length;l++)m+=e[l].totalCount;var C=new Array(m),_=0;for(l=0;l<o;l++)for(s=0;s<e.length;s++)l<i[s].length&&(C[_++]=i[s][l]);for(l=0;l<n;l++)for(s=0;s<e.length;s++)l<a[s].length&&(C[_++]=a[s][l]);return C};for(var r={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},o={L:1,M:0,Q:3,H:2},n=0,i=1,a=2,s=3,h=4,u=5,l=6,f=7,g={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(t){for(var e=t<<10;g.getBCHDigit(e)-g.getBCHDigit(g.G15)>=0;)e^=g.G15<<g.getBCHDigit(e)-g.getBCHDigit(g.G15);return(t<<10|e)^g.G15_MASK},getBCHTypeNumber:function(t){for(var e=t<<12;g.getBCHDigit(e)-g.getBCHDigit(g.G18)>=0;)e^=g.G18<<g.getBCHDigit(e)-g.getBCHDigit(g.G18);return t<<12|e},getBCHDigit:function(t){for(var e=0;0!=t;)e++,t>>>=1;return e},getPatternPosition:function(t){return g.PATTERN_POSITION_TABLE[t-1]},getMask:function(t,e,r){switch(t){case n:return(e+r)%2==0;case i:return e%2==0;case a:return r%3==0;case s:return(e+r)%3==0;case h:return(Math.floor(e/2)+Math.floor(r/3))%2==0;case u:return e*r%2+e*r%3==0;case l:return(e*r%2+e*r%3)%2==0;case f:return(e*r%3+(e+r)%2)%2==0;default:throw new Error("bad maskPattern:"+t)}},getErrorCorrectPolynomial:function(t){for(var e=new p([1],0),r=0;r<t;r++)e=e.multiply(new p([1,c.gexp(r)],0));return e},getLengthInBits:function(t,e){if(1<=e&&e<10)switch(t){case r.MODE_NUMBER:return 10;case r.MODE_ALPHA_NUM:return 9;case r.MODE_8BIT_BYTE:case r.MODE_KANJI:return 8;default:throw new Error("mode:"+t)}else if(e<27)switch(t){case r.MODE_NUMBER:return 12;case r.MODE_ALPHA_NUM:return 11;case r.MODE_8BIT_BYTE:return 16;case r.MODE_KANJI:return 10;default:throw new Error("mode:"+t)}else{if(!(e<41))throw new Error("type:"+e);switch(t){case r.MODE_NUMBER:return 14;case r.MODE_ALPHA_NUM:return 13;case r.MODE_8BIT_BYTE:return 16;case r.MODE_KANJI:return 12;default:throw new Error("mode:"+t)}}},getLostPoint:function(t){for(var e=t.getModuleCount(),r=0,o=0;o<e;o++)for(var n=0;n<e;n++){for(var i=0,a=t.isDark(o,n),s=-1;s<=1;s++)if(!(o+s<0||e<=o+s))for(var h=-1;h<=1;h++)n+h<0||e<=n+h||0==s&&0==h||a==t.isDark(o+s,n+h)&&i++;i>5&&(r+=3+i-5)}for(o=0;o<e-1;o++)for(n=0;n<e-1;n++){var u=0;t.isDark(o,n)&&u++,t.isDark(o+1,n)&&u++,t.isDark(o,n+1)&&u++,t.isDark(o+1,n+1)&&u++,0!=u&&4!=u||(r+=3)}for(o=0;o<e;o++)for(n=0;n<e-6;n++)t.isDark(o,n)&&!t.isDark(o,n+1)&&t.isDark(o,n+2)&&t.isDark(o,n+3)&&t.isDark(o,n+4)&&!t.isDark(o,n+5)&&t.isDark(o,n+6)&&(r+=40);for(n=0;n<e;n++)for(o=0;o<e-6;o++)t.isDark(o,n)&&!t.isDark(o+1,n)&&t.isDark(o+2,n)&&t.isDark(o+3,n)&&t.isDark(o+4,n)&&!t.isDark(o+5,n)&&t.isDark(o+6,n)&&(r+=40);var l=0;for(n=0;n<e;n++)for(o=0;o<e;o++)t.isDark(o,n)&&l++;return r+=10*(Math.abs(100*l/e/e-50)/5)}},c={glog:function(t){if(t<1)throw new Error("glog("+t+")");return c.LOG_TABLE[t]},gexp:function(t){for(;t<0;)t+=255;for(;t>=256;)t-=255;return c.EXP_TABLE[t]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)},d=0;d<8;d++)c.EXP_TABLE[d]=1<<d;for(d=8;d<256;d++)c.EXP_TABLE[d]=c.EXP_TABLE[d-4]^c.EXP_TABLE[d-5]^c.EXP_TABLE[d-6]^c.EXP_TABLE[d-8];for(d=0;d<255;d++)c.LOG_TABLE[c.EXP_TABLE[d]]=d;function p(t,e){if(null==t.length)throw new Error(t.length+"/"+e);for(var r=0;r<t.length&&0==t[r];)r++;this.num=new Array(t.length-r+e);for(var o=0;o<t.length-r;o++)this.num[o]=t[o+r]}function m(t,e){this.totalCount=t,this.dataCount=e}function C(){this.buffer=[],this.length=0}p.prototype={get:function(t){return this.num[t]},getLength:function(){return this.num.length},multiply:function(t){for(var e=new Array(this.getLength()+t.getLength()-1),r=0;r<this.getLength();r++)for(var o=0;o<t.getLength();o++)e[r+o]^=c.gexp(c.glog(this.get(r))+c.glog(t.get(o)));return new p(e,0)},mod:function(t){if(this.getLength()-t.getLength()<0)return this;for(var e=c.glog(this.get(0))-c.glog(t.get(0)),r=new Array(this.getLength()),o=0;o<this.getLength();o++)r[o]=this.get(o);for(o=0;o<t.getLength();o++)r[o]^=c.gexp(c.glog(t.get(o))+e);return new p(r,0).mod(t)}},m.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],m.getRSBlocks=function(t,e){var r=m.getRsBlockTable(t,e);if(null==r)throw new Error("bad rs block @ typeNumber:"+t+"/errorCorrectLevel:"+e);for(var o=r.length/3,n=[],i=0;i<o;i++)for(var a=r[3*i+0],s=r[3*i+1],h=r[3*i+2],u=0;u<a;u++)n.push(new m(s,h));return n},m.getRsBlockTable=function(t,e){switch(e){case o.L:return m.RS_BLOCK_TABLE[4*(t-1)+0];case o.M:return m.RS_BLOCK_TABLE[4*(t-1)+1];case o.Q:return m.RS_BLOCK_TABLE[4*(t-1)+2];case o.H:return m.RS_BLOCK_TABLE[4*(t-1)+3];default:return}},C.prototype={get:function(t){var e=Math.floor(t/8);return 1==(this.buffer[e]>>>7-t%8&1)},put:function(t,e){for(var r=0;r<e;r++)this.putBit(1==(t>>>e-r-1&1))},getLengthInBits:function(){return this.length},putBit:function(t){var e=Math.floor(this.length/8);this.buffer.length<=e&&this.buffer.push(0),t&&(this.buffer[e]|=128>>>this.length%8),this.length++}};var _=[[17,14,11,7],[32,26,20,14],[53,42,32,24],[78,62,46,34],[106,84,60,44],[134,106,74,58],[154,122,86,64],[192,152,108,84],[230,180,130,98],[271,213,151,119],[321,251,177,137],[367,287,203,155],[425,331,241,177],[458,362,258,194],[520,412,292,220],[586,450,322,250],[644,504,364,280],[718,560,394,310],[792,624,442,338],[858,666,482,382],[929,711,509,403],[1003,779,565,439],[1091,857,611,461],[1171,911,661,511],[1273,997,715,535],[1367,1059,751,593],[1465,1125,805,625],[1528,1190,868,658],[1628,1264,908,698],[1732,1370,982,742],[1840,1452,1030,790],[1952,1538,1112,842],[2068,1628,1168,898],[2188,1722,1228,958],[2303,1809,1283,983],[2431,1911,1351,1051],[2563,1989,1423,1093],[2699,2099,1499,1139],[2809,2213,1579,1219],[2953,2331,1663,1273]],v=function(){var t=function(t,e){this._bIsPainted=!1,this._htOption=e,this._elCanvas=null,"undefined"!=typeof document?(this._elCanvas=document.createElement("canvas"),this._elCanvas.width=e.width,this._elCanvas.height=e.height):this._elCanvas=new OffscreenCanvas(e.width,e.height),t&&t.appendChild(this._elCanvas),this._el=t,this._oContext=this._elCanvas.getContext("2d"),this._bIsPainted=!1,this._bSupportDataURI=null};return t.prototype.draw=function(t){var e=this._oContext,r=this._htOption,o=t.getModuleCount(),n=r.width/o,i=r.height/o,a=Math.round(n),s=Math.round(i);this.clear();for(var h=0;h<o;h++)for(var u=0;u<o;u++){var l=t.isDark(h,u),f=u*n,g=h*i;e.strokeStyle=l?r.colorDark:r.colorLight,e.lineWidth=1,e.fillStyle=l?r.colorDark:r.colorLight,e.fillRect(f,g,n,i),e.strokeRect(Math.floor(f)+.5,Math.floor(g)+.5,a,s),e.strokeRect(Math.ceil(f)-.5,Math.ceil(g)-.5,a,s)}this._bIsPainted=!0},t.prototype.isPainted=function(){return this._bIsPainted},t.prototype.clear=function(){this._oContext.clearRect(0,0,this._elCanvas.width,this._elCanvas.height),this._bIsPainted=!1},t.prototype.getCanvas=function(){return this._elCanvas},t.prototype.round=function(t){return t?Math.floor(1e3*t)/1e3:t},t}();function D(t,e){for(var r=1,n=function(t){var e=encodeURI(t).toString().replace(/\%[0-9a-fA-F]{2}/g,"a");return e.length+(e.length!=t?3:0)}(t),i=0,a=_.length;i<=a;i++){var s=0;switch(e){case o.L:s=_[i][0];break;case o.M:s=_[i][1];break;case o.Q:s=_[i][2];break;case o.H:s=_[i][3]}if(n<=s)break;r++}if(r>_.length)throw new Error("Too long data");return r}self.C3_QRCode=function(t,e){if(this._htOption={width:256,height:256,typeNumber:4,colorDark:"#000000",colorLight:"#ffffff",correctLevel:o.H},"string"==typeof e&&(e={text:e}),e)for(var r in e)this._htOption[r]=e[r];"string"==typeof t&&(t=document.getElementById(t)),this._el=t,this._oQRCode=null,this._oDrawing=new v(this._el,this._htOption),this.makeCode(this._htOption.text)},self.C3_QRCode.prototype.makeCode=function(t){this._oQRCode=new e(D(t,this._htOption.correctLevel),this._htOption.correctLevel),this._oQRCode.addData(t),this._oQRCode.make(),this._oDrawing.draw(this._oQRCode)},self.C3_QRCode.prototype.clear=function(){this._oDrawing.clear()},self.C3_QRCode.prototype.getCanvas=function(){return this._oDrawing.getCanvas()},self.C3_QRCode.CorrectLevel=o}();
 }
 
-// scripts/plugins/Rex_NGIO_Authentication/newgroundsio.js
-{
-"use strict";
-/* Generated Tue, 12 Jul 2016 15:21:59 -0400 */
-
-/**
- * @license
- * Copyright (c) 2015 Newgrounds Inc.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
- 
- /* start namespaces.js */
-
- if (typeof(Newgrounds) == 'undefined') {
-	/**
-	 * Newgrounds namespace
-	 * @namespace
-	 */
-	globalThis.Newgrounds = {};
-}
-
-/**
- * Newgrounds.io namespace
- * @memberof Newgrounds
- * @type {object}
- * @version 1.0
- * @namespace Newgrounds.io
- */
-Newgrounds.io = {
-	/**
-	 * @property {string} GATEWAY_URI - The script all commands get posted to
-	 */
-	GATEWAY_URI: '//newgrounds.io/gateway_v3.php'
-};
-
-/**
- * Newgrounds.io.events namespace
- * @memberof Newgrounds.io
- * @type {object}
- * @namespace Newgrounds.io.events
- */
-Newgrounds.io.events = {};
-
-
-/**
- * Newgrounds.io.call_validators namespace
- * @memberof Newgrounds.io
- * @type {object}
- * @namespace Newgrounds.io.call_validators
- */
-Newgrounds.io.call_validators = {};
-
-/**
- * Newgrounds.io.model namespace
- * @memberof Newgrounds.io
- * @type {object}
- * @namespace Newgrounds.io.model
- */
-Newgrounds.io.model = {
-	/* Used to enforce strict typing */
-	checkStrictValue: function(classname, property, value, type, model, array_type, array_model) {
-		if (type == 'mixed') return true;
-		if (value === null || typeof(value) == 'undefined') return true;
-		if (type && value.constructor === type) return true;
-		if (type == Boolean && value.constructor === Number) return true;
-		if (model && value.constructor === Newgrounds.io.model[model]) return true;
-		if (value.constructor === Array && (array_type || array_model)) {
-			for (var i=0; i<value.length; i++) {
-				this.checkStrictValue(classname, property, value[i], array_type, array_model, null, null);
-			}
-			return true;
-		}
-		
-		if (classname) throw new Error("Illegal '"+property+"' value set in model "+classname);
-		
-		return false;
-	}
-}
-
-/* end namespaces.js */
-
-/* start events.js */
-
-/**
- * Contains data output by the Newgrounds.io server for use in event listeners
- * @constructor
- * @memberof Newgrounds.io.events
- * @param {string} type - The name of the event, typically the component name.
- * @param {Newgrounds.io.model.call} call - The call object that was posted to the server.
- * @param {(object|object[])} data - The results from the server.
- * @property {string} type - The name of the event, typically the component name.
- * @property {boolean} success - Will be true if the call was successful.
- * @property {Newgrounds.io.model.call} call - The call object that was posted to the server.
- * @property {(object|object[])} data - The results from the server.
- * @property {boolean} preventDefault - If set to true, event will not perform default behaviour (if any).
- */
-Newgrounds.io.events.OutputEvent = function(type, call, data) {
-	this.type = type;
-	this.call = call;
-	this.data = data;
-	this.success = data && typeof(data['success'] != 'undefined') ? (data.success ? true:false) : false;
-	this.preventDefault = false;
-}
-Newgrounds.io.events.OutputEvent.prototype.constructor = Newgrounds.io.events.OutputEvent;
-
-/**
- * Contains data used when working with sessions
- * @constructor
- * @memberof Newgrounds.io.events
- * @param {string} type - The name of the event, typically a Newgrounds.io.events.SessionEvent constant.
- * @property {string} type - The name of the event, typically the component name.
- * @property {Newgrounds.io.model.user} user - The user associated with the session (if any).
- * @property {string} passport_url - A URL where the user can sign in securely.
- */
-Newgrounds.io.events.SessionEvent = function(type) {
-	this.type = type;
-	this.user = null;
-	this.passport_url = null;
-}
-
-/**
- * @constant
- * @type {string}
- */
-Newgrounds.io.events.SessionEvent.USER_LOADED = 'user-loaded';
-
-/**
- * @constant
- * @type {string}
- */
-Newgrounds.io.events.SessionEvent.SESSION_EXPIRED = 'session-expired';
-
-/**
- * @constant
- * @type {string}
- */
-Newgrounds.io.events.SessionEvent.REQUEST_LOGIN = 'request-login';
-
-Newgrounds.io.events.SessionEvent.prototype.constructor = Newgrounds.io.events.SessionEvent;
-
-/**
- * Class for listening to and dispatching events.
- * @constructor
- * @memberof Newgrounds.io.events
- */
-Newgrounds.io.events.EventDispatcher = function() {};
-Newgrounds.io.events.EventDispatcher.prototype = {
-	
-	_event_listeners: {},
-	
-	/**
-	 * Adds a listener function to the specified event.
-	 * @instance
-	 * @memberof Newgrounds.io.events.EventDispatcher
-	 * @function addEventListener
-	 * @param {string} type - The event name to listen for.
-	 * @param {function} listener - A function to call when the event is triggered.
-	 */
-	addEventListener: function(type, listener) {
-		if (type.constructor !== String) throw new Error('Event names must be a string format.');
-		if (listener.constructor !== Function) throw new Error('Event listeners must be functions.');
-		
-		if (typeof(this._event_listeners[type]) == 'undefined') this._event_listeners[type] = [];
-		this._event_listeners[type].push(listener);
-	},
-	
-	/**
-	 * Removes a listener function from the specified event.
-	 * @instance
-	 * @memberof Newgrounds.io.events.EventDispatcher
-	 * @function removeEventListener
-	 * @param {string} type - The event name you want to remove a listener from.
-	 * @param {function} listener - The listener function you want to remove.
-	 * @return {boolean} Returns true if a matching listener was removed.
-	 */
-	removeEventListener: function(type, listener) {
-		if (typeof(this._event_listeners[type]) == 'undefined') return;
-		var index=-1;
-		for(i=0; i<this._event_listeners[type].length; i++) {
-			if (this._event_listeners[type][i] === listener) {
-				index = i;
-				break;
-			}
-		}
-		if (index >= 0) {
-			this._event_listeners[type].splice(index,1);
-			return true;
-		}
-		return false;
-	},
-	
-	/**
-	 * Removes ALL listener functions from the specified event.
-	 * @instance
-	 * @memberof Newgrounds.io.events.EventDispatcher
-	 * @function removeAllEventListeners
-	 * @param {string} type - The event name you want to remove listeners from.
-	 * @return {number} The number of listeners that were removed.
-	 */
-	removeAllEventListeners: function(type) {
-		if (typeof(this._event_listeners[type]) == 'undefined') return 0;
-		var removed = this._event_listeners[type].length;
-		this._event_listeners[type] = [];
-		return removed;
-	},
-	
-	/**
-	 * Dispatches an event to any listener functions.
-	 * @instance
-	 * @memberof Newgrounds.io.events.EventDispatcher
-	 * @function dispatchEvent
-	 * @param event - The event to dispatch.
-	 * @return {boolean}
-	 */
-	dispatchEvent: function(event) {
-		var valid = false;
-		var listener;
-		for(var e in Newgrounds.io.events) {
-			if(event.constructor === Newgrounds.io.events[e]) {
-				valid = true;
-				break;
-			}
-		}
-		if (!valid) throw new Error('Unsupported event object');
-		if (typeof(this._event_listeners[event.type]) == 'undefined') return false;
-		for(var i=0; i<this._event_listeners[event.type].length; i++) {
-			listener = this._event_listeners[event.type][i];
-			if (listener(event) === false || event.preventDefault) return true;
-		}
-		return true;
-	}
-};
-Newgrounds.io.events.EventDispatcher.prototype.constructor = Newgrounds.io.events.EventDispatcher;
-
-
-/* end events.js */
-
-/* start core.js */
-
-/**
- * Handles making calls and processing results to the Newgrounds.io server
- * @constructor
- * @memberof Newgrounds.io
- * @property {boolean} debug - Set to true to operate in debug mode
- * @property {string} app_id - Your unique app ID (found in the 'API Tools' section of your Newgrounds.com project).
- * @property {Newgrounds.io.model.user} user - A user associated with an active session id. Use getSessionLoader to load.
- * @property {string} session_id - A user session id (acquire with App.startSession call).
- * @param {string} [app_id] - Your unique app ID (found in the 'API Tools' section of your Newgrounds.com project).
- * @param {string} [aes_key] - Your AES-128 encryption key (in Base64 format).
- */
-Newgrounds.io.core = function(app_id, aes_key) {
-
-	var _app_id;
-	var _session_id;
-	var _user;
-	var _debug;
-	var ngio = this;
-	var _aes_key;
-	
-	var _urlhelper = new Newgrounds.io.urlHelper();
-	if (_urlhelper.getRequestQueryParam("ngio_session_id")) {
-		_session_id = _urlhelper.getRequestQueryParam("ngio_session_id");
-	}
-		
-	Object.defineProperty(this, 'app_id', {
-		get: function() {
-			return _app_id;
-		}
-	});
-	
-	Object.defineProperty(this, 'user', {
-		get: function() {
-			return this.getCurrentUser();
-		}
-	});
-	
-	Object.defineProperty(this, 'session_id', {
-		set: function(id) {
-			if (id && typeof(id) != 'string') throw new Error("'session_id' must be a string value.");
-			_session_id = id ? id : null;
-		},
-		get: function() {
-			return _session_id ? _session_id : null;
-		}
-	});
-	
-	Object.defineProperty(this, 'debug', {
-		set: function(debug) {
-			_debug = debug ? true:false;
-		},
-		get: function() {
-			return _debug;
-		}
-	});
-	
-	if (!app_id) throw new Error("Missing required 'app_id' in Newgrounds.io.core constructor");
-	if (typeof(app_id) != 'string') throw new Error("'app_id' must be a string value in Newgrounds.io.core constructor");
-	_app_id = app_id;
-	
-	if (aes_key) _aes_key = CryptoJS.enc.Base64.parse(aes_key);
-	else console.warn("You did not set an encryption key. Some calls may not work without this.");
-	
-	var _session_storage_key = "Newgrounds-io-app_session-"+(_app_id.split(":").join("-"));
-	
-	function checkLocalStorage() {
-		if (typeof(localStorage) != 'undefined' && localStorage && localStorage.getItem.constructor == Function) return true;
-		console.warn('localStorage unavailable. Are you running from a web server?');
-		return false;
-	}
-	
-	function getStoredSession() {
-		if (!checkLocalStorage()) return null;
-		var id = localStorage.getItem(_session_storage_key);
-		return id ? id : null;
-	}
-	
-	function setStoredSession(id) {
-		if (!checkLocalStorage()) return null;
-		localStorage.setItem(_session_storage_key, id);
-	}
-	
-	function clearStoredSession() {
-		if (!checkLocalStorage()) return null;
-		localStorage.removeItem(_session_storage_key);
-	}
-	
-	if (!_session_id && getStoredSession()) _session_id = getStoredSession();
-	
-	this.addEventListener('App.endSession', function(e) {
-		ngio.session_id = null;
-		clearStoredSession();
-	});
-	
-	this.addEventListener('App.startSession', function(e) {
-		if (e.success) ngio.session_id = e.data.session.id;
-	});
-	
-	this.addEventListener('App.checkSession', function(e) {
-		if (e.success) {
-			if (e.data.session.expired) {
-				clearStoredSession();
-				ngio.session_id = null;
-			} else if (e.data.session.remember) {
-				setStoredSession(e.data.session.id);
-			}
-		} else {
-			ngio.session_id = null;
-			clearStoredSession();
-		}
-	});
-	
-	this._encryptCall = function(call_model) {
-		if (!call_model || !call_model.constructor == Newgrounds.io.model.call_model) throw new Error("Attempted to encrypt a non 'call' object");
-		var iv  = CryptoJS.lib.WordArray.random(16);
-		var encrypted = CryptoJS.AES.encrypt(JSON.stringify(call_model.toObject()), _aes_key, { iv: iv });
-		var output = CryptoJS.enc.Base64.stringify(iv.concat(encrypted.ciphertext));
-		
-		call_model.secure = output;
-		call_model.parameters = null;
-		return call_model;
-	};
-}
-
-Newgrounds.io.core.prototype = {
-	
-	_session_loader: null,
-	_call_queue: [],
-	_event_listeners: {},
-	
-	/**
-	 * Adds a listener function to the specified event.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function addEventListener
-	 * @param {string} type - The event to listen for. Typically a component name like 'Gateway.getVersion'.
-	 * @param {function} listener - A function to call when the event is triggered.
-	 */
-	addEventListener: Newgrounds.io.events.EventDispatcher.prototype.addEventListener,
-	
-	/**
-	 * Removes a listener function from the specified event.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function removeEventListener
-	 * @param {string} type - The event you want to remove a listener from. Typically a component name like 'Gateway.getVersion'.
-	 * @param {function} listener - The listener function you want to remove.
-	 * @return {boolean} Returns true if a matching listener was removed.
-	 */
-	removeEventListener: Newgrounds.io.events.EventDispatcher.prototype.removeEventListener,
-	
-	/**
-	 * Removes ALL listener functions from the specified event.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function removeAllEventListeners
-	 * @param {string} type - The event you want to remove listeners from.
-	 * @return {number} The number of listeners that were removed.
-	 */
-	removeAllEventListeners: Newgrounds.io.events.EventDispatcher.prototype.removeAllEventListeners,
-	
-	/**
-	 * Dispatches an event to any listener functions.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function dispatchEvent
-	 * @param {Newgrounds.io.events.OutputEvent} event - The event to dispatch.
-	 * @return {boolean}
-	 */
-	dispatchEvent: Newgrounds.io.events.EventDispatcher.prototype.dispatchEvent,
-	
-	/**
-	 * Gets an initialized Newgrounds.io.SessionLoader instance.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function getSessionLoader
-	 * @return {Newgrounds.io.SessionLoader}
-	 */
-	getSessionLoader: function() {
-		if (this._session_loader == null) this._session_loader = new Newgrounds.io.SessionLoader(this);
-		return this._session_loader;
-	},
-	/**
-	 * Gets the current active session, if any.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function getSession
-	 * @return {Newgrounds.io.model.session}
-	 */
-	getSession: function() {
-		return this.getSessionLoader().session;
-	},
-	
-	/**
-	 * Gets the current logged in user, if available.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function getCurrentUser
-	 * @return {Newgrounds.io.model.user}
-	 */
-	getCurrentUser: function() {
-		var sl = this.getSessionLoader();
-		if (sl.session) return sl.session.user;
-		return null;
-	},
-	
-	/**
-	 * Gets the last login error (if any).
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function getLoginError
-	 * @return {Newgrounds.io.model.error}
-	 */
-	getLoginError: function() {
-		return this.getSessionLoader().last_error;
-	},
-	
-	/**
-	 * Gets an active session. If one does not already exist, one will be created.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function getValidSession
-	 * @param {Newgrounds.io.SessionLoader~onStatusUpdate} [callback] - An optional callback function.
-	 * @param {object} [context] - The context under which to call the callback. Optional.
-	 */
-	getValidSession: function(callback, context) {
-		this.getSessionLoader().getValidSession(callback, context);
-	},
-	
-	/**
-	 * Loads Newgrounds Passport and waits for the user to log in, or cancel their login.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function requestLogin
-	 * @param {function} [on_logged_in] - A function that will execute when the user is logged in
-	 * @param {function} [on_login_failed] - A function that will execute if the login fails
-	 * @param {function} [on_login_cancelled] - A function that will execute if the user cancels the login.
-	 * @param {object} [context] - The context under which the callbacks will be called. Optional.
-	 */
-	requestLogin: function(on_logged_in, on_login_failed, on_login_cancelled, context) {
-		
-		if (!on_logged_in || on_logged_in.constructor !== Function) throw ("Missing required callback for 'on_logged_in'.");
-		if (!on_login_failed || on_login_failed.constructor !== Function) throw ("Missing required callback for 'on_login_failed'.");
-		
-		var io = this;
-		var loader = this.getSessionLoader();
-		var login_interval;
-		
-		function end_request() {
-			if (login_interval) clearInterval(login_interval);
-			io.removeEventListener("cancelLoginRequest", cancel_request);
-			loader.closePassport();
-		}
-		
-		function cancel_request() {
-			on_login_cancelled && on_login_cancelled.constructor === Function ? on_login_cancelled.call(context) : on_login_failed.call(context);
-			end_request();
-		}
-		
-		io.addEventListener("cancelLoginRequest", cancel_request);
-		
-		if (io.getCurrentUser()) {
-			on_logged_in.call(context);
-		} else {
-			loader.loadPassport();
-			login_interval = setInterval(function(){
-				loader.checkSession(function(session) {
-					if (!session || session.expired) {
-						if (loader.last_error.code == 111) {
-							cancel_request();
-						} else {
-							end_request();
-							on_login_failed.call(context);
-						}
-					} else if (session.user) {
-						end_request();
-						on_logged_in.call(context);
-					}
-				});
-			}, 3000);
-		}
-	},
-	
-	/**
-	 * Cancels any pending login request created via requestLogin()
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function cancelLoginRequest
-	 */
-	cancelLoginRequest: function() {
-		event = new Newgrounds.io.events.OutputEvent("cancelLoginRequest",null,null);
-		this.dispatchEvent(event);
-	},
-	
-	/**
-	 * Ends any active user session and logs the user out of Newgrounds Passport.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function logOut
-	 * @param {Newgrounds.io.SessionLoader~onStatusUpdate} [callback] - An optional callback function.
-	 * @param {object} [context] - The context under which to call the callback. Optional.
-	 */
-	logOut: function(callback, context) {
-		this.getSessionLoader().endSession(callback, context);
-	},
-	
-	/**
-	 * Adds a component call to the queue. Will be executed later with executeCall.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function queueComponent
-	 * @param {string} component - The component to call, ie 'Gateway.ping'
-	 * @param {(object|object[])} [parameters] - Parameters being passed to the component. You may also pass multiple parameters objects in an array to execute the component multiple times.
-	 * @param {Newgrounds.io.core~onCallResult} [callback] - A function that will execute when this call has executed.
-	 * @param {object} [context] - The context under which the callback will be executed. Optional.
-	 */
-	queueComponent: function(component, parameters, callback, context) {
-		if (parameters && parameters.constructor ===  Function && !callback) {
-			callback = parameters;
-			parameters = null;
-		}
-		
-		var call_model = new Newgrounds.io.model.call(this);
-		call_model.component = component;
-		if (typeof(parameters) != 'undefined') call_model.parameters = parameters;
-		this._validateCall(call_model);
-		
-		this._call_queue.push([call_model,callback,context]);
-	},
-	
-	/**
-	 * Executes any queued calls and resets the queue.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function executeQueue
-	 */
-	executeQueue: function() {
-		var calls = [];
-		var callbacks = [];
-		var contexts = [];
-		for(var i=0; i<this._call_queue.length; i++) {
-			calls.push(this._call_queue[i][0]);
-			callbacks.push(this._call_queue[i][1]);
-			contexts.push(this._call_queue[i][2]);
-		}
-		
-		this._doCall(calls, callbacks, contexts);
-		
-		this._call_queue = [];
-	},
-	
-	/**
-	 * Executes a call to a single component.
-	 * @instance
-	 * @memberof Newgrounds.io.core
-	 * @function callComponent
-	 * @param {string} component - The component to call, ie 'Gateway.ping'
-	 * @param {(object|object[])} [parameters] - Parameters being passed to the component. You may also pass multiple parameters objects in an array to execute the component multiple times.
-	 * @param {Newgrounds.io.core~onCallResult} [callback] - A function that will execute when this call has executed.
-	 * @param {object} [context] - The context under which the callback will be executed. Optional.
-	 */
-	callComponent: function(component, parameters, callback, context) {
-	
-		if (parameters.constructor ===  Function && !callback) {
-			callback = parameters;
-			parameters = null;
-		}
-		
-		var call_model = new Newgrounds.io.model.call(this);
-		call_model.component = component;
-		if (typeof(parameters) != 'undefined') call_model.parameters = parameters;
-		
-		this._validateCall(call_model);
-		this._doCall(call_model, callback, context);
-	},
-	
-	_doCallback: function(call_model, callback, o_return, context) {
-		
-		var i, x_return, x_callback, x_call, x_context;
-		
-		// generic catch-all error
-		var o_error = {success:false,error:{code:0,message:"Unexpected Server Response"}};
-		
-		if (typeof(o_return) == 'undefined') o_return = null;
-		
-		// if we sent an array of calls, we'll need to check for an array of callbacks
-		if (call_model.constructor ===  Array && callback && callback.constructor ===  Array) {
-		
-			for(i=0; i<call_model.length; i++) {
-				x_return = (!o_return || typeof(o_return[i]) == 'undefined') ? o_error : o_return[i];
-				x_callback = typeof(callback[i]) == 'undefined' ? null:callback[i];
-				this._doCallback(call_model[i], x_callback, x_return, context[i]);
-			}			
-			return;
-			
-		}
-		
-		if (o_return && typeof(o_return['data']) != 'undefined') {
-			var data;
-			if (o_return.data.constructor === Array) {
-				data = [];
-				for(i=0; i<o_return.data.length; i++) {
-					data.push(this._formatResults(o_return.component, o_return.data[i]))
-				}
-			} else {
-				data = this._formatResults(o_return.component, o_return.data);
-			}
-			o_return.data = data;
-		}
-		
-		var o_data;
-		
-		if (o_return) {
-			if (typeof(o_return['data']) != 'undefined') {
-				o_data = o_return.data;
-			} else {
-				console.warn("Received empty data from '"+call_model.component+"'.");
-				o_data = null;
-			}
-		} else {
-			o_data = o_error;
-		}
-		
-		var event;
-		if (o_data.constructor === Array) {
-			for(i=0; i<o_data.length; i++) {
-				event = new Newgrounds.io.events.OutputEvent(call_model.component, call_model[i], o_data[i]);
-				this.dispatchEvent(event);
-			}
-		} else {
-			event = new Newgrounds.io.events.OutputEvent(call_model.component, call_model, o_data);
-			this.dispatchEvent(event);
-		}
-		
-		// if we get here we found an actual callback function
-		if (callback && callback.constructor ===  Function) {
-			callback.call(context, o_data);
-		}
-
-	},
-	
-	_formatResults: function(component, result_object) {
-		var model, i, j, models, model_name, validator = null;
-		
-		if (typeof(result_object.success) != 'undefined' && result_object.success) {
-			validator = Newgrounds.io.call_validators.getValidator(component);
-		}
-		
-		if (!validator) return result_object;
-		
-		var formats = validator.returns;
-		
-		for(i in formats) {
-			if (typeof(result_object[i]) == 'undefined' && result_object.success !== false) {
-				console.warn("Newgrounds.io server failed to return expected '"+i+"' in '"+component+"' data.");
-				continue;
-			}
-			
-			if (typeof(formats[i]['array']) != 'undefined') {
-				
-				if (typeof(formats[i]['array']['object']) != 'undefined') {	
-					model_name = formats[i]['array']['object'];
-				} else {
-					model_name = formats[i]['array'];
-				}
-				
-				if (typeof(Newgrounds.io.model[model_name]) == 'undefined') {
-					console.warn("Received unsupported model '"+model_name+"' from '"+component+"'.");
-					continue;
-				}
-				
-				if (result_object[i].constructor !== Array) {
-					console.warn("Expected array<"+model_name+"> value for '"+i+"' in '"+component+"' data, got "+typeof(result_object[i]));
-					continue;
-				}
-				models = [];
-				for(j=0; j<result_object[i].length; j++) {
-					model = new Newgrounds.io.model[model_name](this);
-					model.fromObject(result_object[i][j]);
-					models.push(model);
-				}
-				result_object[i] = models;
-				
-			} else if (typeof(formats[i]['object']) != 'undefined' && result_object[i]) {
-				model_name = formats[i]['object'];
-				if (typeof(Newgrounds.io.model[model_name]) == 'undefined') {
-					console.warn("Received unsupported model '"+model_name+"' from '"+component+"'.");
-					continue;
-				}
-				model = new Newgrounds.io.model[model_name](this);
-				model.fromObject(result_object[i]);
-				result_object[i] = model;
-			}
-		}
-		return result_object;
-	},
-	
-	_doCall: function(call_model, callback, context) {
-	
-		if (!this.app_id) throw new Error('Attempted to call Newgrounds.io server without setting an app_id in Newgrounds.io.core instance.');
-		
-		var call_object;
-		var is_redirect = false;
-		var io=this;
-		
-		function checkRedirect(model) {
-			var validator = Newgrounds.io.call_validators.getValidator(model.component);
-			if (validator.hasOwnProperty('redirect') && validator.redirect) {
-				var parameters = model.parameters;
-				if (!parameters || !parameters.hasOwnProperty('redirect') || parameters.redirect) {
-					return true;
-				}
-			}
-			return false;
-		}
-		
-		if (call_model.constructor === Array) {
-			call_object = [];
-			for(i=0; i<call_model.length; i++) {
-				if (checkRedirect(call_model[i])) {
-					throw new Error("Loader components can not be called in an array without a redirect=false parameter.");
-				}
-				call_object.push(call_model[i].toObject());
-			}
-		} else {
-			call_object = call_model.toObject();
-			is_redirect = checkRedirect(call_model);
-		}
-		
-		var input = {
-			app_id:this.app_id,
-			session_id:this.session_id,
-			call: call_object
-		};
-		
-		if (this.debug) input.debug = 1;
-		
-		if (is_redirect) {
-			var result = {
-				success: true,
-				app_id: this.app_id,
-				result: {
-					component: call_model.component,
-					data: { success: true }
-				}
-			};
-			
-			var _form = document.createElement("form");
-			_form.action = Newgrounds.io.GATEWAY_URI;
-			_form.target = "_blank";
-			_form.method = "POST";
-			
-			var _form_input = document.createElement("input");
-			_form_input.type="hidden";
-			_form_input.name="input";
-			
-			_form.appendChild(_form_input);
-			document.body.appendChild(_form);
-			
-			_form_input.value = JSON.stringify(input);
-			_form.submit();
-			document.body.removeChild(_form);
-			
-		} else {
-			var xhr = new XMLHttpRequest();
-			var output;
-			var error = null
-			
-			var ngio = this;
-			
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState==4) {
-					var o_return;
-					try { o_return = (JSON.parse(xhr.responseText)).result; } catch(e) {}
-					ngio._doCallback(call_model, callback, o_return, context);
-				}
-			};
-			
-			var formData = new FormData();
-			
-			// jhax is a hack to get around JS frameworks that add a toJSON method to Array (wich breaks the native implementation).
-			var jhax = typeof(Array.prototype.toJSON) != 'undefined' ? Array.prototype.toJSON : null;
-			if (jhax) delete Array.prototype.toJSON;
-			formData.append('input', JSON.stringify(input));
-			if (jhax) Array.prototype.toJSON = jhax;
-			
-			xhr.open('POST', Newgrounds.io.GATEWAY_URI, true);
-
-			xhr.send(formData);
-		}
-	},
-	
-	_doValidateCall: function(component,parameters) {
-		
-		var i, c, param, rules;
-		
-		var validator = Newgrounds.io.call_validators.getValidator(component);
-		if (!validator) throw new Error("'"+component+"' is not a valid server component.");
-		
-		if (validator.require_session && !this.session_id) throw new Error("'"+component+"' requires a session id");
-		
-		if (validator.import && validator.import.length > 0) {
-			for(i=0; i<validator.import.length; i++) {
-				c = validator.import[i].split(".");
-				this._doValidateCall(c[0],c[1],parameters);
-			}
-		}
-		
-		var param_value;
-		
-		for(param in validator.params) {
-			rules = validator.params[param];
-			param_value = parameters && typeof(parameters[param]) != 'undefined' ? parameters[param] : null;
-			
-			if (!param_value && rules.extract_from && rules.extract_from.alias) param_value = parameters[rules.extract_from.alias];
-			
-			if (param_value === null) {
-				if (rules.required) throw new Error("Missing required parameter for '"+component+"': "+param);
-				continue;
-			}
-			
-			if (rules.extract_from && param_value.constructor === Newgrounds.io.model[rules.extract_from.object]) {
-				param_value = param_value[rules.extract_from.property];
-			}
-			
-			if (!Newgrounds.io.model.checkStrictValue(null, param, param_value, rules.type, null, null, null)) throw new Error("Illegal value for '"+param+"' parameter of '"+component+"': "+param_value);
-		}
-	},
-	
-	_validateCall: function(call_model) {
-		
-		var i;
-		
-		if (call_model.constructor === Array) {
-			var c = [];
-			for(i=0; i<call_model.length; i++) {
-				c.push(this._validateCall(call_model[i]));
-			}
-			return c;
-		} else if (call_model.constructor !== Newgrounds.io.model.call) {
-			throw new Error("Unexpected 'call_model' value. Expected Newgrounds.io.model.call instance.");
-		}
-		
-		var component = call_model.component;
-		var parameters = call_model.parameters;
-		var echo = call_model.echo;
-		
-		if (parameters && parameters.constructor === Array) {
-			for(i=0; i<parameters.length; i++) {
-				this._doValidateCall(component, parameters[i]);
-			}
-		} else {
-			this._doValidateCall(component, parameters);
-		}
-		
-		var call_object = {component: call_model.component};
-		var validator = Newgrounds.io.call_validators.getValidator(call_model.component);
-		
-		if (typeof(parameters) != 'undefined') {
-			if (validator.secure) {
-				var secure = this._encryptCall(call_model);
-				call_object.secure = secure.secure;
-			} else {
-				call_object.parameters = parameters;
-			}
-		}
-		if (typeof(echo) != 'undefined') call_object.echo = echo;
-		
-		return call_object;
-	}
-}
-Newgrounds.io.core.prototype.constructor = Newgrounds.io.core;
-
-Newgrounds.io.core.instance_id = 0;
-Newgrounds.io.core.getNextInstanceID = function() {
-	Newgrounds.io.core.instance_id++;
-	return Newgrounds.io.core.instance_id;
-};
-
-/**
- * Callback used by Newgrounds.io.core.callComponent and Newgrounds.io.core.queueComponent
- * @callback Newgrounds.io.core~onCallResult
- * @param {object} data - The results of the call.
- */
-
-/**
- * Used to get query string parameters from any url hosting this script (specifically to look for a session id on newgrounds hosted games)
- **/
-Newgrounds.io.urlHelper = function() {
-	
-	var uri = self.location.href;
-	var requestParams = {};
-	var query = uri.split("?").pop();
-	
-	if (query) {
-		var pairs = query.split("&");
-		var key_value;
-		for(var i=0; i<pairs.length; i++) {
-			key_value = pairs[i].split("=");
-			requestParams[key_value[0]] = key_value[1];
-		}
-	}
-	
-	/**
-	 * Gets the value (if any) of a query string parameter in the current url.
-	 * @instance
-	 * @memberof Newgrounds.io.urlHelper
-	 * @function getRequestQueryParam
-	 * @param {string} param_name - The name of the query parameter you want to look up
-	 * @param [default_value] - A value to return if there is no matching query parameter.
-	 */
-	this.getRequestQueryParam = function(param_name, default_value) {
-		if (typeof(default_value) == 'undefined') default_value = null;
-		return typeof(requestParams[param_name]) == 'undefined' ? default_value : requestParams[param_name];
-	};
-}
-
-/* end core.js *//**
- * Contains all the information needed to execute an API component. 
- * @name Newgrounds.io.model.call 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {string} component - The name of the component you want to call, ie 'App.connect'.
- * @property {object} echo - An optional value that will be returned, verbatim, in the #result object.
- * @property {(object|object[])} parameters - An object of parameters you want to pass to the component.
- * @property {string} secure - A an encrypted #call object or array of #call objects. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.call = function(ngio, from_object) {
-
-	/* private vars */
-	var _component, _echo, _parameters, _secure;
-	this.__property_names = ["component","echo","parameters","secure"];
-	this.__classname = "Newgrounds.io.model.call";
-	this.__ngio = ngio;
-	
-	
-	var _component;
-	Object.defineProperty(this, 'component', {
-		get: function() { return typeof(_component) == 'undefined' ? null : _component; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'component', __vv__, String, null, null, null); 
-			_component = __vv__;
-		}
-	});
-
-	var _echo;
-	Object.defineProperty(this, 'echo', {
-		get: function() { return typeof(_echo) == 'undefined' ? null : _echo; },
-		set: function(__vv__) {
-			_echo = __vv__;
-		}
-	});
-
-	var _parameters;
-	Object.defineProperty(this, 'parameters', {
-		get: function() { return typeof(_parameters) == 'undefined' ? null : _parameters; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'parameters', __vv__, Object, null, Object, null); 
-			_parameters = __vv__;
-		}
-	});
-
-	var _secure;
-	Object.defineProperty(this, 'secure', {
-		get: function() { return typeof(_secure) == 'undefined' ? null : _secure; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'secure', __vv__, String, null, null, null); 
-			_secure = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.call.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.call 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.call.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.call 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.call.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		this[this.__property_names[i]] = property;
-	}
-};
-
-
-Newgrounds.io.model.call.prototype.constructor = Newgrounds.io.model.call;/**
- * Contains extra debugging information. 
- * @name Newgrounds.io.model.debug 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {string} exec_time - The time, in milliseconds, that it took to execute a request.
- * @property {Newgrounds.io.model.input} input - A copy of the input object that was posted to the server. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.debug = function(ngio, from_object) {
-
-	/* private vars */
-	var _exec_time, _input;
-	this.__property_names = ["exec_time","input"];
-	this.__classname = "Newgrounds.io.model.debug";
-	this.__ngio = ngio;
-	
-	
-	var _exec_time;
-	Object.defineProperty(this, 'exec_time', {
-		get: function() { return typeof(_exec_time) == 'undefined' ? null : _exec_time; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'exec_time', __vv__, String, null, null, null); 
-			_exec_time = __vv__;
-		}
-	});
-
-	var _input;
-	Object.defineProperty(this, 'input', {
-		get: function() { return typeof(_input) == 'undefined' ? null : _input; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'input', __vv__, null, 'input', null, null); 
-			_input = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.debug.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.debug 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.debug.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.debug 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.debug.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		if (this.__property_names[i] == 'input' && property) property = new Newgrounds.io.model.input(this.__ngio, property);
-		this[this.__property_names[i]] = property;
-	}
-};
-
-
-Newgrounds.io.model.debug.prototype.constructor = Newgrounds.io.model.debug;/**
- *  
- * @name Newgrounds.io.model.error 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {number} code - A code indication the error type.
- * @property {string} message - Contains details about the error. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.error = function(ngio, from_object) {
-
-	/* private vars */
-	var _code, _message;
-	this.__property_names = ["code","message"];
-	this.__classname = "Newgrounds.io.model.error";
-	this.__ngio = ngio;
-	
-	
-	var _code;
-	Object.defineProperty(this, 'code', {
-		get: function() { return typeof(_code) == 'undefined' ? null : _code; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'code', __vv__, Number, null, null, null); 
-			_code = __vv__;
-		}
-	});
-
-	var _message;
-	Object.defineProperty(this, 'message', {
-		get: function() { return typeof(_message) == 'undefined' ? null : _message; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'message', __vv__, String, null, null, null); 
-			_message = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.error.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.error 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.error.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.error 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.error.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		this[this.__property_names[i]] = property;
-	}
-};
-
-/**
- * Gets a new Newgrounds.io.model.error instance.
- * @memberof Newgrounds.io.model.error
- * @function get
- * @static
- * @param {string} [message=Unknown Error] - The error message.
- * @param {number} [code=0] - The error code.
- */
-Newgrounds.io.model.error.get = function(message,code) {
-	var e = new Newgrounds.io.model.error();
-	e.message = message ? message : "Unknown Error";
-	e.code = code ? code : 0;
-	return e;
-};
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.MISSING_INPUT = 100;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.INVALID_INPUT = 101;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.MISSING_PARAMETER = 102;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.INVALID_PARAMETER = 103;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.EXPIRED_SESSION = 104;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.DUPLICATE_SESSION = 105;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.MAX_CONNECTIONS_EXCEEDED = 106;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.MAX_CALLS_EXCEEDED = 107;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.MEMORY_EXCEEDED = 108;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.TIMED_OUT = 109;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.LOGIN_REQUIRED = 110;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.INVALID_APP_ID = 200;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.INVALID_ENCRYPTION = 201;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.INVALID_MEDAL_ID = 202;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.INVALID_SCOREBOARD_ID = 203;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.INVALID_SAVEGROUP_ID = 204;
-
-/**
- * @constant
- * @type {number}
- */
-Newgrounds.io.model.error.SERVER_UNAVAILABLE = 504;
-
- 
-
-Newgrounds.io.model.error.prototype.constructor = Newgrounds.io.model.error;/**
- * A top-level wrapper containing any information needed to authenticate the application/user and any component calls being made. 
- * @name Newgrounds.io.model.input 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {string} app_id - Your application's unique ID.
- * @property {(Newgrounds.io.model.call|Newgrounds.io.model.call[])} call - A #call object, or array of one-or-more #call objects.
- * @property {boolean} debug - If set to true, calls will be executed in debug mode.
- * @property {object} echo - An optional value that will be returned, verbatim, in the #output object.
- * @property {string} session_id - An optional login session id. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.input = function(ngio, from_object) {
-
-	/* private vars */
-	var _app_id, _call, _debug, _echo, _session_id;
-	this.__property_names = ["app_id","call","debug","echo","session_id"];
-	this.__classname = "Newgrounds.io.model.input";
-	this.__ngio = ngio;
-	
-	
-	var _app_id;
-	Object.defineProperty(this, 'app_id', {
-		get: function() { return typeof(_app_id) == 'undefined' ? null : _app_id; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'app_id', __vv__, String, null, null, null); 
-			_app_id = __vv__;
-		}
-	});
-
-	var _call;
-	Object.defineProperty(this, 'call', {
-		get: function() { return typeof(_call) == 'undefined' ? null : _call; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'call', __vv__, null, 'call', null, 'call'); 
-			_call = __vv__;
-		}
-	});
-
-	var _debug;
-	Object.defineProperty(this, 'debug', {
-		get: function() { return typeof(_debug) == 'undefined' ? null : _debug; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'debug', __vv__, Boolean, null, null, null); 
-			_debug = __vv__;
-		}
-	});
-
-	var _echo;
-	Object.defineProperty(this, 'echo', {
-		get: function() { return typeof(_echo) == 'undefined' ? null : _echo; },
-		set: function(__vv__) {
-			_echo = __vv__;
-		}
-	});
-
-	var _session_id;
-	Object.defineProperty(this, 'session_id', {
-		get: function() { return typeof(_session_id) == 'undefined' ? null : _session_id; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'session_id', __vv__, String, null, null, null); 
-			_session_id = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.input.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.input 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.input.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.input 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.input.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		if (this.__property_names[i] == 'call' && property) property = new Newgrounds.io.model.call(this.__ngio, property);
-		this[this.__property_names[i]] = property;
-	}
-};
-
-
-Newgrounds.io.model.input.prototype.constructor = Newgrounds.io.model.input;/**
- * Contains information about a medal. 
- * @name Newgrounds.io.model.medal 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {string} description - A short description of the medal.
- * @property {number} difficulty - The difficulty id of the medal.
- * @property {string} icon - The URL for the medal's icon.
- * @property {number} id - The numeric ID of the medal.
- * @property {string} name - The name of the medal.
- * @property {boolean} unlocked - This will only be set if a valid user session exists.
- * @property {number} value - The medal's point value. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.medal = function(ngio, from_object) {
-
-	/* private vars */
-	var _description, _difficulty, _icon, _id, _name, _secret, _unlocked, _value;
-	this.__property_names = ["description","difficulty","icon","id","name","secret","unlocked","value"];
-	this.__classname = "Newgrounds.io.model.medal";
-	this.__ngio = ngio;
-	
-	
-	var _description;
-	Object.defineProperty(this, 'description', {
-		get: function() { return typeof(_description) == 'undefined' ? null : _description; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'description', __vv__, String, null, null, null); 
-			_description = __vv__;
-		}
-	});
-
-	var _difficulty;
-	Object.defineProperty(this, 'difficulty', {
-		get: function() { return typeof(_difficulty) == 'undefined' ? null : _difficulty; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'difficulty', __vv__, Number, null, null, null); 
-			_difficulty = __vv__;
-		}
-	});
-
-	var _icon;
-	Object.defineProperty(this, 'icon', {
-		get: function() { return typeof(_icon) == 'undefined' ? null : _icon; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'icon', __vv__, String, null, null, null); 
-			_icon = __vv__;
-		}
-	});
-
-	var _id;
-	Object.defineProperty(this, 'id', {
-		get: function() { return typeof(_id) == 'undefined' ? null : _id; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'id', __vv__, Number, null, null, null); 
-			_id = __vv__;
-		}
-	});
-
-	var _name;
-	Object.defineProperty(this, 'name', {
-		get: function() { return typeof(_name) == 'undefined' ? null : _name; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'name', __vv__, String, null, null, null); 
-			_name = __vv__;
-		}
-	});
-
-	var _secret;
-	Object.defineProperty(this, 'secret', {
-		get: function() { return typeof(_secret) == 'undefined' ? null : _secret; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'secret', __vv__, Boolean, null, null, null); 
-			_secret = __vv__;
-		}
-	});
-
-	var _unlocked;
-	Object.defineProperty(this, 'unlocked', {
-		get: function() { return typeof(_unlocked) == 'undefined' ? null : _unlocked; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'unlocked', __vv__, Boolean, null, null, null); 
-			_unlocked = __vv__;
-		}
-	});
-
-	var _value;
-	Object.defineProperty(this, 'value', {
-		get: function() { return typeof(_value) == 'undefined' ? null : _value; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'value', __vv__, Number, null, null, null); 
-			_value = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.medal.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.medal 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.medal.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.medal 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.medal.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		this[this.__property_names[i]] = property;
-	}
-};
-
-/**
- * Calls 'Medal.unlock' component using this medal and updates the unlocked property accordingly.
- * @instance
- * @memberof Newgrounds.io.model.medal 
- * @function unlock
- * @param {Newgrounds.io.model.medal~onUnlocked} [callback] - Called on success
- */
-Newgrounds.io.model.medal.prototype.unlock = function(callback) {
-	var medal = this;
-	
-	if (this._has_ngio_user()) {
-		this.__ngio.callComponent('Medal.unlock', {id:this.id}, function(result) {
-			if (result.success) this.unlocked = true;
-			callback(result);
-		});
-	} else if (typeof(callback) == 'function') {
-		var error = Newgrounds.io.model.error.get("This function requires a valid user session.", Newgrounds.io.model.error.LOGIN_REQUIRED);
-		var result = {success:false, error:error};
-		callback(result);
-	}
-}
-
-/**
- * Callback used by Newgrounds.io.model.medal.unlock
- * @callback Newgrounds.io.model.medal~onUnlocked
- * @param {object} result - The results from the component call.
- */
-Newgrounds.io.model.medal.prototype.constructor = Newgrounds.io.model.medal;/**
- * Contains all return output from an API request. 
- * @name Newgrounds.io.model.output 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {string} api_version - If there was an error, this will contain the current version number of the API gateway.
- * @property {string} app_id - Your application's unique ID
- * @property {Newgrounds.io.model.debug} debug - Contains extra information you may need when debugging (debug mode only).
- * @property {object} echo - If you passed an 'echo' value in your input object, it will be echoed here.
- * @property {Newgrounds.io.model.error} error - This will contain any error info if the success property is false.
- * @property {string} help_url - If there was an error, this will contain the URL for our help docs.
- * @property {(Newgrounds.io.model.result|Newgrounds.io.model.result[])} result - This will be a #result object, or an array containing one-or-more #result objects (this will match the structure of the #call property in your #input object).
- * @property {boolean} success - If false, there was a problem with your 'input' object. Details will be in the #error property. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.output = function(ngio, from_object) {
-
-	/* private vars */
-	var _api_version, _app_id, _debug, _echo, _error, _help_url, _result, _success;
-	this.__property_names = ["api_version","app_id","debug","echo","error","help_url","result","success"];
-	this.__classname = "Newgrounds.io.model.output";
-	this.__ngio = ngio;
-	
-	
-	var _api_version;
-	Object.defineProperty(this, 'api_version', {
-		get: function() { return typeof(_api_version) == 'undefined' ? null : _api_version; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'api_version', __vv__, String, null, null, null); 
-			_api_version = __vv__;
-		}
-	});
-
-	var _app_id;
-	Object.defineProperty(this, 'app_id', {
-		get: function() { return typeof(_app_id) == 'undefined' ? null : _app_id; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'app_id', __vv__, String, null, null, null); 
-			_app_id = __vv__;
-		}
-	});
-
-	var _debug;
-	Object.defineProperty(this, 'debug', {
-		get: function() { return typeof(_debug) == 'undefined' ? null : _debug; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'debug', __vv__, null, 'debug', null, null); 
-			_debug = __vv__;
-		}
-	});
-
-	var _echo;
-	Object.defineProperty(this, 'echo', {
-		get: function() { return typeof(_echo) == 'undefined' ? null : _echo; },
-		set: function(__vv__) {
-			_echo = __vv__;
-		}
-	});
-
-	var _error;
-	Object.defineProperty(this, 'error', {
-		get: function() { return typeof(_error) == 'undefined' ? null : _error; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'error', __vv__, null, 'error', null, null); 
-			_error = __vv__;
-		}
-	});
-
-	var _help_url;
-	Object.defineProperty(this, 'help_url', {
-		get: function() { return typeof(_help_url) == 'undefined' ? null : _help_url; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'help_url', __vv__, String, null, null, null); 
-			_help_url = __vv__;
-		}
-	});
-
-	var _result;
-	Object.defineProperty(this, 'result', {
-		get: function() { return typeof(_result) == 'undefined' ? null : _result; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'result', __vv__, null, 'result', null, 'result'); 
-			_result = __vv__;
-		}
-	});
-
-	var _success;
-	Object.defineProperty(this, 'success', {
-		get: function() { return typeof(_success) == 'undefined' ? null : _success; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'success', __vv__, Boolean, null, null, null); 
-			_success = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.output.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.output 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.output.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.output 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.output.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		if (this.__property_names[i] == 'debug' && property) property = new Newgrounds.io.model.debug(this.__ngio, property);
-		else if (this.__property_names[i] == 'error' && property) property = new Newgrounds.io.model.error(this.__ngio, property);
-		else if (this.__property_names[i] == 'result' && property) property = new Newgrounds.io.model.result(this.__ngio, property);
-		this[this.__property_names[i]] = property;
-	}
-};
-
-
-Newgrounds.io.model.output.prototype.constructor = Newgrounds.io.model.output;/**
- * Contains information returned by an API component. 
- * @name Newgrounds.io.model.result 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {string} component - The name of the component that was executed (ie 'Medal.unlock').
- * @property {(object|object[])} data - An object, or array of one-or-more objects (follows the structure of the corresponding 'call' property), containing any returned properties or errors.
- * @property {object} echo - If you passed an 'echo' value in your call object, it will be echoed here. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.result = function(ngio, from_object) {
-
-	/* private vars */
-	var _component, _data, _echo;
-	this.__property_names = ["component","data","echo"];
-	this.__classname = "Newgrounds.io.model.result";
-	this.__ngio = ngio;
-	
-	
-	var _component;
-	Object.defineProperty(this, 'component', {
-		get: function() { return typeof(_component) == 'undefined' ? null : _component; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'component', __vv__, String, null, null, null); 
-			_component = __vv__;
-		}
-	});
-
-	var _data;
-	Object.defineProperty(this, 'data', {
-		get: function() { return typeof(_data) == 'undefined' ? null : _data; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'data', __vv__, Object, null, Object, null); 
-			_data = __vv__;
-		}
-	});
-
-	var _echo;
-	Object.defineProperty(this, 'echo', {
-		get: function() { return typeof(_echo) == 'undefined' ? null : _echo; },
-		set: function(__vv__) {
-			_echo = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.result.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.result 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.result.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.result 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.result.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		this[this.__property_names[i]] = property;
-	}
-};
-
-
-Newgrounds.io.model.result.prototype.constructor = Newgrounds.io.model.result;/**
- * Contains information about a score posted to a scoreboard. 
- * @name Newgrounds.io.model.score 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {string} formatted_value - The score value in the format selected in your scoreboard settings.
- * @property {string} tag - The tag attached to this score (if any).
- * @property {Newgrounds.io.model.user} user - The user who earned score. If this property is absent, the score belongs to the active user.
- * @property {number} value - The integer value of the score. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.score = function(ngio, from_object) {
-
-	/* private vars */
-	var _formatted_value, _tag, _user, _value;
-	this.__property_names = ["formatted_value","tag","user","value"];
-	this.__classname = "Newgrounds.io.model.score";
-	this.__ngio = ngio;
-	
-	
-	var _formatted_value;
-	Object.defineProperty(this, 'formatted_value', {
-		get: function() { return typeof(_formatted_value) == 'undefined' ? null : _formatted_value; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'formatted_value', __vv__, String, null, null, null); 
-			_formatted_value = __vv__;
-		}
-	});
-
-	var _tag;
-	Object.defineProperty(this, 'tag', {
-		get: function() { return typeof(_tag) == 'undefined' ? null : _tag; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'tag', __vv__, String, null, null, null); 
-			_tag = __vv__;
-		}
-	});
-
-	var _user;
-	Object.defineProperty(this, 'user', {
-		get: function() { return typeof(_user) == 'undefined' ? null : _user; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'user', __vv__, null, 'user', null, null); 
-			_user = __vv__;
-		}
-	});
-
-	var _value;
-	Object.defineProperty(this, 'value', {
-		get: function() { return typeof(_value) == 'undefined' ? null : _value; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'value', __vv__, Number, null, null, null); 
-			_value = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.score.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.score 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.score.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.score 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.score.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		if (this.__property_names[i] == 'user' && property) property = new Newgrounds.io.model.user(this.__ngio, property);
-		this[this.__property_names[i]] = property;
-	}
-};
-
-
-Newgrounds.io.model.score.prototype.constructor = Newgrounds.io.model.score;/**
- * Contains information about a scoreboard. 
- * @name Newgrounds.io.model.scoreboard 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {number} id - The numeric ID of the scoreboard.
- * @property {string} name - The name of the scoreboard. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.scoreboard = function(ngio, from_object) {
-
-	/* private vars */
-	var _id, _name;
-	this.__property_names = ["id","name"];
-	this.__classname = "Newgrounds.io.model.scoreboard";
-	this.__ngio = ngio;
-	
-	
-	var _id;
-	Object.defineProperty(this, 'id', {
-		get: function() { return typeof(_id) == 'undefined' ? null : _id; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'id', __vv__, Number, null, null, null); 
-			_id = __vv__;
-		}
-	});
-
-	var _name;
-	Object.defineProperty(this, 'name', {
-		get: function() { return typeof(_name) == 'undefined' ? null : _name; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'name', __vv__, String, null, null, null); 
-			_name = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.scoreboard.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.scoreboard 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.scoreboard.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.scoreboard 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.scoreboard.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		this[this.__property_names[i]] = property;
-	}
-};
-
-/**
- * Calls the 'ScoreBoard.postScore' component using this scoreboard and the score info provided.
- * @instance
- * @memberof Newgrounds.io.model.scoreboard 
- * @function postScore
- * @param {number} score - The flat, numeric value of the score to post.
- * @param {string} [tag] - An optional tag that can be used to filter this score.
- * @param {Newgrounds.io.model.scoreboard~onScorePosted} [callback] - Called when score is posted
- */
-Newgrounds.io.model.scoreboard.prototype.postScore = function(score, tag, callback) {
-	var board = this;
-	
-	if (typeof(tag) == 'function' && !callback) {
-		callback = tag;
-		tag = null;
-	}
-	if (!tag) tag = null;
-	
-	if (this._has_ngio_user()) {
-		this.__ngio.callComponent('ScoreBoard.postScore', {id:this.id, value:score, tag:tag}, function(result) {
-			callback(result);
-		});
-	} else if (typeof(callback) == 'function') {
-		var error = Newgrounds.io.model.error.get("This function requires a valid user session.", Newgrounds.io.model.error.LOGIN_REQUIRED);
-		var result = {success:false, error:error};
-		callback(result);
-	}
-}
-
-/**
- * Callback used by Newgrounds.io.model.scoreboard.postScore
- * @callback Newgrounds.io.model.scoreboard~onScorePosted
- * @param {object} result - The results from the component call.
- */
-Newgrounds.io.model.scoreboard.prototype.constructor = Newgrounds.io.model.scoreboard;/**
- * Contains information about the current user session. 
- * @name Newgrounds.io.model.session 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {boolean} expired - If true, the session_id is expired. Use App.startSession to get a new one.
- * @property {string} id - A unique session identifier
- * @property {string} passport_url - If the session has no associated user but is not expired, this property will provide a URL that can be used to sign the user in.
- * @property {boolean} remember - If true, the user would like you to remember their session id.
- * @property {Newgrounds.io.model.user} user - If the user has not signed in, or granted access to your app, this will be null 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.session = function(ngio, from_object) {
-
-	/* private vars */
-	var _expired, _id, _passport_url, _remember, _user;
-	this.__property_names = ["expired","id","passport_url","remember","user"];
-	this.__classname = "Newgrounds.io.model.session";
-	this.__ngio = ngio;
-	
-	
-	var _expired;
-	Object.defineProperty(this, 'expired', {
-		get: function() { return typeof(_expired) == 'undefined' ? null : _expired; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'expired', __vv__, Boolean, null, null, null); 
-			_expired = __vv__;
-		}
-	});
-
-	var _id;
-	Object.defineProperty(this, 'id', {
-		get: function() { return typeof(_id) == 'undefined' ? null : _id; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'id', __vv__, String, null, null, null); 
-			_id = __vv__;
-		}
-	});
-
-	var _passport_url;
-	Object.defineProperty(this, 'passport_url', {
-		get: function() { return typeof(_passport_url) == 'undefined' ? null : _passport_url; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'passport_url', __vv__, String, null, null, null); 
-			_passport_url = __vv__;
-		}
-	});
-
-	var _remember;
-	Object.defineProperty(this, 'remember', {
-		get: function() { return typeof(_remember) == 'undefined' ? null : _remember; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'remember', __vv__, Boolean, null, null, null); 
-			_remember = __vv__;
-		}
-	});
-
-	var _user;
-	Object.defineProperty(this, 'user', {
-		get: function() { return typeof(_user) == 'undefined' ? null : _user; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'user', __vv__, null, 'user', null, null); 
-			_user = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.session.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.session 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.session.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.session 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.session.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		if (this.__property_names[i] == 'user' && property) property = new Newgrounds.io.model.user(this.__ngio, property);
-		this[this.__property_names[i]] = property;
-	}
-};
-
-
-Newgrounds.io.model.session.prototype.constructor = Newgrounds.io.model.session;/**
- * Contains information about a user. 
- * @name Newgrounds.io.model.user 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {Newgrounds.io.model.usericons} icons - The user's icon images.
- * @property {number} id - The user's numeric ID.
- * @property {string} name - The user's textual name.
- * @property {boolean} supporter - Returns true if the user has a Newgrounds Supporter upgrade. 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.user = function(ngio, from_object) {
-
-	/* private vars */
-	var _icons, _id, _name, _supporter;
-	this.__property_names = ["icons","id","name","supporter"];
-	this.__classname = "Newgrounds.io.model.user";
-	this.__ngio = ngio;
-	
-	
-	var _icons;
-	Object.defineProperty(this, 'icons', {
-		get: function() { return typeof(_icons) == 'undefined' ? null : _icons; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'icons', __vv__, null, 'usericons', null, null); 
-			_icons = __vv__;
-		}
-	});
-
-	var _id;
-	Object.defineProperty(this, 'id', {
-		get: function() { return typeof(_id) == 'undefined' ? null : _id; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'id', __vv__, Number, null, null, null); 
-			_id = __vv__;
-		}
-	});
-
-	var _name;
-	Object.defineProperty(this, 'name', {
-		get: function() { return typeof(_name) == 'undefined' ? null : _name; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'name', __vv__, String, null, null, null); 
-			_name = __vv__;
-		}
-	});
-
-	var _supporter;
-	Object.defineProperty(this, 'supporter', {
-		get: function() { return typeof(_supporter) == 'undefined' ? null : _supporter; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'supporter', __vv__, Boolean, null, null, null); 
-			_supporter = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.user.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.user 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.user.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.user 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.user.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		if (this.__property_names[i] == 'icons' && property) property = new Newgrounds.io.model.usericons(this.__ngio, property);
-		this[this.__property_names[i]] = property;
-	}
-};
-
-
-Newgrounds.io.model.user.prototype.constructor = Newgrounds.io.model.user;/**
- * Contains any icons associated with this user. 
- * @name Newgrounds.io.model.usericons 
- * @constructor
- * @memberof Newgrounds.io.model
- * @property {string} large - The URL of the user's large icon
- * @property {string} medium - The URL of the user's medium icon
- * @property {string} small - The URL of the user's small icon 
- * @param {Newgrounds.io.core} [ngio] - A Newgrounds.io.core instance associated with the model object.
- * @param {object} [from_object] - A literal object used to populate this model's properties.
- */
-Newgrounds.io.model.usericons = function(ngio, from_object) {
-
-	/* private vars */
-	var _large, _medium, _small;
-	this.__property_names = ["large","medium","small"];
-	this.__classname = "Newgrounds.io.model.usericons";
-	this.__ngio = ngio;
-	
-	
-	var _large;
-	Object.defineProperty(this, 'large', {
-		get: function() { return typeof(_large) == 'undefined' ? null : _large; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'large', __vv__, String, null, null, null); 
-			_large = __vv__;
-		}
-	});
-
-	var _medium;
-	Object.defineProperty(this, 'medium', {
-		get: function() { return typeof(_medium) == 'undefined' ? null : _medium; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'medium', __vv__, String, null, null, null); 
-			_medium = __vv__;
-		}
-	});
-
-	var _small;
-	Object.defineProperty(this, 'small', {
-		get: function() { return typeof(_small) == 'undefined' ? null : _small; },
-		set: function(__vv__) {
-			Newgrounds.io.model.checkStrictValue(this.__classname, 'small', __vv__, String, null, null, null); 
-			_small = __vv__;
-		}
-	});
-	if(from_object) this.fromObject(from_object);
-};
-
-Newgrounds.io.model.usericons.prototype._has_ngio_user = function() {
-	return (this.__ngio && this.__ngio.user);
-}
-
-/**
- * Converts the model instance to a literal object.
- * @instance
- * @memberof Newgrounds.io.model.usericons 
- * @function toObject
- * @return {object}
- */
-Newgrounds.io.model.usericons.prototype.toObject = function() {
-	var object = {};
-	for(var i=0; i<this.__property_names.length; i++) {
-		if (typeof(this[this.__property_names[i]]) != 'undefined') object[this.__property_names[i]] = this[this.__property_names[i]];
-	}
-	return object;
-};
-
-/**
- * Populates the model instance using a literal object.
- * @instance
- * @memberof Newgrounds.io.model.usericons 
- * @function fromObject
- * @param {object} object - An object containing property/value pairs
- */
-Newgrounds.io.model.usericons.prototype.fromObject = function(object) {
-	var property, model;
-	for(var i=0; i<this.__property_names.length; i++) {
-		property = object[this.__property_names[i]]; 
-		this[this.__property_names[i]] = property;
-	}
-};
-
-
-Newgrounds.io.model.usericons.prototype.constructor = Newgrounds.io.model.usericons;/* start validators.js */
-
-Newgrounds.io.call_validators.getValidator = function(component) {
-	var c = component.split(".");
-	var classname = c[0];
-	var method = c[1];
-	
-	var validator = (Newgrounds.io.call_validators[classname] && Newgrounds.io.call_validators[classname][method]) ? Newgrounds.io.call_validators[classname][method] : null;
-	return validator;
-};
-
-/**
- * Contains validation rules for calls within the 'App' component.
- * @memberof Newgrounds.io.call_validators
- * @type {object}
- */
-Newgrounds.io.call_validators.App = { 
-
-	/**
-	 * @property {object} checkSession - Contains rules for validating calls to 'App.checkSession'.
-	 */
-	checkSession: {"require_session":true,"secure":false,"redirect":false,"import":false,"params":{},"returns":{"session":{"object":"session","description":null}}}, 
-
-	/**
-	 * @property {object} endSession - Contains rules for validating calls to 'App.endSession'.
-	 */
-	endSession: {"require_session":true,"secure":false,"redirect":false,"import":false,"params":{},"returns":{}}, 
-
-	/**
-	 * @property {object} getCurrentVersion - Contains rules for validating calls to 'App.getCurrentVersion'.
-	 */
-	getCurrentVersion: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{"version":{"type":String,"extract_from":null,"required":null,"description":"The version number (in \"X.Y.Z\" format) of the client-side app. (default = \"0.0.0\")"}},"returns":{}}, 
-
-	/**
-	 * @property {object} getHostLicense - Contains rules for validating calls to 'App.getHostLicense'.
-	 */
-	getHostLicense: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{"host":{"type":String,"extract_from":null,"required":null,"description":"The host domain to check (ei, somesite.com)."}},"returns":{}}, 
-
-	/**
-	 * @property {object} logView - Contains rules for validating calls to 'App.logView'.
-	 */
-	logView: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{"host":{"type":String,"extract_from":null,"required":true,"description":"The domain hosting your app. Examples: \"www.somesite.com\", \"localHost\""}},"returns":{}}, 
-
-	/**
-	 * @property {object} startSession - Contains rules for validating calls to 'App.startSession'.
-	 */
-	startSession: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{"force":{"type":Boolean,"extract_from":null,"required":null,"description":"If true, will create a new session even if the user already has an existing one.\n\nNote: Any previous session ids will no longer be valid if this is used."}},"returns":{"session":{"object":"session","description":null}}} 
-
-};
-/**
- * Contains validation rules for calls within the 'Event' component.
- * @memberof Newgrounds.io.call_validators
- * @type {object}
- */
-Newgrounds.io.call_validators.Event = { 
-
-	/**
-	 * @property {object} logEvent - Contains rules for validating calls to 'Event.logEvent'.
-	 */
-	logEvent: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{"event_name":{"type":String,"extract_from":null,"required":true,"description":"The name of your custom event as defined in your Referrals & Events settings."},"host":{"type":String,"extract_from":null,"required":true,"description":"The domain hosting your app. Example: \"newgrounds.com\", \"localHost\""}},"returns":{}} 
-
-};
-/**
- * Contains validation rules for calls within the 'Gateway' component.
- * @memberof Newgrounds.io.call_validators
- * @type {object}
- */
-Newgrounds.io.call_validators.Gateway = { 
-
-	/**
-	 * @property {object} getDatetime - Contains rules for validating calls to 'Gateway.getDatetime'.
-	 */
-	getDatetime: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{},"returns":{}}, 
-
-	/**
-	 * @property {object} getVersion - Contains rules for validating calls to 'Gateway.getVersion'.
-	 */
-	getVersion: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{},"returns":{}}, 
-
-	/**
-	 * @property {object} ping - Contains rules for validating calls to 'Gateway.ping'.
-	 */
-	ping: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{},"returns":{}} 
-
-};
-/**
- * Contains validation rules for calls within the 'Loader' component.
- * @memberof Newgrounds.io.call_validators
- * @type {object}
- */
-Newgrounds.io.call_validators.Loader = { 
-
-	/**
-	 * @property {object} loadAuthorUrl - Contains rules for validating calls to 'Loader.loadAuthorUrl'.
-	 */
-	loadAuthorUrl: {"require_session":false,"secure":false,"redirect":true,"import":false,"params":{"host":{"type":String,"extract_from":null,"required":true,"description":"The domain hosting your app. Example: \"www.somesite.com\", \"localHost\""},"redirect":{"type":Boolean,"extract_from":null,"required":false,"description":"Set this to false to get a JSON response containing the URL instead of doing an actual redirect."}},"returns":{}}, 
-
-	/**
-	 * @property {object} loadMoreGames - Contains rules for validating calls to 'Loader.loadMoreGames'.
-	 */
-	loadMoreGames: {"require_session":false,"secure":false,"redirect":true,"import":false,"params":{"host":{"type":String,"extract_from":null,"required":true,"description":"The domain hosting your app. Example: \"www.somesite.com\", \"localHost\""},"redirect":{"type":Boolean,"extract_from":null,"required":false,"description":"Set this to false to get a JSON response containing the URL instead of doing an actual redirect."}},"returns":{}}, 
-
-	/**
-	 * @property {object} loadNewgrounds - Contains rules for validating calls to 'Loader.loadNewgrounds'.
-	 */
-	loadNewgrounds: {"require_session":false,"secure":false,"redirect":true,"import":false,"params":{"host":{"type":String,"extract_from":null,"required":true,"description":"The domain hosting your app. Example: \"www.somesite.com\", \"localHost\""},"redirect":{"type":Boolean,"extract_from":null,"required":false,"description":"Set this to false to get a JSON response containing the URL instead of doing an actual redirect."}},"returns":{}}, 
-
-	/**
-	 * @property {object} loadOfficialUrl - Contains rules for validating calls to 'Loader.loadOfficialUrl'.
-	 */
-	loadOfficialUrl: {"require_session":false,"secure":false,"redirect":true,"import":false,"params":{"host":{"type":String,"extract_from":null,"required":true,"description":"The domain hosting your app. Example: \"www.somesite.com\", \"localHost\""},"redirect":{"type":Boolean,"extract_from":null,"required":false,"description":"Set this to false to get a JSON response containing the URL instead of doing an actual redirect."}},"returns":{}}, 
-
-	/**
-	 * @property {object} loadReferral - Contains rules for validating calls to 'Loader.loadReferral'.
-	 */
-	loadReferral: {"require_session":false,"secure":false,"redirect":true,"import":false,"params":{"host":{"type":String,"extract_from":null,"required":true,"description":"The domain hosting your app. Example: \"www.somesite.com\", \"localHost\""},"redirect":{"type":Boolean,"extract_from":null,"required":false,"description":"Set this to false to get a JSON response containing the URL instead of doing an actual redirect."},"referral_name":{"type":String,"extract_from":null,"required":true,"description":"The name of the referral (as defined in your \"Referrals & Events\" settings)."}},"returns":{}} 
-
-};
-/**
- * Contains validation rules for calls within the 'Medal' component.
- * @memberof Newgrounds.io.call_validators
- * @type {object}
- */
-Newgrounds.io.call_validators.Medal = { 
-
-	/**
-	 * @property {object} getList - Contains rules for validating calls to 'Medal.getList'.
-	 */
-	getList: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{},"returns":{"medals":{"array":{"object":"medal"},"description":"An array of medal objects."}}}, 
-
-	/**
-	 * @property {object} unlock - Contains rules for validating calls to 'Medal.unlock'.
-	 */
-	unlock: {"require_session":true,"secure":true,"redirect":false,"import":false,"params":{"id":{"type":Number,"extract_from":{"object":"medal","alias":"medal","property":"id"},"required":true,"description":"The numeric ID of the medal to unlock."}},"returns":{"medal":{"object":"medal","description":"The #medal that was unlocked."}}} 
-
-};
-/**
- * Contains validation rules for calls within the 'ScoreBoard' component.
- * @memberof Newgrounds.io.call_validators
- * @type {object}
- */
-Newgrounds.io.call_validators.ScoreBoard = { 
-
-	/**
-	 * @property {object} getBoards - Contains rules for validating calls to 'ScoreBoard.getBoards'.
-	 */
-	getBoards: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{},"returns":{"scoreboards":{"array":{"object":"scoreboard"},"description":"An array of #scoreboard objects."}}}, 
-
-	/**
-	 * @property {object} getScores - Contains rules for validating calls to 'ScoreBoard.getScores'.
-	 */
-	getScores: {"require_session":false,"secure":false,"redirect":false,"import":false,"params":{"id":{"type":Number,"extract_from":{"object":"scoreboard","alias":"scoreboard","property":"id"},"required":true,"description":"The numeric ID of the scoreboard."},"limit":{"type":Number,"extract_from":null,"required":null,"description":"An integer indicating the number of scores to include in the list. Default = 10."},"period":{"type":String,"extract_from":null,"required":null,"description":"The time-frame to pull scores from (see notes for acceptable values)."},"skip":{"type":Number,"extract_from":null,"required":null,"description":"An integer indicating the number of scores to skip before starting the list. Default = 0."},"social":{"type":Boolean,"extract_from":null,"required":null,"description":"If set to true, only social scores will be loaded (scores by the user and their friends). This param will be ignored if there is no valid session id and the 'user' param is absent."},"tag":{"type":String,"extract_from":null,"required":null,"description":"A tag to filter results by."},"user":{"type":"mixed","extract_from":null,"required":null,"description":"A user's ID or name.  If 'social' is true, this user and their friends will be included. Otherwise, only scores for this user will be loaded. If this param is missing and there is a valid session id, that user will be used by default."}},"returns":{"scoreboard":{"object":"scoreboard","description":"The #scoreboard being queried."},"scores":{"array":{"object":"score"},"description":"An array of #score objects."},"user":{"object":"user","description":"The #user the score list is associated with (either as defined in the 'user' param, or extracted from the current session when 'social' is set to true)"}}}, 
-
-	/**
-	 * @property {object} postScore - Contains rules for validating calls to 'ScoreBoard.postScore'.
-	 */
-	postScore: {"require_session":true,"secure":true,"redirect":false,"import":false,"params":{"id":{"type":Number,"extract_from":{"object":"scoreboard","alias":"scoreboard","property":"id"},"required":true,"description":"The numeric ID of the scoreboard."},"tag":{"type":String,"extract_from":null,"required":null,"description":"An optional tag that can be used to filter scores via ScoreBoard.getScores"},"value":{"type":Number,"extract_from":null,"required":true,"description":"The int value of the score."}},"returns":{"score":{"object":"score","description":"The #score that was posted to the board."},"scoreboard":{"object":"scoreboard","description":"The #scoreboard that was posted to."}}} 
-
-};
-
-
-/* end validators.js */
-
-/* start sessionloader.js */
-
-/**
- * Used to get a user logged in to your app
- * @constructor
- * @memberof Newgrounds.io
- * @param {Newgrounds.io.core} ngio - The Newgrounds.io.core instance being used.
- */
-Newgrounds.io.SessionLoader = function(ngio) {
-	if (!ngio || ngio.constructor !== Newgrounds.io.core) throw new Error("'ngio' must be a 'Newgrounds.io.core' instance.");
-	this.__ngio = ngio;
-	
-	var _session = null;
-	
-	/**
-	 * @property {Newgrounds.io.model.session} debug - Set to true to operate in debug mode
-	 */
-	Object.defineProperty(this, 'session', {
-		set: function(session) {
-			if (session && !session.constructor === Newgrounds.io.model.session) throw new Error("'session' must be a 'Newgrounds.io.model.session' instance.");
-			_session = session;
-		},
-		get: function() {
-			return _session;
-		}
-	});
-}
-Newgrounds.io.SessionLoader.prototype = {
-	
-	_event_listeners: {},
-	last_error: null,
-	passport_window: null,
-	
-	/**
-	 * Adds a listener function to the specified event.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function addEventListener
-	 * @param {string} type - The event to listen for.  Typically a Newgrounds.io.events.SessionEvent constant.
-	 * @param {function} listener - A function to call when the event is triggered.
-	 */
-	addEventListener: Newgrounds.io.events.EventDispatcher.prototype.addEventListener,
-	
-	/**
-	 * Removes a listener function from the specified event.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function removeEventListener
-	 * @param {string} type - The event you want to remove a listener from. Typically a Newgrounds.io.events.SessionEvent constant.
-	 * @param {function} listener - The listener function you want to remove.
-	 * @return {boolean} Returns true if a matching listener was removed.
-	 */
-	removeEventListener: Newgrounds.io.events.EventDispatcher.prototype.removeEventListener,
-	
-	/**
-	 * Removes ALL listener functions from the specified event.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function removeAllEventListeners
-	 * @param {string} type - The event you want to remove listeners from.
-	 * @return {number} The number of listeners that were removed.
-	 */
-	removeAllEventListeners: Newgrounds.io.events.EventDispatcher.prototype.removeAllEventListeners,
-	
-	/**
-	 * Dispatches an event to any listener functions.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function dispatchEvent
-	 * @param {Newgrounds.io.events.SessionEvent} event - The event to dispatch.
-	 * @return {boolean}
-	 */
-	dispatchEvent: Newgrounds.io.events.EventDispatcher.prototype.dispatchEvent,
-	
-	/**
-	 * Gets an active session. If one does not already exist, one will be created.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function getValidSession
-	 * @param {Newgrounds.io.SessionLoader~onStatusUpdate} [callback] - An optional callback function.
-	 * @param {object} [context] - The context under which the callback will be executed. Optional.
-	 */
-	getValidSession: function(callback, context) {
-		var loader = this;
-		loader.checkSession(function(session) {
-			if (!session || session.expired) {
-				loader.startSession(callback, context);
-			} else {
-				callback.call(context, session);
-			}
-		});
-	},
-	
-	/**
-	 * Starts a new Passport session.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function startSession
-	 * @param {Newgrounds.io.SessionLoader~onStatusUpdate} [callback] - An optional callback function.
-	 * @param {object} [context] - The context under which the callback will be executed. Optional.
-	 */
-	startSession: function(callback, context) {
-		
-		var event = new Newgrounds.io.events.SessionEvent();
-		var loader = this;
-		
-		this.__ngio.callComponent('App.startSession', function(r) {
-			if (!r.success || !r.session) {
-				if (r.error) {
-					loader.last_error = r.error;
-				} else {
-					loader.last_error = new Newgrounds.io.model.error;
-					loader.last_error.message = "Unexpected Error";
-				}
-				event.type = Newgrounds.io.events.SessionEvent.SESSION_EXPIRED;
-				loader.session = null;
-			} else {
-				event.type = Newgrounds.io.events.SessionEvent.REQUEST_LOGIN;
-				event.passport_url = r.session.passport_url;
-				loader.session = r.session;
-			}
-			
-			loader.__ngio.session_id = loader.session ? loader.session.id : null;
-			loader.dispatchEvent(event);
-			if (callback && callback.constructor === Function) callback.call(context, loader.session);
-		});
-	},
-	
-	/**
-	 * Loads the current session status and fires the appropriate event.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function checkSession
-	 * @param {function} [callback] - An optional callback function.
-	 * @param {object} [context] - The context under which the callback will be executed. Optional.
-	 */
-	checkSession: function(callback, context) {
-		
-		var event = new Newgrounds.io.events.SessionEvent();
-		var loader = this;
-		
-		/* session has been successfully loaded already */
-		if (loader.session && loader.session.user) {
-			event.type = Newgrounds.io.events.SessionEvent.USER_LOADED;
-			event.user = loader.session.user;
-			
-			loader.dispatchEvent(event);
-			
-			if (callback && callback.constructor === Function) callback.call(context, loader.session);
-			
-		/* we don't even have a session, treat it like it expired */
-		} else if (!this.__ngio.session_id) {
-			event.type = Newgrounds.io.events.SessionEvent.SESSION_EXPIRED;
-			loader.session = null;
-			loader.dispatchEvent(event);
-			if (callback && callback.constructor === Function) callback.call(context, null);
-			
-		/* check existing session */
-		} else {
-			this.__ngio.callComponent('App.checkSession', function(r) {
-				if (!r.success || !r.session || r.session.expired) {
-					event.type = Newgrounds.io.events.SessionEvent.SESSION_EXPIRED;
-					loader.session = null;
-					if (r.error) {
-						loader.last_error = r.error;
-					} else {
-						loader.last_error = new Newgrounds.io.model.error;
-						if (r.session && r.session.expired) {
-							loader.last_error.message = "Session is Expired";
-						} else {
-							loader.last_error.message = "Unexpected Error";
-						}
-					}
-					
-				} else if (!r.session.user) {
-					event.type = Newgrounds.io.events.SessionEvent.REQUEST_LOGIN;
-					event.passport_url = r.session.passport_url;
-					loader.session = r.session;
-					
-				} else {
-					event.type = Newgrounds.io.events.SessionEvent.USER_LOADED;
-					event.user = r.session.user;
-					loader.session = r.session;
-				}
-				
-				loader.__ngio.session_id = loader.session ? loader.session.id : null;
-				loader.dispatchEvent(event);
-				if (callback && callback.constructor === Function) callback.call(context, loader.session);
-			});
-		}
-	},
-	
-	/**
-	 * Ends the current session and fires the appropriate event.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function endSession
-	 * @param {function} [callback] - An optional callback function.
-	 * @param {object} [context] - The context under which the callback will be executed. Optional.
-	 */
-	endSession: function(callback, context) {
-		var loader = this;
-		var ngio = this.__ngio;
-		
-		this.__ngio.callComponent('App.endSession', function(r) {
-			loader.session = null;
-			ngio.session_id = null;
-			var event = new Newgrounds.io.events.SessionEvent(Newgrounds.io.events.SessionEvent.SESSION_EXPIRED);
-			loader.dispatchEvent(event);
-			if (callback && callback.constructor === Function) callback.call(context, loader.session);
-		});
-		
-		this.__ngio.session_id = null;
-		this.session = null;
-	},
-	
-	/**
-	 * Opens a Newgrounds Passport login page in a new browser window.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function loadPassport
-	 * @param {string} [target=_blank] - The window target.
-	 */
-	loadPassport: function(target) {
-		if(typeof(target) != 'string') target = "_blank";
-		if(!this.session || !this.session.passport_url) {
-			console.warn('Attempted to open Newgrounds Passport without a valid passport_url. Be sure you have called getValidSession() first!.');
-			return false;
-		}
-		
-		this.passport_window = window.open(this.session.passport_url, target);
-		if (!this.passport_window) console.warn('Unable to detect passport window. Pop-up blockers will prevent loading Newgrounds Passport if loadPassport() or requestLogin() are not called from within a mouse click handler.');
-		return this.passportOpen();
-	},
-	
-	/**
-	 * Closes the Newgrounds Passport window if it's still open.
-	 * @instance
-	 * @memberof Newgrounds.io.SessionLoader
-	 * @function closePassport
-	 * @return {boolean} - If true, a passport window was closed.
-	 */
-	closePassport: function() {
-		if (!this.passport_window) return false;
-		this.passport_window.close();
-		return this.passportOpen();
-	},
-	
-	/**
-	 * Returns true if the passport login tab is open (must be opened from openPassport).
-	 */
-	passportOpen: function() {
-		return this.passport_window && this.passport_window.parent ? true : false;
-	}
-};
-Newgrounds.io.SessionLoader.prototype.constructor = Newgrounds.io.SessionLoader;
-
-
-/* end sessionloader.js *//*
-CryptoJS v3.1.2
-code.google.com/p/crypto-js
-(c) 2009-2013 by Jeff Mott. All rights reserved.
-code.google.com/p/crypto-js/wiki/License
-*/
-var CryptoJS=CryptoJS||function(u,p){var d={},l=d.lib={},s=function(){},t=l.Base={extend:function(a){s.prototype=this;var c=new s;a&&c.mixIn(a);c.hasOwnProperty("init")||(c.init=function(){c.$super.init.apply(this,arguments)});c.init.prototype=c;c.$super=this;return c},create:function(){var a=this.extend();a.init.apply(a,arguments);return a},init:function(){},mixIn:function(a){for(var c in a)a.hasOwnProperty(c)&&(this[c]=a[c]);a.hasOwnProperty("toString")&&(this.toString=a.toString)},clone:function(){return this.init.prototype.extend(this)}},
-r=l.WordArray=t.extend({init:function(a,c){a=this.words=a||[];this.sigBytes=c!=p?c:4*a.length},toString:function(a){return(a||v).stringify(this)},concat:function(a){var c=this.words,e=a.words,j=this.sigBytes;a=a.sigBytes;this.clamp();if(j%4)for(var k=0;k<a;k++)c[j+k>>>2]|=(e[k>>>2]>>>24-8*(k%4)&255)<<24-8*((j+k)%4);else if(65535<e.length)for(k=0;k<a;k+=4)c[j+k>>>2]=e[k>>>2];else c.push.apply(c,e);this.sigBytes+=a;return this},clamp:function(){var a=this.words,c=this.sigBytes;a[c>>>2]&=4294967295<<
-32-8*(c%4);a.length=u.ceil(c/4)},clone:function(){var a=t.clone.call(this);a.words=this.words.slice(0);return a},random:function(a){for(var c=[],e=0;e<a;e+=4)c.push(4294967296*u.random()|0);return new r.init(c,a)}}),w=d.enc={},v=w.Hex={stringify:function(a){var c=a.words;a=a.sigBytes;for(var e=[],j=0;j<a;j++){var k=c[j>>>2]>>>24-8*(j%4)&255;e.push((k>>>4).toString(16));e.push((k&15).toString(16))}return e.join("")},parse:function(a){for(var c=a.length,e=[],j=0;j<c;j+=2)e[j>>>3]|=parseInt(a.substr(j,
-2),16)<<24-4*(j%8);return new r.init(e,c/2)}},b=w.Latin1={stringify:function(a){var c=a.words;a=a.sigBytes;for(var e=[],j=0;j<a;j++)e.push(String.fromCharCode(c[j>>>2]>>>24-8*(j%4)&255));return e.join("")},parse:function(a){for(var c=a.length,e=[],j=0;j<c;j++)e[j>>>2]|=(a.charCodeAt(j)&255)<<24-8*(j%4);return new r.init(e,c)}},x=w.Utf8={stringify:function(a){try{return decodeURIComponent(escape(b.stringify(a)))}catch(c){throw Error("Malformed UTF-8 data");}},parse:function(a){return b.parse(unescape(encodeURIComponent(a)))}},
-q=l.BufferedBlockAlgorithm=t.extend({reset:function(){this._data=new r.init;this._nDataBytes=0},_append:function(a){"string"==typeof a&&(a=x.parse(a));this._data.concat(a);this._nDataBytes+=a.sigBytes},_process:function(a){var c=this._data,e=c.words,j=c.sigBytes,k=this.blockSize,b=j/(4*k),b=a?u.ceil(b):u.max((b|0)-this._minBufferSize,0);a=b*k;j=u.min(4*a,j);if(a){for(var q=0;q<a;q+=k)this._doProcessBlock(e,q);q=e.splice(0,a);c.sigBytes-=j}return new r.init(q,j)},clone:function(){var a=t.clone.call(this);
-a._data=this._data.clone();return a},_minBufferSize:0});l.Hasher=q.extend({cfg:t.extend(),init:function(a){this.cfg=this.cfg.extend(a);this.reset()},reset:function(){q.reset.call(this);this._doReset()},update:function(a){this._append(a);this._process();return this},finalize:function(a){a&&this._append(a);return this._doFinalize()},blockSize:16,_createHelper:function(a){return function(b,e){return(new a.init(e)).finalize(b)}},_createHmacHelper:function(a){return function(b,e){return(new n.HMAC.init(a,
-e)).finalize(b)}}});var n=d.algo={};return d}(Math);
-(function(){var u=CryptoJS,p=u.lib.WordArray;u.enc.Base64={stringify:function(d){var l=d.words,p=d.sigBytes,t=this._map;d.clamp();d=[];for(var r=0;r<p;r+=3)for(var w=(l[r>>>2]>>>24-8*(r%4)&255)<<16|(l[r+1>>>2]>>>24-8*((r+1)%4)&255)<<8|l[r+2>>>2]>>>24-8*((r+2)%4)&255,v=0;4>v&&r+0.75*v<p;v++)d.push(t.charAt(w>>>6*(3-v)&63));if(l=t.charAt(64))for(;d.length%4;)d.push(l);return d.join("")},parse:function(d){var l=d.length,s=this._map,t=s.charAt(64);t&&(t=d.indexOf(t),-1!=t&&(l=t));for(var t=[],r=0,w=0;w<
-l;w++)if(w%4){var v=s.indexOf(d.charAt(w-1))<<2*(w%4),b=s.indexOf(d.charAt(w))>>>6-2*(w%4);t[r>>>2]|=(v|b)<<24-8*(r%4);r++}return p.create(t,r)},_map:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="}})();
-(function(u){function p(b,n,a,c,e,j,k){b=b+(n&a|~n&c)+e+k;return(b<<j|b>>>32-j)+n}function d(b,n,a,c,e,j,k){b=b+(n&c|a&~c)+e+k;return(b<<j|b>>>32-j)+n}function l(b,n,a,c,e,j,k){b=b+(n^a^c)+e+k;return(b<<j|b>>>32-j)+n}function s(b,n,a,c,e,j,k){b=b+(a^(n|~c))+e+k;return(b<<j|b>>>32-j)+n}for(var t=CryptoJS,r=t.lib,w=r.WordArray,v=r.Hasher,r=t.algo,b=[],x=0;64>x;x++)b[x]=4294967296*u.abs(u.sin(x+1))|0;r=r.MD5=v.extend({_doReset:function(){this._hash=new w.init([1732584193,4023233417,2562383102,271733878])},
-_doProcessBlock:function(q,n){for(var a=0;16>a;a++){var c=n+a,e=q[c];q[c]=(e<<8|e>>>24)&16711935|(e<<24|e>>>8)&4278255360}var a=this._hash.words,c=q[n+0],e=q[n+1],j=q[n+2],k=q[n+3],z=q[n+4],r=q[n+5],t=q[n+6],w=q[n+7],v=q[n+8],A=q[n+9],B=q[n+10],C=q[n+11],u=q[n+12],D=q[n+13],E=q[n+14],x=q[n+15],f=a[0],m=a[1],g=a[2],h=a[3],f=p(f,m,g,h,c,7,b[0]),h=p(h,f,m,g,e,12,b[1]),g=p(g,h,f,m,j,17,b[2]),m=p(m,g,h,f,k,22,b[3]),f=p(f,m,g,h,z,7,b[4]),h=p(h,f,m,g,r,12,b[5]),g=p(g,h,f,m,t,17,b[6]),m=p(m,g,h,f,w,22,b[7]),
-f=p(f,m,g,h,v,7,b[8]),h=p(h,f,m,g,A,12,b[9]),g=p(g,h,f,m,B,17,b[10]),m=p(m,g,h,f,C,22,b[11]),f=p(f,m,g,h,u,7,b[12]),h=p(h,f,m,g,D,12,b[13]),g=p(g,h,f,m,E,17,b[14]),m=p(m,g,h,f,x,22,b[15]),f=d(f,m,g,h,e,5,b[16]),h=d(h,f,m,g,t,9,b[17]),g=d(g,h,f,m,C,14,b[18]),m=d(m,g,h,f,c,20,b[19]),f=d(f,m,g,h,r,5,b[20]),h=d(h,f,m,g,B,9,b[21]),g=d(g,h,f,m,x,14,b[22]),m=d(m,g,h,f,z,20,b[23]),f=d(f,m,g,h,A,5,b[24]),h=d(h,f,m,g,E,9,b[25]),g=d(g,h,f,m,k,14,b[26]),m=d(m,g,h,f,v,20,b[27]),f=d(f,m,g,h,D,5,b[28]),h=d(h,f,
-m,g,j,9,b[29]),g=d(g,h,f,m,w,14,b[30]),m=d(m,g,h,f,u,20,b[31]),f=l(f,m,g,h,r,4,b[32]),h=l(h,f,m,g,v,11,b[33]),g=l(g,h,f,m,C,16,b[34]),m=l(m,g,h,f,E,23,b[35]),f=l(f,m,g,h,e,4,b[36]),h=l(h,f,m,g,z,11,b[37]),g=l(g,h,f,m,w,16,b[38]),m=l(m,g,h,f,B,23,b[39]),f=l(f,m,g,h,D,4,b[40]),h=l(h,f,m,g,c,11,b[41]),g=l(g,h,f,m,k,16,b[42]),m=l(m,g,h,f,t,23,b[43]),f=l(f,m,g,h,A,4,b[44]),h=l(h,f,m,g,u,11,b[45]),g=l(g,h,f,m,x,16,b[46]),m=l(m,g,h,f,j,23,b[47]),f=s(f,m,g,h,c,6,b[48]),h=s(h,f,m,g,w,10,b[49]),g=s(g,h,f,m,
-E,15,b[50]),m=s(m,g,h,f,r,21,b[51]),f=s(f,m,g,h,u,6,b[52]),h=s(h,f,m,g,k,10,b[53]),g=s(g,h,f,m,B,15,b[54]),m=s(m,g,h,f,e,21,b[55]),f=s(f,m,g,h,v,6,b[56]),h=s(h,f,m,g,x,10,b[57]),g=s(g,h,f,m,t,15,b[58]),m=s(m,g,h,f,D,21,b[59]),f=s(f,m,g,h,z,6,b[60]),h=s(h,f,m,g,C,10,b[61]),g=s(g,h,f,m,j,15,b[62]),m=s(m,g,h,f,A,21,b[63]);a[0]=a[0]+f|0;a[1]=a[1]+m|0;a[2]=a[2]+g|0;a[3]=a[3]+h|0},_doFinalize:function(){var b=this._data,n=b.words,a=8*this._nDataBytes,c=8*b.sigBytes;n[c>>>5]|=128<<24-c%32;var e=u.floor(a/
-4294967296);n[(c+64>>>9<<4)+15]=(e<<8|e>>>24)&16711935|(e<<24|e>>>8)&4278255360;n[(c+64>>>9<<4)+14]=(a<<8|a>>>24)&16711935|(a<<24|a>>>8)&4278255360;b.sigBytes=4*(n.length+1);this._process();b=this._hash;n=b.words;for(a=0;4>a;a++)c=n[a],n[a]=(c<<8|c>>>24)&16711935|(c<<24|c>>>8)&4278255360;return b},clone:function(){var b=v.clone.call(this);b._hash=this._hash.clone();return b}});t.MD5=v._createHelper(r);t.HmacMD5=v._createHmacHelper(r)})(Math);
-(function(){var u=CryptoJS,p=u.lib,d=p.Base,l=p.WordArray,p=u.algo,s=p.EvpKDF=d.extend({cfg:d.extend({keySize:4,hasher:p.MD5,iterations:1}),init:function(d){this.cfg=this.cfg.extend(d)},compute:function(d,r){for(var p=this.cfg,s=p.hasher.create(),b=l.create(),u=b.words,q=p.keySize,p=p.iterations;u.length<q;){n&&s.update(n);var n=s.update(d).finalize(r);s.reset();for(var a=1;a<p;a++)n=s.finalize(n),s.reset();b.concat(n)}b.sigBytes=4*q;return b}});u.EvpKDF=function(d,l,p){return s.create(p).compute(d,
-l)}})();
-CryptoJS.lib.Cipher||function(u){var p=CryptoJS,d=p.lib,l=d.Base,s=d.WordArray,t=d.BufferedBlockAlgorithm,r=p.enc.Base64,w=p.algo.EvpKDF,v=d.Cipher=t.extend({cfg:l.extend(),createEncryptor:function(e,a){return this.create(this._ENC_XFORM_MODE,e,a)},createDecryptor:function(e,a){return this.create(this._DEC_XFORM_MODE,e,a)},init:function(e,a,b){this.cfg=this.cfg.extend(b);this._xformMode=e;this._key=a;this.reset()},reset:function(){t.reset.call(this);this._doReset()},process:function(e){this._append(e);return this._process()},
-finalize:function(e){e&&this._append(e);return this._doFinalize()},keySize:4,ivSize:4,_ENC_XFORM_MODE:1,_DEC_XFORM_MODE:2,_createHelper:function(e){return{encrypt:function(b,k,d){return("string"==typeof k?c:a).encrypt(e,b,k,d)},decrypt:function(b,k,d){return("string"==typeof k?c:a).decrypt(e,b,k,d)}}}});d.StreamCipher=v.extend({_doFinalize:function(){return this._process(!0)},blockSize:1});var b=p.mode={},x=function(e,a,b){var c=this._iv;c?this._iv=u:c=this._prevBlock;for(var d=0;d<b;d++)e[a+d]^=
-c[d]},q=(d.BlockCipherMode=l.extend({createEncryptor:function(e,a){return this.Encryptor.create(e,a)},createDecryptor:function(e,a){return this.Decryptor.create(e,a)},init:function(e,a){this._cipher=e;this._iv=a}})).extend();q.Encryptor=q.extend({processBlock:function(e,a){var b=this._cipher,c=b.blockSize;x.call(this,e,a,c);b.encryptBlock(e,a);this._prevBlock=e.slice(a,a+c)}});q.Decryptor=q.extend({processBlock:function(e,a){var b=this._cipher,c=b.blockSize,d=e.slice(a,a+c);b.decryptBlock(e,a);x.call(this,
-e,a,c);this._prevBlock=d}});b=b.CBC=q;q=(p.pad={}).Pkcs7={pad:function(a,b){for(var c=4*b,c=c-a.sigBytes%c,d=c<<24|c<<16|c<<8|c,l=[],n=0;n<c;n+=4)l.push(d);c=s.create(l,c);a.concat(c)},unpad:function(a){a.sigBytes-=a.words[a.sigBytes-1>>>2]&255}};d.BlockCipher=v.extend({cfg:v.cfg.extend({mode:b,padding:q}),reset:function(){v.reset.call(this);var a=this.cfg,b=a.iv,a=a.mode;if(this._xformMode==this._ENC_XFORM_MODE)var c=a.createEncryptor;else c=a.createDecryptor,this._minBufferSize=1;this._mode=c.call(a,
-this,b&&b.words)},_doProcessBlock:function(a,b){this._mode.processBlock(a,b)},_doFinalize:function(){var a=this.cfg.padding;if(this._xformMode==this._ENC_XFORM_MODE){a.pad(this._data,this.blockSize);var b=this._process(!0)}else b=this._process(!0),a.unpad(b);return b},blockSize:4});var n=d.CipherParams=l.extend({init:function(a){this.mixIn(a)},toString:function(a){return(a||this.formatter).stringify(this)}}),b=(p.format={}).OpenSSL={stringify:function(a){var b=a.ciphertext;a=a.salt;return(a?s.create([1398893684,
-1701076831]).concat(a).concat(b):b).toString(r)},parse:function(a){a=r.parse(a);var b=a.words;if(1398893684==b[0]&&1701076831==b[1]){var c=s.create(b.slice(2,4));b.splice(0,4);a.sigBytes-=16}return n.create({ciphertext:a,salt:c})}},a=d.SerializableCipher=l.extend({cfg:l.extend({format:b}),encrypt:function(a,b,c,d){d=this.cfg.extend(d);var l=a.createEncryptor(c,d);b=l.finalize(b);l=l.cfg;return n.create({ciphertext:b,key:c,iv:l.iv,algorithm:a,mode:l.mode,padding:l.padding,blockSize:a.blockSize,formatter:d.format})},
-decrypt:function(a,b,c,d){d=this.cfg.extend(d);b=this._parse(b,d.format);return a.createDecryptor(c,d).finalize(b.ciphertext)},_parse:function(a,b){return"string"==typeof a?b.parse(a,this):a}}),p=(p.kdf={}).OpenSSL={execute:function(a,b,c,d){d||(d=s.random(8));a=w.create({keySize:b+c}).compute(a,d);c=s.create(a.words.slice(b),4*c);a.sigBytes=4*b;return n.create({key:a,iv:c,salt:d})}},c=d.PasswordBasedCipher=a.extend({cfg:a.cfg.extend({kdf:p}),encrypt:function(b,c,d,l){l=this.cfg.extend(l);d=l.kdf.execute(d,
-b.keySize,b.ivSize);l.iv=d.iv;b=a.encrypt.call(this,b,c,d.key,l);b.mixIn(d);return b},decrypt:function(b,c,d,l){l=this.cfg.extend(l);c=this._parse(c,l.format);d=l.kdf.execute(d,b.keySize,b.ivSize,c.salt);l.iv=d.iv;return a.decrypt.call(this,b,c,d.key,l)}})}();
-(function(){for(var u=CryptoJS,p=u.lib.BlockCipher,d=u.algo,l=[],s=[],t=[],r=[],w=[],v=[],b=[],x=[],q=[],n=[],a=[],c=0;256>c;c++)a[c]=128>c?c<<1:c<<1^283;for(var e=0,j=0,c=0;256>c;c++){var k=j^j<<1^j<<2^j<<3^j<<4,k=k>>>8^k&255^99;l[e]=k;s[k]=e;var z=a[e],F=a[z],G=a[F],y=257*a[k]^16843008*k;t[e]=y<<24|y>>>8;r[e]=y<<16|y>>>16;w[e]=y<<8|y>>>24;v[e]=y;y=16843009*G^65537*F^257*z^16843008*e;b[k]=y<<24|y>>>8;x[k]=y<<16|y>>>16;q[k]=y<<8|y>>>24;n[k]=y;e?(e=z^a[a[a[G^z]]],j^=a[a[j]]):e=j=1}var H=[0,1,2,4,8,
-16,32,64,128,27,54],d=d.AES=p.extend({_doReset:function(){for(var a=this._key,c=a.words,d=a.sigBytes/4,a=4*((this._nRounds=d+6)+1),e=this._keySchedule=[],j=0;j<a;j++)if(j<d)e[j]=c[j];else{var k=e[j-1];j%d?6<d&&4==j%d&&(k=l[k>>>24]<<24|l[k>>>16&255]<<16|l[k>>>8&255]<<8|l[k&255]):(k=k<<8|k>>>24,k=l[k>>>24]<<24|l[k>>>16&255]<<16|l[k>>>8&255]<<8|l[k&255],k^=H[j/d|0]<<24);e[j]=e[j-d]^k}c=this._invKeySchedule=[];for(d=0;d<a;d++)j=a-d,k=d%4?e[j]:e[j-4],c[d]=4>d||4>=j?k:b[l[k>>>24]]^x[l[k>>>16&255]]^q[l[k>>>
-8&255]]^n[l[k&255]]},encryptBlock:function(a,b){this._doCryptBlock(a,b,this._keySchedule,t,r,w,v,l)},decryptBlock:function(a,c){var d=a[c+1];a[c+1]=a[c+3];a[c+3]=d;this._doCryptBlock(a,c,this._invKeySchedule,b,x,q,n,s);d=a[c+1];a[c+1]=a[c+3];a[c+3]=d},_doCryptBlock:function(a,b,c,d,e,j,l,f){for(var m=this._nRounds,g=a[b]^c[0],h=a[b+1]^c[1],k=a[b+2]^c[2],n=a[b+3]^c[3],p=4,r=1;r<m;r++)var q=d[g>>>24]^e[h>>>16&255]^j[k>>>8&255]^l[n&255]^c[p++],s=d[h>>>24]^e[k>>>16&255]^j[n>>>8&255]^l[g&255]^c[p++],t=
-d[k>>>24]^e[n>>>16&255]^j[g>>>8&255]^l[h&255]^c[p++],n=d[n>>>24]^e[g>>>16&255]^j[h>>>8&255]^l[k&255]^c[p++],g=q,h=s,k=t;q=(f[g>>>24]<<24|f[h>>>16&255]<<16|f[k>>>8&255]<<8|f[n&255])^c[p++];s=(f[h>>>24]<<24|f[k>>>16&255]<<16|f[n>>>8&255]<<8|f[g&255])^c[p++];t=(f[k>>>24]<<24|f[n>>>16&255]<<16|f[g>>>8&255]<<8|f[h&255])^c[p++];n=(f[n>>>24]<<24|f[g>>>16&255]<<16|f[h>>>8&255]<<8|f[k&255])^c[p++];a[b]=q;a[b+1]=s;a[b+2]=t;a[b+3]=n},keySize:8});u.AES=p._createHelper(d)})();
-}
-
-// scripts/plugins/Rex_NGIO_Authentication/c3runtime/plugin.js
-{
-"use strict";
-
-{
-	const C3=self.C3;
-	C3.Plugins.Rex_NGIO_Authentication = class SingleGlobalPlugin extends C3.SDKPluginBase
-	{
-		constructor(opts)
-		{
-			super(opts);
-		}
-		
-		Release()
-		{
-			super.Release();
-		}
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Authentication/c3runtime/type.js
-{
-"use strict";
-
-{
-	const C3=self.C3;
-	C3.Plugins.Rex_NGIO_Authentication.Type = class SingleGlobalType extends C3.SDKTypeBase
-	{
-		constructor(objectClass)
-		{
-			super(objectClass);
-		}
-		
-		Release()
-		{
-			super.Release();
-		}
-		
-		OnCreate()
-		{	
-		}
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Authentication/c3runtime/instance.js
-{
-"use strict";
-
-{
-	const C3=self.C3;
-	C3.Plugins.Rex_NGIO_Authentication.Instance = class SingleGlobalInstance extends C3.SDKInstanceBase
-	{
-		constructor(inst, properties)
-		{
-			super(inst);
-			
-			// Initialise object properties
-			this.ngio=null;
-
-			if (properties)		// note properties may be null in some cases
-			{						
-				//debugger;
-				this.GetRuntime().AddLoadPromise(
-					new Promise(
-						(resolve,reject)=>{
-							try{
-								this.ngio = new self["Newgrounds"]["io"]["core"](properties[0], properties[1]);
-								self.ngioInstance = this.ngio;
-								this.ngio["debug"] = (properties[2] === 1);
-								resolve();
-							}
-							catch(e){
-								reject(e);
-							}
-						}
-					)
-				);
-			}
-			this.isLogin = false;
-			this.LoginPooling();
-		}
-		
-		Release()
-		{
-			super.Release();
-		}
-		
-		SaveToJson()
-		{
-			return {
-				// data to be saved for savegames
-			};
-		}
-		
-		LoadFromJson(o)
-		{
-			// load state for savegames
-		}
-		
-		onLoggedIn() {
-			this.isLogin = true;
-			//this.runtime.trigger(cr.plugins_.Rex_NGIO_Authentication.prototype.cnds.OnLoginSuccess, this);
-			this.Trigger(C3.Plugins.Rex_NGIO_Authentication.Cnds.OnLoginSuccess);
-		}
-		
-		onLoggedOut(){
-			this.isLogin = false;
-			this.ngio["getSessionLoader"]()["closePassport"]();
-			//this.runtime.trigger(cr.plugins_.Rex_NGIO_Authentication.prototype.cnds.OnLoggedOut, this);
-			this.Trigger(C3.Plugins.Rex_NGIO_Authentication.Cnds.OnLoggedOut);
-		}
-		
-		LoginPooling() {
-			var self = this;
-			var onGetSession = function (session) {
-				var isLogin = session && !session["expired"] && session["user"];
-
-				if (!self.isLogin && isLogin)
-					self.onLoggedIn();
-				else if (self.isLogin && !isLogin)
-					self.onLoggedOut();
-
-				self.isLogin = isLogin;
-
-				// pooling next 3 seconds
-				setTimeout(function () {
-					self.LoginPooling();
-				}, 3000);
-			}
-			this.ngio["getSessionLoader"]()["getValidSession"](onGetSession);
-		}
-		
-		GetNGIO() {
-			//return this.ngio;
-			return self.ngioInstance;
-		};
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Authentication/c3runtime/conditions.js
-{
-"use strict";
-
-{
-	const C3=self.C3;
-	C3.Plugins.Rex_NGIO_Authentication.Cnds =
-	{
-		OnLoginSuccess()
-		{
-			return true;
-		},
-		
-		OnLoginError(){
-			return true;
-		},
-		
-		OnLoginCancel(){
-			return true;
-		},
-		
-		OnLoggedOut(){
-			return true;
-		},
-		
-		IsLogin() {
-			return this.isLogin;
-		}
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Authentication/c3runtime/actions.js
-{
-"use strict";
-
-{
-	const C3=self.C3;
-	C3.Plugins.Rex_NGIO_Authentication.Acts =
-	{
-		Login(){
-			var self = this;
-			var onLoggedIn = function () {
-				self.onLoggedIn();
-			};
-			var onLoginFailed = function () {
-				//self.runtime.trigger(cr.plugins_.Rex_NGIO_Authentication.prototype.cnds.OnLoginError, self);
-				this.Trigger(C3.Plugins.Rex_NGIO_Authentication.Cnds.OnLoginError);
-			};
-			var onLoginCancelled = function () {
-				//self.runtime.trigger(cr.plugins_.Rex_NGIO_Authentication.prototype.cnds.OnLoginCancel, self);
-				this.Trigger(C3.Plugins.Rex_NGIO_Authentication.Cnds.OnLoginCancel);
-			};
-
-			var onGetSession = function () {
-				self.ngio["requestLogin"](onLoggedIn, onLoginFailed, onLoginCancelled);
-			};
-
-			this.ngio["getSessionLoader"]()["getValidSession"](onGetSession);
-		},
-		
-		LoggingOut() {
-			var self = this;
-			var onLoggedOut = function () {
-				self.onLoggedOut();
-			}
-			var onGetSession = function () {
-				self.ngio["logOut"](onLoggedOut);
-			};
-
-			this.ngio["getSessionLoader"]()["getValidSession"](onGetSession);
-		}
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Authentication/c3runtime/expressions.js
-{
-"use strict";
-
-{
-	const C3=self.C3;
-	C3.Plugins.Rex_NGIO_Authentication.Exps =
-	{
-		UserName() {
-			var user = this.ngio["user"];
-			var val = (user) ? user["name"] : "";
-			return(val || "");
-		},
-		
-		UserID() {
-			var user = this.ngio["user"];
-			var val = (user) ? user["id"] : "";
-			return(val || 0);
-		},
-
-		UserIconURL(sizeIdx) {
-			if (typeof (sizeIdx) === "string")
-				sizeIdx = sizeIdx.toLowerCase();
-
-			switch (sizeIdx) {
-				case 0:
-				case "s":
-				case "small":
-					sizeIdx = "small";
-					break;
-
-				case 1:
-				case "m":
-				case "medium":
-					sizeIdx = "medium";
-					break;
-
-				case 2:
-				case "l":
-				case "large":
-					sizeIdx = "large";
-					break;
-
-				default:
-					sizeIdx = "large";
-					break;
-			}
-
-			var user = this.ngio["user"];
-			var val = (user) ? user["icons"][sizeIdx] : "";
-			return(val || "");
-		}
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Medal/c3runtime/plugin.js
-{
-"use strict";
-
-{
-	C3.Plugins.Rex_NGIO_Medal = class SingleGlobalPlugin extends C3.SDKPluginBase
-	{
-		constructor(opts)
-		{
-			super(opts);
-		}
-		
-		Release()
-		{
-			super.Release();
-		}
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Medal/c3runtime/type.js
-{
-"use strict";
-
-{
-	C3.Plugins.Rex_NGIO_Medal.Type = class SingleGlobalType extends C3.SDKTypeBase
-	{
-		constructor(objectClass)
-		{
-			super(objectClass);
-		}
-		
-		Release()
-		{
-			super.Release();
-		}
-		
-		OnCreate()
-		{	
-		}
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Medal/c3runtime/instance.js
-{
-"use strict";
-
-{
-	C3.Plugins.Rex_NGIO_Medal.Instance = class SingleGlobalInstance extends C3.SDKInstanceBase
-	{
-		constructor(inst, properties)
-		{
-			super(inst);
-			
-			// Initialise object properties
-			this.ngio = null;
-			this.lastResult = null;
-			this.lastMedals = null;
-			this.exp_LoopIndex = 0;
-		}
-		
-		Release()
-		{
-			super.Release();
-		}
-		
-		SaveToJson()
-		{
-			return {
-				// data to be saved for savegames
-			};
-		}
-		
-		LoadFromJson(o)
-		{
-			// load state for savegames
-		}
-		
-		GetNGIO() {
-			if (this.ngio != null)
-				return this.ngio;
-
-			/*var plugins = this.runtime.types;
-			var name, inst;
-			for (name in plugins) {
-				inst = plugins[name].instances[0];
-
-				//if (cr.plugins_.Rex_NGIO_Authentication && (inst instanceof cr.plugins_.Rex_NGIO_Authentication.prototype.Instance)) {
-				if (C3.Plugins.Rex_NGIO_Authentication && (inst instanceof C3.Plugins.Rex_NGIO_Authentication.prototype.Instance)) {
-					this.ngio = inst.GetNGIO();
-					return this.ngio;
-				}
-			}*/
-			
-			if (C3.Plugins.Rex_NGIO_Authentication) {
-					this.ngio = C3.Plugins.Rex_NGIO_Authentication.Instance.prototype.GetNGIO();
-					return this.ngio;
-			}
-			
-			//assert2(this.ngio, "NGIO.Medal: Can not find NGIO Authentication oject.");
-			alert(this.ngio, "NGIO.Medal: Can not find NGIO Authentication oject.");
-			return null;
-		}
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Medal/c3runtime/conditions.js
-{
-"use strict";
-
-{
-	C3.Plugins.Rex_NGIO_Medal.Cnds =
-	{
-		OnGetMedalsListSuccess()
-		{
-			return true;
-		},
-		
-		OnGetMedalsListError(){
-			return true;
-		},
-		
-		ForEachMedal(){
-			if (!this.lastMedals)
-				return false;
-
-			/*var current_frame = this.runtime.getCurrentEventStack();
-			var current_event = current_frame.current_event;
-			var solModifierAfterCnds = current_frame.isModifierAfterCnds();
-
-			var i, cnt = this.lastMedals.length;
-			for (i = 0; i < cnt; i++) {
-				if (solModifierAfterCnds)
-					this.runtime.pushCopySol(current_event.solModifiers);
-
-				this.exp_LoopIndex = i;
-				this.exp_CurMedal = this.lastMedals[this.exp_LoopIndex];
-				current_event.retrigger();
-
-				if (solModifierAfterCnds)
-					this.runtime.popSol(current_event.solModifiers);
-			}*/
-			
-			const runtime = this._runtime;
-			const eventSheetManager = runtime.GetEventSheetManager();
-			const currentEvent = runtime.GetCurrentEvent();
-			const solModifiers = currentEvent.GetSolModifiers();
-			const eventStack = runtime.GetEventStack();
-
-			// Get current stack frame and push new one
-			const oldFrame = eventStack.GetCurrentStackFrame();
-			const newFrame = eventStack.Push(currentEvent);
-
-			/*for (const item of myArray)
-			{
-				// ... optionally update state here ...
-
-				// Push a copy of the current SOL
-				eventSheetManager.PushCopySol(solModifiers);
-
-				// Retrigger the current event, running a single loop iteration
-				currentEvent.Retrigger(oldFrame, newFrame);
-
-				// Pop the current SOL
-				eventSheetManager.PopSol(solModifiers);
-			}*/
-			
-			var i, cnt = this.lastMedals.length;
-			for (i = 0; i < cnt; i++) {
-				if (solModifiers)
-					eventSheetManager.PushCopySol(solModifiers);
-					//this.runtime.pushCopySol(current_event.solModifiers);
-
-				this.exp_LoopIndex = i;
-				this.exp_CurMedal = this.lastMedals[this.exp_LoopIndex];
-				currentEvent.Retrigger(oldFrame, newFrame);
-				//current_event.retrigger();
-
-				if (solModifiers)
-					eventSheetManager.PopSol(solModifiers);
-					//this.runtime.popSol(current_event.solModifiers);
-			}
-
-			// Pop the event stack frame
-			eventStack.Pop();
-
-			// Return false since event already executed
-			return false;
-		},
-		
-		CurMedalIsSecret(){
-			return this.exp_CurMedal && this.exp_CurMedal["secret"];
-		},
-		
-		CurMedalIsUnlocked() {
-			return this.exp_CurMedal && this.exp_CurMedal["unlocked"];
-		},
-
-		CompareCurMedalDifficulty(cmp, s) {
-			if (this.exp_CurMedal && this.exp_CurMedal["difficulty"])
-				return cr.do_cmp(this.exp_CurMedal["difficulty"], cmp, s - 1);
-
-			return false;
-		},
-
-		Index2MedalIsSecret(index) {
-			return this.lastMedals && this.lastMedals[index] && this.lastMedals[index]["secret"];
-		},
-
-		Index2MedalIsUnlocked(index) {
-			return this.lastMedals && this.lastMedals[index] && this.lastMedals[index]["unlocked"];
-		},
-
-		CompareIndex2MedalDifficulty(index, cmp, s) {
-			if (this.lastMedals && this.lastMedals[index])
-				return cr.do_cmp(this.lastMedals[index]["difficulty"], cmp, s - 1); //cr.do_cmp
-
-			return false;
-		},
-
-		OnUnlockMedalSuccess() { return true; },
-		
-		OnUnlockMedalError() { return true; }
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Medal/c3runtime/actions.js
-{
-"use strict";
-
-{
-	C3.Plugins.Rex_NGIO_Medal.Acts =
-	{
-		getHandler(self, successTrig, errorTrig, callback) {
-			var handler = function (result) {
-				if (callback)
-					callback(result);
-
-				self.lastResult = result;
-				var trig = (result["success"]) ? successTrig : errorTrig;
-				self.Trigger(trig);
-			};
-			return handler;
-		},
-		
-		GetList() {
-			var self = this;
-			var getMedals = function (result) {
-				if (result["success"]) {
-					self.lastMedals = [];
-					var medals = result["medals"], medal;
-					var i, cnt = medals.length;
-					for (i = 0; i < cnt; i++) {
-						medal = medals[i];
-						var data = {
-							"description": medal["description"],
-							"difficulty": medal["difficulty"],
-							"icon": medal["icon"],
-							"id": medal["id"],
-							"name": medal["name"],
-							"secret": medal["secret"],
-							"value": medal["value"],
-						};
-						if (medal["unlocked"] != null)
-							data["unlocked"] = medal["unlocked"];
-
-						self.lastMedals.push(data);
-					}
-				}
-				else {
-					self.lastMedals = null;
-				}
-
-			};
-
-			var cnds = C3.Plugins.Rex_NGIO_Medal.Cnds; //cr.plugins_.Rex_NGIO_Medal.prototype.cnds;
-			var callback = C3.Plugins.Rex_NGIO_Medal.Acts.getHandler(this, cnds.OnGetMedalsListSuccess, cnds.OnGetMedalsListError, getMedals);
-			this.GetNGIO()["callComponent"]("Medal.getList", {}, callback);
-		},
-		
-		Unlock(id) {
-			var cnds = C3.Plugins.Rex_NGIO_Medal.Cnds; //cr.plugins_.Rex_NGIO_Medal.prototype.cnds;
-			var callback = C3.Plugins.Rex_NGIO_Medal.Acts.getHandler(this, cnds.OnUnlockMedalSuccess, cnds.OnUnlockMedalError);
-			var param = {
-				"id": id,
-			};
-			this.GetNGIO()["callComponent"]("Medal.unlock", param, callback);
-		}
-	};
-}
-}
-
-// scripts/plugins/Rex_NGIO_Medal/c3runtime/expressions.js
-{
-"use strict";
-
-{
-	C3.Plugins.Rex_NGIO_Medal.Exps =
-	{
-		ErrorMessage() {
-			var val;
-			if (this.lastResult && this.lastResult["error"])
-				val = this.lastResult["error"]["message"];
-			return(val || "");
-		},
-		
-		MedalsAsJSON() {
-			var val;
-			if (this.lastMedals)
-				val = JSON.stringify(this.lastMedals);
-			return(val || "");
-		},
-		
-		CurMedalDescription() {
-			var val;
-			if (this.exp_CurMedal)
-				val = this.exp_CurMedal["description"];
-			return(val || "");
-		},
-		
-		CurMedalDifficulty(){
-			var val;
-			if (this.exp_CurMedal)
-				val = this.exp_CurMedal["difficulty"];
-			return(val || -1);
-		},
-		
-		CurMedalIcon() {
-			var val;
-			if (this.exp_CurMedal)
-				val = this.exp_CurMedal["icon"];
-			return(val || "");
-		},
-		
-		CurMedalID() {
-			var val;
-			if (this.exp_CurMedal)
-				val = this.exp_CurMedal["id"];
-			return(val || -1);
-		},
-		
-		CurMedalName() {
-			var val;
-			if (this.exp_CurMedal)
-				val = this.exp_CurMedal["name"];
-			return(val || "");
-		},
-		
-		CurMedalValue() {
-			var val;
-			if (this.exp_CurMedal)
-				val = this.exp_CurMedal["value"];
-			return(val || -1);
-		},
-		
-		CurMedalIsSecret() {
-			var val;
-			if (this.exp_CurMedal)
-				val = (this.exp_CurMedal["secret"]) ? 1 : 0;
-			return(val || -1);
-		},
-		
-		CurMedalIsUnlocked() {
-			var val;
-			if (this.exp_CurMedal)
-				val = (this.exp_CurMedal["unlocked"]) ? 1 : 0;
-			return(val || -1);
-		},
-		
-		LoopIndex() {
-			return(this.exp_LoopIndex);
-		},
-		
-		Index2MedalDescription(index) {
-			var val;
-			if (this.lastMedals && this.lastMedals[index])
-				val = this.lastMedals[index]["description"];
-			return(val || "");
-		},
-		
-		Index2MedalDifficulty(index) {
-			var val;
-			if (this.lastMedals && this.lastMedals[index])
-				val = this.lastMedals[index]["difficulty"];
-			return(val || -1);
-		},
-		
-		Index2MedalIcon() {
-			var val;
-			if (this.lastMedals && this.lastMedals[index])
-				val = this.lastMedals[index]["icon"];
-			return(val || "");
-		},
-		
-		Index2MedalID(index) {
-			var val;
-			if (this.lastMedals && this.lastMedals[index])
-				val = this.lastMedals[index]["id"];
-			ret.set_int(val || -1);
-		},
-		
-		Index2MedalName(index) {
-			var val;
-			if (this.lastMedals && this.lastMedals[index])
-				val = this.lastMedals[index]["name"];
-			return(val || "");
-		},
-		
-		Index2MedalValue(index) {
-			var val;
-			if (this.lastMedals && this.lastMedals[index])
-				val = this.lastMedals[index]["value"];
-			return(val || -1);
-		},
-		
-		Index2rMedalIsSecret(index) {
-			var val;
-			if (this.lastMedals && this.lastMedals[index])
-				val = (this.lastMedals[index]["secret"]) ? 1 : 0;
-			return(val || -1);
-		},
-		
-		Index2MedalIsUnlocked(index) {
-			var val;
-			if (this.lastMedals && this.lastMedals[index])
-				val = (this.lastMedals[index]["unlocked"]) ? 1 : 0;
-			return(val || -1);
-		},
-		
-		MedalsCount() {
-			var val;
-			if (this.lastMedals)
-				val = this.lastMedals.lngth;
-			return(val || 0);
-		},
-		
-		LastUnlockedMedalID(){
-			var val;
-			if (this.lastResult && this.lastResult["medal"])
-				val = this.lastResult["medal"]["id"];
-			
-			return(val || 0);
-		}
-	};
-}
-}
-
 // scripts/plugins/Arr/c3runtime/runtime.js
 {
 {const t=self.C3;t.Plugins.Arr=class extends t.SDKPluginBase{constructor(t){super(t)}Release(){super.Release()}}}{const e=self.C3;e.Plugins.Arr.Type=class extends e.SDKTypeBase{constructor(t){super(t)}Release(){super.Release()}OnCreate(){}}}{const r=self.C3,s=self.C3X,i=self.IInstance;function ResizeArray(t,e,s){if(e<t.length)r.truncateArray(t,e);else if(e>t.length)if("function"==typeof s)for(let r=t.length;r<e;++r)t.push(s());else for(let r=t.length;r<e;++r)t.push(s)}r.Plugins.Arr.Instance=class extends r.SDKInstanceBase{constructor(t,e){super(t),this._cx=10,this._cy=1,this._cz=1,this._arr=null,this._forX=[],this._forY=[],this._forZ=[],this._forDepth=-1,e&&(this._cx=e[0],this._cy=e[1],this._cz=e[2]),this._arr=r.MakeFilledArray(this._cx,()=>r.MakeFilledArray(this._cy,()=>r.MakeFilledArray(this._cz,0)))}Release(){this._arr=null,super.Release()}At(t,e,r){return t=Math.floor(t),e=Math.floor(e),r=Math.floor(r),t>=0&&t<this._cx&&e>=0&&e<this._cy&&r>=0&&r<this._cz?this._arr[t][e][r]:0}Set(t,e,r,s){t=Math.floor(t),e=Math.floor(e),r=Math.floor(r),t>=0&&t<this._cx&&e>=0&&e<this._cy&&r>=0&&r<this._cz&&(this._arr[t][e][r]=s)}SetSize(t,e,s){if(t=Math.floor(t),e=Math.floor(e),s=Math.floor(s),t<0&&(t=0),e<0&&(e=0),s<0&&(s=0),this._cx===t&&this._cy===e&&this._cz===s)return;this._cx=t,this._cy=e,this._cz=s;const i=this._arr;ResizeArray(i,t,()=>r.MakeFilledArray(e,()=>r.MakeFilledArray(s,0)));for(let h=0;h<t;++h){ResizeArray(i[h],e,()=>r.MakeFilledArray(s,0));for(let t=0;t<e;++t)ResizeArray(i[h][t],s,0)}}GetWidth(){return this._cx}GetHeight(){return this._cy}GetDepth(){return this._cz}_ShuffleHelper(t,e,r,s,i){for(;e>0;){const h=Math.floor(this._runtime.Random()*e);if(--e,0===t){const t=this.At(e,s,i),r=this.At(h,s,i);this.Set(e,s,i,r),this.Set(h,s,i,t)}else if(1===t){const t=this.At(r,e,i),s=this.At(r,h,i);this.Set(r,e,i,s),this.Set(r,h,i,t)}else if(2===t){const t=this.At(r,s,e),i=this.At(r,s,h);this.Set(r,s,e,i),this.Set(r,s,h,t)}}}GetDebuggerProperties(){const t="plugins.arr.debugger",e="plugins.arr.properties",r=[{title:t+".array-properties.title",properties:[{name:e+".width.name",value:this._cx,onedit:t=>this.SetSize(t,this._cy,this._cz)},{name:e+".height.name",value:this._cy,onedit:t=>this.SetSize(this._cx,t,this._cz)},{name:e+".depth.name",value:this._cz,onedit:t=>this.SetSize(this._cx,this._cy,t)},{name:e+".elements.name",value:this._cx*this._cy*this._cz}]}],s=[];if(1===this._cy&&1===this._cz)for(let t=0;t<this._cx;++t)s.push({name:"$"+t,value:this._arr[t][0][0],onedit:e=>this._arr[t][0][0]=e});else for(let t=0;t<this._cx;++t)s.push({name:"$"+t,value:this._arr[t].toString()});return s.length&&r.push({title:t+".array-data.title",properties:s}),r}GetAsJsonString(){return JSON.stringify({"c2array":!0,"size":[this._cx,this._cy,this._cz],"data":this._arr})}SaveToJson(){return{"size":[this._cx,this._cy,this._cz],"data":this._arr}}LoadFromJson(t){const e=t["size"];this._cx=e[0],this._cy=e[1],this._cz=e[2],this._arr=t["data"]}_GetForX(){return this._forDepth>=0&&this._forDepth<this._forX.length?this._forX[this._forDepth]:0}_GetForY(){return this._forDepth>=0&&this._forDepth<this._forY.length?this._forY[this._forDepth]:0}_GetForZ(){return this._forDepth>=0&&this._forDepth<this._forZ.length?this._forZ[this._forDepth]:0}GetScriptInterfaceClass(){return self.IArrayInstance}};const h=new WeakMap;self.IArrayInstance=class extends i{constructor(){super(),h.set(this,i._GetInitInst().GetSdkInstance())}get width(){return h.get(this).GetWidth()}get height(){return h.get(this).GetHeight()}get depth(){return h.get(this).GetDepth()}setSize(t,e=1,r=1){s.RequireFiniteNumber(t),s.RequireFiniteNumber(e),s.RequireFiniteNumber(r),h.get(this).SetSize(t,e,r)}getAt(t,e=0,r=0){return s.RequireFiniteNumber(t),s.RequireFiniteNumber(e),s.RequireFiniteNumber(r),h.get(this).At(t,e,r)}setAt(t,e,r=0,i=0){if(s.RequireFiniteNumber(e),s.RequireFiniteNumber(r),s.RequireFiniteNumber(i),"number"!=typeof t&&"string"!=typeof t)throw new TypeError("invalid type");h.get(this).Set(e,r,i,t)}}}{const o=self.C3;function DoForEachTrigger(t,e,r,s,i,h){t.PushCopySol(r);h.GetObjectClass().GetCurrentSol().PickOne(h.GetInstance()),e.Retrigger(s,i),t.PopSol(r)}o.Plugins.Arr.Cnds={CompareX(t,e,r){return o.compare(this.At(t,0,0),e,r)},CompareXY(t,e,r,s){return o.compare(this.At(t,e,0),r,s)},CompareXYZ(t,e,r,s,i){return o.compare(this.At(t,e,r),s,i)},ArrForEach(t){const e=this._runtime,r=e.GetEventSheetManager(),s=e.GetCurrentEvent(),i=s.GetSolModifiers(),h=e.GetEventStack(),o=h.GetCurrentStackFrame(),n=h.Push(s),l=++this._forDepth,c=this._forX,a=this._forY,f=this._forZ,_=this._cx,u=this._cy,p=this._cz;if(l===this._forX.length?(c.push(0),a.push(0),f.push(0)):(c[l]=0,a[l]=0,f[l]=0),e.SetDebuggingEnabled(!1),0===t)for(let t=0;t<_;++t)for(let e=0;e<u;++e)for(let h=0;h<p;++h)c[l]=t,a[l]=e,f[l]=h,DoForEachTrigger(r,s,i,o,n,this);else if(1===t)for(let t=0;t<_;++t)for(let e=0;e<u;++e)c[l]=t,a[l]=e,DoForEachTrigger(r,s,i,o,n,this);else for(let t=0;t<_;++t)c[l]=t,DoForEachTrigger(r,s,i,o,n,this);return e.SetDebuggingEnabled(!0),this._forDepth--,h.Pop(),!1},CompareCurrent(t,e){return o.compare(this.At(this._GetForX(),this._GetForY(),this._GetForZ()),t,e)},Contains(t){const e=this._cx,r=this._cy,s=this._cz,i=this._arr;for(let h=0;h<e;++h)for(let e=0;e<r;++e)for(let r=0;r<s;++r)if(i[h][e][r]===t)return!0;return!1},IsEmpty(){return 0===this._cx||0===this._cy||0===this._cz},CompareSize(t,e,r){let s=0;switch(t){case 0:s=this._cx;break;case 1:s=this._cy;break;case 2:s=this._cz}return o.compare(s,e,r)}}}{const n=self.C3;function CompareValues(t,e){if("number"==typeof t&&"number"==typeof e)return t-e;{const r=t.toString(),s=e.toString();return r<s?-1:r>s?1:0}}n.Plugins.Arr.Acts={Clear(t){const e=this._cx,r=this._cy,s=this._cz,i=this._arr;for(let h=0;h<e;++h)for(let e=0;e<r;++e)for(let r=0;r<s;++r)i[h][e][r]=t},SetSize(t,e,r){this.SetSize(t,e,r)},SetX(t,e){this.Set(t,0,0,e)},SetXY(t,e,r){this.Set(t,e,0,r)},SetXYZ(t,e,r,s){this.Set(t,e,r,s)},Push(t,e,r){const s=this._cx,i=this._cy,h=this._cz,o=this._arr;if(0===r){const r=n.MakeFilledArray(i,()=>n.MakeFilledArray(h,e));0===t?o.push(r):o.unshift(r),this._cx++}else if(1===r){for(let r=0;r<s;++r){const s=n.MakeFilledArray(h,e);0===t?o[r].push(s):o[r].unshift(s)}this._cy++}else{for(let r=0;r<s;++r)for(let s=0;s<i;++s)0===t?o[r][s].push(e):o[r][s].unshift(e);this._cz++}},Pop(t,e){const r=this._cx,s=this._cy,i=this._cz,h=this._arr;if(0===e){if(0===r)return;0===t?h.pop():h.shift(),this._cx--}else if(1===e){if(0===s)return;for(let e=0;e<r;++e)0===t?h[e].pop():h[e].shift();this._cy--}else{if(0===i)return;for(let e=0;e<r;++e)for(let r=0;r<s;++r)0===t?h[e][r].pop():h[e][r].shift();this._cz--}},Reverse(t){const e=this._cx,r=this._cy,s=this._cz,i=this._arr;if(0!==e&&0!==r&&0!==s)if(0===t)i.reverse();else if(1===t)for(let t=0;t<e;++t)i[t].reverse();else for(let t=0;t<e;++t)for(let e=0;e<r;++e)i[t][e].reverse()},Sort(t){const e=this._cx,r=this._cy,s=this._cz,i=this._arr;if(0!==e&&0!==r&&0!==s)if(0===t)i.sort((t,e)=>CompareValues(t[0][0],e[0][0]));else if(1===t)for(let t=0;t<e;++t)i[t].sort((t,e)=>CompareValues(t[0],e[0]));else for(let t=0;t<e;++t)for(let e=0;e<r;++e)i[t][e].sort(CompareValues)},Sort2(t){const e=this._cx,r=this._cy,s=this._cz,i=this._arr;if(0!==e&&0!==r&&0!==s)if(0===t)i.sort((t,e)=>{for(let s=0;s<r;++s){const r=CompareValues(t[s][0],e[s][0]);if(0!==r)return r}return 0});else if(1===t)for(let t=0;t<r;++t){const r=[];for(let s=0;s<e;++s)r.push(i[s][t]);r.sort((t,e)=>CompareValues(t[0],e[0]));for(let s=0;s<e;++s)i[s][t]=r[s]}else if(2===t){const t=[];for(let e=0;e<r;++e)t.push(e);t.sort((t,r)=>{for(let s=0;s<e;++s){const e=CompareValues(i[s][t],i[s][r]);if(0!==e)return e}return 0});for(let r=0;r<e;++r){let e=[];for(const s of t)e.push(i[r][s]);i[r]=e}}else if(3===t)for(let t=0;t<e;++t)i[t].sort((t,e)=>CompareValues(t[0],e[0]));else for(let t=0;t<e;++t)for(let e=0;e<r;++e)i[t][e].sort(CompareValues)},Shuffle(t){const e=this._cx,r=this._cy,s=this._cz;if(0!==e&&0!==r&&0!==s)if(0===t)for(let i=0;i<r;++i)for(let r=0;r<s;++r)this._ShuffleHelper(t,e,0,i,r);else if(1===t)for(let i=0;i<e;++i)for(let e=0;e<s;++e)this._ShuffleHelper(t,r,i,0,e);else for(let i=0;i<e;++i)for(let e=0;e<r;++e)this._ShuffleHelper(t,s,i,e,0)},Delete(t,e){if((t=Math.floor(t))<0)return;const r=this._cx,s=this._cy,i=this._cz,h=this._arr;if(0===e){if(t>=r)return;h.splice(t,1),this._cx--}else if(1===e){if(t>=s)return;for(let e=0;e<r;++e)h[e].splice(t,1);this._cy--}else{if(t>=i)return;for(let e=0;e<r;++e)for(let r=0;r<s;++r)h[e][r].splice(t,1);this._cz--}},Insert(t,e,r){if((e=Math.floor(e))<0)return;const s=this._cx,i=this._cy,h=this._cz,o=this._arr;if(0===r){if(e>s)return;o.splice(e,0,n.MakeFilledArray(i,()=>n.MakeFilledArray(h,t))),this._cx++}else if(1===r){if(e>i)return;for(let r=0;r<s;++r)o[r].splice(e,0,n.MakeFilledArray(h,t));this._cy++}else{if(e>h)return;for(let r=0;r<s;++r)for(let s=0;s<i;++s)o[r][s].splice(e,0,t);this._cz++}},SplitString(t,e,r){const s=t.split(e);this.SetSize(s.length,1,1);for(let t=0,e=s.length;t<e;++t){let e=s[t];0===r?String(Number(e))===e&&(e=Number(e)):2===r&&(e=Number(e)),this.Set(t,0,0,e)}},JSONLoad(t){let e=null;try{e=JSON.parse(t)}catch(t){return void console.error("[Construct] Failed to parse JSON: ",t)}if(!e["c2array"])return void console.warn("[Array] Attempted to load JSON that does not appear to be Construct array data - no data loaded");const r=e["size"];this._cx=r[0],this._cy=r[1],this._cz=r[2],this._arr=e["data"]},JSONDownload(t){const e=URL.createObjectURL(new Blob([this.GetAsJsonString()],{type:"application/json"}));this._runtime.InvokeDownload(e,t)}}}self.C3.Plugins.Arr.Exps={At(t,e,r){return this.At(t,e||0,r||0)},Width(){return this._cx},Height(){return this._cy},Depth(){return this._cz},CurX(){return this._GetForX()},CurY(){return this._GetForY()},CurZ(){return this._GetForZ()},CurValue(){return this.At(this._GetForX(),this._GetForY(),this._GetForZ())},Front(){return this.At(0,0,0)},Back(){return this.At(this._cx-1,0,0)},IndexOf(t){const e=this._arr;for(let r=0,s=this._cx;r<s;++r)if(e[r][0][0]===t)return r;return-1},LastIndexOf(t){const e=this._arr;for(let r=this._cx-1;r>=0;--r)if(e[r][0][0]===t)return r;return-1},JoinString(t){let e=[];for(let t=0;t<this._cx;++t)e.push(this.At(t,0,0));return e.join(t)},AsJSON(){return this.GetAsJsonString()}};
@@ -4830,6 +1377,11 @@ const C3=self.C3,NAMESPACE=C3.Behaviors.Tween;NAMESPACE.ValueGetters=class{const
 // scripts/behaviors/Tween/c3runtime/scriptInterface.js
 {
 const C3=self.C3,C3X=self.C3X,IBehaviorInstance=self.IBehaviorInstance,Ease=self.Ease,NAMESPACE=C3.Behaviors.Tween,map=new WeakMap,TWEEN_PROPERTIES=new Map([["x",{name:"offsetX",type:"one"}],["y",{name:"offsetY",type:"one"}],["width",{name:"offsetWidth",type:"one"}],["height",{name:"offsetHeight",type:"one"}],["angle",{name:"offsetAngle",type:"one"}],["opacity",{name:"offsetOpacity",type:"one"}],["color",{name:"offsetColor",type:"color"}],["z-elevation",{name:"offsetZElevation",type:"one"}],["x-scale",{name:"offsetScaleX",type:"one"}],["y-scale",{name:"offsetScaleY",type:"one"}],["position",{name:"position",type:"two"}],["size",{name:"size",type:"two"}],["scale",{name:"scale",type:"two"}],["value",{name:"value",type:"value"}]]);function getIndexForEase(e){C3X.RequireString(e);const t=Ease.ToInternal(e);let n;if(n=t?Ease.GetIndexForEase(t,null):Ease.GetIndexForEase(e,null),-1===n)throw new Error(`invalid ease name '${e}'`);return n}const TWEEN_OPTS={tags:"",destroyOnComplete:!1,loop:!1,pingPong:!1,repeatCount:1,startValue:0},I_TWEEN_OPTS={easeToIndexFunc:getIndexForEase};function ValidateTags(e,t=!1){if(!(t&&null==e||"string"==typeof e||Array.isArray(e)))throw new Error("invalid tags")}self.ITweenBehaviorInstance=class extends IBehaviorInstance{constructor(){super(),map.set(this,IBehaviorInstance._GetInitInst().GetSdkInstance())}startTween(e,t,n,a,o){const s=map.get(this);if(!s.IsEnabled()||!s.IsInstanceValid())return null;const r=TWEEN_PROPERTIES.get(e);if(!r)throw new Error("invalid tween property");"one"===r.type||"value"===r.type?C3X.RequireNumber(t):(C3X.RequireArray(t),"two"===r.type?(C3X.RequireNumber(t[0]),C3X.RequireNumber(t[1])):"color"===r.type&&(C3X.RequireNumber(t[0]),C3X.RequireNumber(t[1]),C3X.RequireNumber(t[2]))),"angle"===e?t=C3.toDegrees(t):"opacity"===e?t*=100:"color"===e&&(t=C3.PackRGBEx(t[0],t[1],t[2]));const i=getIndexForEase(a);let l;if(C3X.RequireFiniteNumber(n),o=Object.assign({},TWEEN_OPTS,o),"value"===r.type&&C3X.RequireNumber(o.startValue),ValidateTags(o.tags,!0),"one"===r.type||"color"===r.type?l=s.CreateTween(NAMESPACE.TweenArguments.OneProperty(s,o.tags,r.name,t,n,i,!!o.destroyOnComplete,!!o.loop,!!o.pingPong,o.repeatCount)):"two"===r.type?l=s.CreateTween(NAMESPACE.TweenArguments.TwoProperties(s,o.tags,r.name,t[0],t[1],n,i,!!o.destroyOnComplete,!!o.loop,!!o.pingPong,o.repeatCount)):"value"===r.type&&(l=s.CreateTween(NAMESPACE.TweenArguments.ValueProperty(s,o.tags,o.startValue,t,n,i,!!o.destroyOnComplete,!!o.loop,!!o.pingPong,o.repeatCount))),l.SetBehaviorInstance(s.GetBehaviorInstance().GetSdkInstance()),!l.Play())throw new Error("failed to start tween");return l.GetITweenState(s,I_TWEEN_OPTS)}*allTweens(){const e=map.get(this);for(const t of e.AllTweens())yield t.GetITweenState(e,I_TWEEN_OPTS)}*tweensByTags(e){ValidateTags(e);const t=map.get(this);for(const n of t.GetTweens(e))yield n.GetITweenState(t,I_TWEEN_OPTS)}get isEnabled(){return map.get(this).IsEnabled()}set isEnabled(e){map.get(this).SetEnabled(e)}};
+}
+
+// scripts/behaviors/LOS/c3runtime/runtime.js
+{
+{const e=self.C3;e.Behaviors.LOS=class extends e.SDKBehaviorBase{constructor(e){super(e)}Release(){super.Release()}}}{const e=self.C3;e.Behaviors.LOS.Type=class extends e.SDKBehaviorTypeBase{constructor(e){super(e),this._obstacleTypes=[]}Release(){e.clearArray(this._obstacleTypes),super.Release()}OnCreate(){}AddObstacle(e){if(!this._obstacleTypes.includes(e)){for(const t of this._obstacleTypes)if(t.IsFamily()&&t.FamilyHasMember(e))return;this._obstacleTypes.push(e)}}ClearObstacles(){e.clearArray(this._obstacleTypes)}GetObstacleTypes(){return this._obstacleTypes}FindLOSBehavior(e){const t=this.GetBehaviorType();for(const s of e.GetBehaviorInstances())if(s.GetBehaviorType()===t)return s.GetSdkInstance();return null}}}{const e=self.C3,t=self.C3X,s=self.IBehaviorInstance,n=0,i=1,r=2,a=3,o=0,l=[];e.Behaviors.LOS.Instance=class extends e.SDKBehaviorInstanceBase{constructor(t,s){super(t),this._obstacleMode=0,this._range=1e4,this._cone=e.toRadians(360),this._useCollisionCells=!0,this._ray=new e.Ray,s&&(this._obstacleMode=s[n],this._range=s[i],this._cone=e.toRadians(s[r]),this._useCollisionCells=s[a])}Release(){super.Release()}SaveToJson(){return{"r":this._range,"c":this._cone,"om":this._obstacleMode,"ucc":this._useCollisionCells,"t":this.GetSdkType().GetObstacleTypes().map(e=>e.GetSID())}}LoadFromJson(t){this._range=t["r"],this._cone=t["c"],this._obstacleMode=t["om"]||0,this._useCollisionCells=!!t["ucc"];const s=this.GetSdkType().GetObstacleTypes();e.clearArray(s);for(const e of t["t"]){const t=this._runtime.GetObjectClassBySID(e);t&&s.push(t)}}HasLOSToInstance(e,t){const s=e.GetUID(),[n,i]=e.GetImagePoint(t);return this.HasLOSTo(n,i)||this._ray.DidCollide()&&this._ray.hitUid===s}HasLOSTo(e,t){const s=this.GetWorldInfo();let n=s.GetAngle();return s.GetWidth()<0&&(n+=Math.PI),this.HasLOSBetweenPositions(s.GetX(),s.GetY(),n,e,t)}HasLOSBetweenPositions(t,s,n,i,r){this._ray.Reset();const a=this._range;if(e.distanceSquared(t,s,i,r)>a*a)return!1;const o=e.angleTo(t,s,i,r);if(e.angleDiff(n,o)>this._cone/2)return!1;return!this.CastRay(t,s,i,r,this._useCollisionCells).DidCollide()}_GetCollisionCandidates(t,s){if(s){const e=this.GetWorldInfo().GetLayer(),s=this._runtime.GetCollisionEngine();return this._obstacleMode===o?s.GetSolidCollisionCandidates(e,t.rect,l):s.GetObjectClassesCollisionCandidates(e,this._GetObstacleTypes(),t.rect,l),l}if(this._obstacleMode===o){const e=this._runtime.GetSolidBehavior();return e?e.GetInstances():l}for(const t of this._GetObstacleTypes())e.appendArray(l,t.GetInstances());return l}_GetObstacleTypes(){return this.GetSdkType().GetObstacleTypes()}CastRay(t,s,n,i,r){const a=this._ray.Set(t,s,n,i),c=this._GetCollisionCandidates(a,r),h=this._runtime.GetCollisionEngine(),u=this._obstacleMode===o,_=this._inst;for(let e=0,t=c.length;e<t;++e){const t=c[e];t!==_&&(u&&!h.IsSolidCollisionAllowed(t,_)||h.TestRayIntersectsInstance(t,a))}return a.Complete(),e.clearArray(l),a}_GetRay(){return this._ray}_GetRayHitX(){const e=this._ray;return e.DidCollide()?e.hitX:0}_GetRayHitY(){const e=this._ray;return e.DidCollide()?e.hitY:0}_GetRayHitDistance(){const e=this._ray;return e.DidCollide()?e.distance:0}_GetRayHitUID(){const e=this._ray;return e.DidCollide()?e.hitUid:-1}_GetRayNormalX(e){const t=this._ray;return t.DidCollide()?t.hitX+e*t.normalX:0}_GetRayNormalY(e){const t=this._ray;return t.DidCollide()?t.hitY+e*t.normalY:0}_GetRayNormalAngle(){const e=this._ray;return e.DidCollide()?e.hitNormal:0}_GetRayReflectionX(e){const t=this._ray;return t.DidCollide()?t.hitX+e*t.reflectionX:0}_GetRayReflectionY(e){const t=this._ray;return t.DidCollide()?t.hitY+e*t.reflectionY:0}_GetRayReflectionAngle(){const e=this._ray;return e.DidCollide()?Math.atan2(e.reflectionY,e.reflectionX):0}_SetRange(e){this._range=e}_GetRange(){return this._range}_SetConeOfView(e){this._cone=e}_GetConeOfView(){return this._cone}GetPropertyValueByIndex(t){switch(t){case n:return this._obstacleMode;case i:return this._range;case r:return e.toDegrees(this._cone);case a:return this._useCollisionCells}}SetPropertyValueByIndex(t,s){switch(t){case n:this._obstacleMode=s;break;case i:this._range=s;break;case r:this._cone=e.toRadians(s);break;case a:this._useCollisionCells=!!s}}GetDebuggerProperties(){const t="behaviors.los.properties";return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:t+".range.name",value:this._GetRange(),onedit:e=>this._SetRange(e)},{name:t+".cone-of-view.name",value:e.toDegrees(this._GetConeOfView()),onedit:t=>this._SetConeOfView(e.toRadians(t))}]}]}GetScriptInterfaceClass(){return self.ILOSBehaviorInstance}};const c=new WeakMap;self.ILOSBehaviorInstance=class extends s{constructor(){super();const e=s._GetInitInst().GetSdkInstance();c.set(this,e),this.ray=new self.ILOSBehaviorRay(e)}set range(e){t.RequireFiniteNumber(e),c.get(this)._SetRange(e)}get range(){return c.get(this)._GetRange()}set coneOfView(e){t.RequireFiniteNumber(e),c.get(this)._SetConeOfView(e)}get coneOfView(){return c.get(this)._GetConeOfView()}hasLOStoPosition(e,s){return t.RequireNumber(e),t.RequireNumber(s),c.get(this).HasLOSTo(e,s)}hasLOSBetweenPositions(e,s,n,i,r){return t.RequireNumber(e),t.RequireNumber(s),t.RequireNumber(n),t.RequireNumber(i),t.RequireNumber(r),c.get(this).HasLOSBetweenPositions(e,s,n,i,r)}castRay(e,s,n,i,r=!0){return t.RequireNumber(e),t.RequireNumber(s),t.RequireNumber(n),t.RequireNumber(i),c.get(this).CastRay(e,s,n,i,r),this.ray}addObstacle(e){const t=c.get(this),s=t.GetRuntime()._UnwrapIObjectClass(e);t.GetSdkType().AddObstacle(s)}clearObstacles(){c.get(this).GetSdkType().ClearObstacles()}},self.ILOSBehaviorRay=class{constructor(e){c.set(this,e)}get didCollide(){return c.get(this)._GetRay().DidCollide()}get hitX(){return c.get(this)._GetRayHitX()}get hitY(){return c.get(this)._GetRayHitY()}getHitPosition(){const e=c.get(this);return[e._GetRayHitX(),e._GetRayHitY()]}get hitDistance(){return c.get(this)._GetRayHitDistance()}get hitUid(){return c.get(this)._GetRayHitUID()}getNormalX(e){return t.RequireFiniteNumber(e),c.get(this)._GetRayNormalX(e)}getNormalY(e){return t.RequireFiniteNumber(e),c.get(this)._GetRayNormalY(e)}getNormal(e){t.RequireFiniteNumber(e);const s=c.get(this);return[s._GetRayNormalX(e),s._GetRayNormalY(e)]}get normalAngle(){return c.get(this)._GetRayNormalAngle()}getReflectionX(e){return t.RequireFiniteNumber(e),c.get(this)._GetRayReflectionX(e)}getReflectionY(e){return t.RequireFiniteNumber(e),c.get(this)._GetRayReflectionY(e)}getReflection(e){t.RequireFiniteNumber(e);const s=c.get(this);return[s._GetRayReflectionX(e),s._GetRayReflectionY(e)]}get reflectionAngle(){return c.get(this)._GetRayReflectionAngle()}}}{const e=self.C3,t=new Set,s=new Set;e.Behaviors.LOS.Cnds={HasLOSToPosition(e,t){return this.HasLOSTo(e,t)},RayIntersected(){return this._ray.DidCollide()},HasLOSBetweenPositions(t,s,n,i,r){return this.HasLOSBetweenPositions(t,s,e.toRadians(n),i,r)},HasLOSToObject(n,i){if(!n)return!1;const r=this._runtime.GetCurrentCondition(),a=r.GetEventBlock().IsOrBlock(),o=r.GetRuntime(),l=r.GetObjectClass().GetCurrentSol(),c=n.GetCurrentSol();let h=l.GetInstances(),u=c.GetInstances();l.IsSelectAll()?e.clearArray(l._GetOwnElseInstances()):a&&(h=o.IsCurrentConditionFirst()&&!l._GetOwnElseInstances().length&&l._GetOwnInstances().length?l._GetOwnInstances():l._GetOwnElseInstances()),c.IsSelectAll()?e.clearArray(c._GetOwnElseInstances()):a&&(u=o.IsCurrentConditionFirst()&&!c._GetOwnElseInstances().length&&c._GetOwnInstances().length?c._GetOwnInstances():c._GetOwnElseInstances());const _=r.IsInverted(),d=this.GetSdkType();for(const n of h){let r=!1;const a=d.FindLOSBehavior(n);if(0===u.length)_&&(r=!0);else for(const t of u)n!==t&&e.xor(a.HasLOSToInstance(t,i),_)&&(r=!0,s.add(t));r&&t.add(n)}return a?(h===l._GetOwnElseInstances()?l.TransferElseInstancesToOwn(t):(l.AddElseInstances(t,h),l.SetSetPicked(t)),u===c._GetOwnElseInstances()?c.TransferElseInstancesToOwn(s):(c.AddElseInstances(s,u),c.SetSetPicked(s))):(l.SetSetPicked(t),c.SetSetPicked(s)),t.clear(),s.clear(),l.HasAnyInstances()}}}{const e=self.C3;e.Behaviors.LOS.Acts={SetRange(e){this._SetRange(e)},SetCone(t){this._SetConeOfView(e.toRadians(t))},CastRay(e,t,s,n,i){this.CastRay(e,t,s,n,i)},AddObstacle(e){this.GetSdkType().AddObstacle(e)},ClearObstacles(){this.GetSdkType().ClearObstacles()}}}{const e=self.C3;e.Behaviors.LOS.Exps={Range(){return this._GetRange()},ConeOfView(){return e.toDegrees(this._GetConeOfView())},HitX(){return this._GetRayHitX()},HitY(){return this._GetRayHitY()},HitDistance(){return this._GetRayHitDistance()},HitUID(){return this._GetRayHitUID()},NormalX(e){return this._GetRayNormalX(e)},NormalY(e){return this._GetRayNormalY(e)},NormalAngle(){return e.toDegrees(this._GetRayNormalAngle())},ReflectionX(e){return this._GetRayReflectionX(e)},ReflectionY(e){return this._GetRayReflectionY(e)},ReflectionAngle(){return e.toDegrees(this._GetRayReflectionAngle())}}}
 }
 
 // scripts/behaviors/Sin/c3runtime/runtime.js
@@ -4950,17 +1502,19 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
-		() => "Main Menu",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0();
-		},
-		() => "Menu",
+		() => "Title - Core Logic",
 		() => 160,
 		() => 16,
 		() => 0,
-		() => "Main",
-		() => 4,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject();
+		},
+		() => "resume",
+		() => "New Game",
+		() => "quit",
+		() => "Credits",
+		() => 1,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
@@ -4968,6 +1522,7 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "music",
 		() => "music doom",
+		() => "doom",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() * 4);
@@ -4983,197 +1538,327 @@ self.C3_ExpressionFuncs = [
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => (n0.ExpObject() + (f1() * 3));
 		},
+		() => "galaktor",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => (60 * f0());
+			return () => f0();
 		},
+		() => 90,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => Math.round(f0(0, 99));
+		},
+		() => 270,
+		() => "Title - Erasing",
+		() => "Main",
 		() => "version",
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("ERASING... ", (100 - Math.round(((v0.GetValue() * 100) / 180)))) + "%");
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => (and("@ ", f0(((n1.ExpBehavior("erase") * 100) / n2.ExpBehavior("erase")))) + "%");
 		},
+		() => "erase",
+		() => 3,
 		() => "",
 		() => "<local-app-data>",
 		() => "SCUMDOG/doom_tge",
-		() => "doom",
-		() => "Menu Logic",
+		() => "Level - General",
+		() => "None",
+		() => "none",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 22);
+		},
+		() => -90,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + "Normal");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject(v1.GetValue());
+		},
+		() => "Skins",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpInstVar();
+		},
+		() => 100,
+		() => 30,
+		() => 60,
+		() => "Mobile",
+		() => "shop",
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => (n0.ExpObject() + (f1() * 2));
+		},
+		() => "timer",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => ("V" + f0());
+			const v1 = p._GetNode(1).GetVar();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			const v3 = p._GetNode(3).GetVar();
+			const f4 = p._GetNode(4).GetBoundMethod();
+			const v5 = p._GetNode(5).GetVar();
+			const f6 = p._GetNode(6).GetBoundMethod();
+			const v7 = p._GetNode(7).GetVar();
+			return () => ((((((f0(Math.floor((v1.GetValue() / 3600)), 2) + ":") + f2(Math.floor(((v3.GetValue() % 3600) / 60)), 2)) + ":") + f4(Math.floor((v5.GetValue() % 60)), 2)) + ".") + f6(Math.floor(((v7.GetValue() % 1) * 1000)), 3));
 		},
+		() => "Modal",
+		() => "Level - HUD",
+		() => "health",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("$", v0.GetValue());
+		},
+		() => "armor",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and(v0.GetValue(), "%");
+		},
+		() => "ammo",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpObject("wine"), 1);
+		},
+		() => 2,
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpObject("beer"), 1);
+		},
+		() => "wine",
+		() => "beer",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("beer");
+		},
+		() => "true",
+		() => 50,
+		() => "Brightness",
+		() => 75,
+		() => 120,
+		() => "override",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(0.25, 2);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => Math.round(f0(0, 2));
+		},
+		() => "inactivity",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => v0.GetValue();
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject();
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((n0.ExpObject() - Math.round((n1.ExpObject() / 2))) - 4);
-		},
-		() => "up",
-		() => -40,
-		() => 0.2,
-		() => "down",
-		() => 40,
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() - 1);
-		},
-		() => "disabled",
-		() => 1,
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpInstVar();
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() + 1);
-		},
-		() => 50,
-		() => "Options",
-		() => "OptionsAlt",
-		() => 3,
-		() => -1,
-		() => "Modal",
-		() => 100,
-		() => "Results",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(255, 255, 255);
-		},
-		() => "nope",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(0);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(192, 192, 255);
-		},
-		() => "title",
-		() => "scumdog",
-		() => "Menu Selection",
-		() => "level",
-		() => "Level",
-		() => 5,
-		() => "Fade",
-		() => "inactivity",
-		() => 2,
-		() => "Credits",
-		() => "Medals",
-		() => 8,
-		() => 6,
-		() => 7,
-		() => "menu",
-		() => "Options Logic",
-		() => "slider",
-		() => 0.15,
-		() => "left",
-		() => "right",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			return () => ((n0.ExpObject() - (n1.ExpObject() + 4)) / (n2.ExpObject() - 8));
-		},
-		() => "pickup flash: on",
-		() => "pickup flash: off",
-		() => "fullscreen: on",
-		() => "fullscreen: off",
-		() => "doom music: on",
-		() => "doom music: off",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 5);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() + 5);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() + 4);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((n0.ExpObject() + n1.ExpObject()) - 4);
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			return () => ((v0.GetValue() * (n1.ExpObject() - 8)) + (n2.ExpObject() + 4));
-		},
-		() => "link",
-		() => " $",
-		() => "General",
-		() => "Mobile",
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => (n0.ExpObject() + v1.GetValue());
-		},
-		() => -90,
-		() => 85,
-		() => "-1",
-		() => "shop",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => (8 * f0());
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0.25, 2);
-		},
-		() => "default",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => Math.round(f0(0, 2));
-		},
-		p => {
-			const n0 = p._GetNode(0);
 			return () => n0.ExpBehavior("inactivity");
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() / 2);
-		},
-		() => "sleep",
-		p => {
 			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => (n0.ExpObject() + (f1() * 2));
+			return () => (n0.ExpBehavior("inactivity") / 2);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + "Sleep");
+		},
+		() => "inputMouse",
+		() => "inputKeyboard",
+		() => "inputGamepad",
+		() => "inputTouch",
+		() => "inputMixed",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + "Grunt");
 		},
 		() => "grunt",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(0.95, 1.05);
 		},
-		() => "Controls",
+		() => "Title",
+		() => "Level - Drinks",
+		() => "Level - Drinks (Selection)",
+		() => "swap",
+		() => "drink",
+		() => "direct",
+		() => "hand",
+		() => "left",
+		() => "right",
+		() => "drinks",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 1);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => (((v0.GetValue() + ((((v1.GetValue()) === ("right") ? 1 : 0)) ? (1) : ((-1)))) + n2.ExpObject()) % n3.ExpObject());
+		},
+		() => "false",
+		() => "Level - Drinks (Drinking)",
+		() => 5,
+		() => "sip",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("wine");
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + "Wine");
+		},
+		() => -1,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + "Beer");
+		},
+		() => "reach",
+		() => 6,
+		() => -98,
+		() => "wink",
+		() => 0.5,
+		() => "default",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			return () => add(n0.ExpObject(n1.ExpObject(v2.GetValue()), 1), v3.GetValue());
+		},
+		() => "Level - Interaction",
+		() => "switch",
+		() => 4,
+		() => "Doors",
+		() => "open",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(0);
+		},
+		() => "door",
+		() => "exit",
+		() => "on",
+		() => "Results",
+		() => -99,
+		() => 0.15,
+		() => "cat",
+		() => "francis",
+		() => 1.5,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + "Scream");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => Math.round(f0(0, 9));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => and("menu/meow", Math.round(f0(1, 2)));
+		},
+		() => "...I DON'T WANT TO LOOK AT THIS ONE.",
+		() => "me",
+		() => -2,
+		() => "YOU ARE IN: RENAISSANCE WING.",
+		() => "map",
+		() => -3,
+		() => "YOU ARE IN: JAPANESE WING.",
+		() => -4,
+		() => "YOU ARE IN: SCULPTURE GARDEN.",
+		() => "unlock",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => (f0(v1.GetValue()) * 50);
+		},
+		() => "Secret",
+		() => "courtyard",
+		() => "YOU FOUND A SECRET AREA!",
+		() => "secret",
+		() => "YOU FOUND GALAKTOR'S HIDEOUT!",
+		() => "YOU FOUND A LONE PAINTING!",
+		() => "Level - Pickups",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => f0(n1.ExpObject(n2.ExpObject(n3.ExpInstVar()), 1));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((((n0.ExpInstVar()) === ("beer") ? 1 : 0)) ? ("weapon") : ("item"));
+		},
+		() => "cash",
+		() => 25,
+		() => "bigcash",
+		() => 499,
+		() => "beerpack",
+		() => "cheese",
+		() => 10,
+		() => "bigcheese",
+		() => "popup",
+		() => 0.25,
+		() => "flash",
+		() => "item",
+		() => "weapon",
+		() => "Level - Movement",
+		() => "Level - Movement (Input)",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => Math.abs(f0(0, 0));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => Math.abs(f0(0, 1));
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => (n0.ExpInstVar() - n1.ExpInstVar());
 		},
-		() => "Brightness",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
-			return () => or(((n0.ExpInstVar()) !== (0) ? 1 : 0), ((n1.ExpInstVar()) !== (0) ? 1 : 0));
+			const v2 = p._GetNode(2).GetVar();
+			const f3 = p._GetNode(3).GetBoundMethod();
+			const n4 = p._GetNode(4);
+			const v5 = p._GetNode(5).GetVar();
+			const n6 = p._GetNode(6);
+			const v7 = p._GetNode(7).GetVar();
+			return () => C3.clamp((n0.ExpInstVar() + (n1.ExpInstVar() * (((960 * v2.GetValue()) * 0.75) * f3()))), (((-n4.ExpBehavior()) * v5.GetValue()) * 0.75), ((n6.ExpBehavior() * v7.GetValue()) * 0.75));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
+			const f3 = p._GetNode(3).GetBoundMethod();
+			return () => (Math.sign(n0.ExpInstVar()) * f1((Math.abs(n2.ExpInstVar()) - ((480 * 0.75) * f3())), 0));
 		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
-			return () => ((C3.toDegrees(C3.angleTo(0, 0, n0.ExpInstVar(), n1.ExpInstVar())) + 90) % 360);
+			const v2 = p._GetNode(2).GetVar();
+			const f3 = p._GetNode(3).GetBoundMethod();
+			const n4 = p._GetNode(4);
+			const v5 = p._GetNode(5).GetVar();
+			const n6 = p._GetNode(6);
+			const v7 = p._GetNode(7).GetVar();
+			return () => C3.clamp((n0.ExpInstVar() - (n1.ExpInstVar() * ((960 * v2.GetValue()) * f3()))), ((-n4.ExpBehavior()) * v5.GetValue()), (n6.ExpBehavior() * v7.GetValue()));
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (-v0.GetValue());
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
+			const f3 = p._GetNode(3).GetBoundMethod();
+			return () => (Math.sign(n0.ExpInstVar()) * f1((Math.abs(n2.ExpInstVar()) - (480 * f3())), 0));
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -5189,88 +1874,61 @@ self.C3_ExpressionFuncs = [
 			const n3 = p._GetNode(3);
 			return () => ((Math.sin(C3.toRadians(f0())) * n1.ExpInstVar()) + (Math.sin(C3.toRadians((f2() + 90))) * n3.ExpInstVar()));
 		},
+		() => "Level - Collision",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (8 * f0());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => (n0.ExpObject() + v1.GetValue());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() - n1.ExpObject());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpObject() - n1.ExpObject()) + 10);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() + n1.ExpObject());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((n0.ExpObject() + 22) + 4);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((n0.ExpObject() + 22) - 8);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((n0.ExpObject() - 22) - 4);
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			const n2 = p._GetNode(2);
 			return () => Math.round(((n0.ExpObject() + n1.ExpObject()) - n2.ExpObject()));
 		},
-		() => 10,
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => (n0.ExpObject() + n1.ExpObject());
-		},
+		() => "elevation",
 		() => 0.1,
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => Math.abs(f0(0, 0));
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => Math.abs(f0(0, 1));
-		},
-		p => {
 			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => (n0.ExpBehavior() * v1.GetValue());
+			return () => n0.ExpBehavior("elevation");
 		},
+		() => -256,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
-			return () => (v0.GetValue() * v1.GetValue());
+			return () => (v0.GetValue() + "ScreamBig");
 		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => (-(n0.ExpBehavior() * v1.GetValue()));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => ((-(n0.ExpBehavior() * v1.GetValue())) * 0.75);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => ((n0.ExpBehavior() * v1.GetValue()) * 0.75);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => ((f0() * f1(0, 2)) * 1.5);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => (f0() * (-90));
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => (f0() * 90);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpBehavior();
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (-n0.ExpBehavior());
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => (f0() * (-60));
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => (f0() * 60);
-		},
-		() => 110,
-		() => "Arm",
-		() => "swap",
-		() => "drink",
-		() => "beer",
-		() => "sip",
-		() => "reach",
+		() => "Level - Camera",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -5286,149 +1944,70 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => (2 * (n0.ExpBehavior() / n1.ExpBehavior()));
 		},
-		() => "Z Collision",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => (n0.ExpObject() - n1.ExpObject());
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((n0.ExpObject() - n1.ExpObject()) + 10);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => ((n0.ExpObject() + v1.GetValue()) - 8);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => ((n0.ExpObject() + v1.GetValue()) + 2);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => ((n0.ExpObject() - v1.GetValue()) - 2);
-		},
-		() => "Doodads",
-		() => 0.25,
-		() => "description",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			return () => ((n0.ExpObject() - 1) + (n1.ExpObject() - n2.ExpObject()));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			return () => (C3.distanceTo(n0.ExpObject(), 0, ((n1.ExpObject() - 1) + (n2.ExpObject() - n3.ExpObject())), 0) / 15);
-		},
-		() => "Doors",
-		() => "open",
-		() => "door",
-		() => "exit",
-		() => "on",
-		() => "results",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((n0.ExpObject() - n1.ExpObject()) + 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => and("https://scum.dog/games/doom_tge/art?=", n0.ExpInstVar());
-		},
-		() => "cat",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => and("Menu/cat", Math.round(f0(1, 2)));
-		},
-		() => 60,
-		() => " #",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((n0.ExpInstVar() + " - $") + n1.ExpInstVar());
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			return () => f0(n1.ExpInstVar());
-		},
-		() => 288,
-		() => 244,
-		() => "modal",
-		() => -2,
-		() => "...I DON'T WANT TO LOOK AT THIS ONE.",
-		() => "me",
-		() => "cash",
-		() => "PICKED UP SOME CASH.",
-		() => "item",
-		() => 25,
-		() => "bigcash",
-		() => "PICKED UP GALAKTOR'S STASH.",
-		() => 499,
-		() => "wine",
-		() => "PICKED UP A WINE BOTTLE.",
-		() => "PICKED UP A SIX PACK.",
-		() => "cheese",
-		() => "PICKED UP AN HORS D'OEUVRE.",
-		() => "bigcheese",
-		() => "PICKED UP THE CHEESE WHEEL.",
-		() => 30,
-		() => "can",
-		() => "YOU GOT THE BEER!",
-		() => "weapon",
-		() => 15,
-		() => "secret",
-		() => "unlock",
-		() => "Secret",
-		() => "courtyard",
-		() => "YOU FOUND A SECRET AREA!",
-		() => "galaktor",
-		() => "YOU FOUND GALAKTOR'S HIDEOUT!",
-		() => "YOU FOUND A LONE PAINTING!",
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const n2 = p._GetNode(2);
-			return () => ((n0.ExpObject() + v1.GetValue()) + n2.ExpBehavior());
-		},
-		() => "health",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => and("$", v0.GetValue());
+			const n1 = p._GetNode(1);
+			return () => ((v0.GetValue() + 22) + n1.ExpBehavior());
 		},
-		() => "armor",
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and(v0.GetValue(), "%");
-		},
-		() => "ammo",
-		() => -256,
-		() => "death",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() / 10);
 		},
-		() => "Bleed",
-		() => "HUD",
-		() => "kill",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			const v1 = p._GetNode(1).GetVar();
-			return () => Math.ceil((f0("HUD") / v1.GetValue()));
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => ((f0() * f1(0, 2)) * 1.5);
 		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0() * (-90));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0() * 90);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0() * (-60));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0() * 60);
+		},
+		() => "close",
+		() => "Global - Initialization",
+		() => "artworks",
+		() => "pickups",
+		() => "skins",
+		() => "medals",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0(f1(), "^(https?:\\/\\/|\\/\\/)?([a-z0-9-]+\\.)?(newgrounds\\.com|ungrounded\\.net)($|[\\/?#])", "gi");
+		},
+		() => "Global - AJAX",
+		() => "SCUMDOG/doom_tge/saveData1.txt",
+		() => "load",
+		() => "saveData1",
+		() => "Global - Core Logic",
+		() => "Global - Fullscreen",
+		() => "refreshToggles",
+		() => "Global - Transitions",
+		() => "Global - Transitions (Initialization)",
+		() => "HUD",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => Math.ceil((f0("HUD") / 4));
+		},
+		() => 2.5,
 		() => "i",
 		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() - 1);
+		},
+		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			const v1 = p._GetNode(1).GetVar();
-			return () => (f0("i") * v1.GetValue());
+			return () => (f0("i") * 4);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -5439,57 +2018,66 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const f1 = p._GetNode(1).GetBoundMethod();
 			const f2 = p._GetNode(2).GetBoundMethod();
-			const v3 = p._GetNode(3).GetVar();
-			return () => (((-f0("i")) * (f1() / f2("HUD"))) * v3.GetValue());
+			return () => (((-f0("i")) * (f1() / f2("HUD"))) * 4);
 		},
+		() => "Global - Transitions (Image Loading)",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => C3.clamp((v0.GetValue() + f1((-1), 1)), 0, 5);
 		},
-		() => "bleed",
+		() => "transitionWait",
+		() => "Global - Transitions (Finalizing)",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("HUD");
 		},
-		() => "Save/Load",
-		() => "SCUMDOG/doom_tge/saveData1.txt",
-		() => "load",
-		() => "saveData1",
+		() => "Global - NGIO",
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
+			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => f0(f1(f2(), "^.+?[^\\/:](?=[?\\/]|$)", "gi", 0), "newgrounds.com");
+			return () => n0.ExpObject(f1());
 		},
+		() => "Global - Unlocks",
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const f1 = p._GetNode(1).GetBoundMethod();
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => f0(f1(f2(), "^.+?[^\\/:](?=[?\\/]|$)", "gi", 0), "ungrounded.net");
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject(v1.GetValue(), 0);
 		},
+		() => "Global - Saving",
+		() => "saving",
 		() => "sound",
-		() => "flashing",
+		() => "skin",
 		() => "fullscreen",
-		() => "doomMusic",
+		() => "flashing",
 		() => "doomUnlock",
-		() => "medalObservations",
-		() => "medalItems",
-		() => "medalSpending",
-		() => "medalSecrets",
-		() => "medalTime",
-		() => "medalDrinks",
-		() => "medalThoughtful",
-		() => "medalDoom",
+		() => "doomMusic",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpObject(), 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpObject(), 5);
+		},
+		() => "tankman",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			return () => f0((("btoa('" + n1.ExpObject()) + "')"));
 		},
+		() => "Global - Loading",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => f0((("atob('" + f1()) + "')"));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0((and("atob('", f1()) + "')"));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -5501,43 +2089,41 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(82079);
+			return () => n0.ExpObject("flashing");
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(82080);
+			return () => n0.ExpObject("timer");
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(82081);
+			return () => n0.ExpObject("doomUnlock");
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(82082);
+			return () => n0.ExpObject("doomMusic");
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(82083);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => ((((n0.ExpObject(n1.ExpObject(n2.ExpObject("skin")), 5)) === (1) ? 1 : 0)) ? (n3.ExpObject("skin")) : ("default"));
 		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(82084);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(82085);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(82086);
-		},
-		() => "Initialization",
-		() => "Counters",
+		() => "Results - Initialization",
+		() => "Results - Unlocks",
+		() => 999,
+		() => 64,
+		() => 20,
+		() => 7,
+		() => 600,
+		() => 8,
+		() => 9,
+		() => "Results - Counters",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => (f0() * ((((v1.GetValue()) > (0) ? 1 : 0)) ? ((((((v2.GetValue() % 2)) === (0) ? 1 : 0)) ? (270) : (90))) : (90)));
+			return () => (f0() * ((or(((v1.GetValue()) === (2) ? 1 : 0), 4)) ? (360) : (90)));
 		},
 		() => "percent",
 		p => {
@@ -5546,12 +2132,16 @@ self.C3_ExpressionFuncs = [
 			return () => Math.round(((v0.GetValue() / v1.GetValue()) * 100));
 		},
 		() => "money",
-		() => 999,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => Math.round(((v0.GetValue() / 3) * 100));
 		},
 		() => "time",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => and(((v0.GetValue()) === (4) ? 1 : 0), ((v1.GetValue()) >= (3600) ? 1 : 0));
+		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => and(Math.round(v0.GetValue()), "%");
@@ -5566,56 +2156,368 @@ self.C3_ExpressionFuncs = [
 			const v2 = p._GetNode(2).GetVar();
 			return () => and(and(and(Math.floor((v0.GetValue() / 60)), ":"), Math.floor(((v1.GetValue() % 60) / 10))), Math.floor((v2.GetValue() % 10)));
 		},
-		() => 82079,
-		() => 82080,
-		() => 82081,
-		() => 82082,
-		() => 82083,
-		() => 64,
-		() => 82084,
-		() => 82085,
-		() => 82086,
-		() => "splashes",
-		() => "Loader",
+		() => 3600,
+		() => "SUCKS",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			const f1 = p._GetNode(1).GetBoundMethod();
-			const f2 = p._GetNode(2).GetBoundMethod();
-			const f3 = p._GetNode(3).GetBoundMethod();
-			const f4 = p._GetNode(4).GetBoundMethod();
-			return () => f0(f1(), Math.round(f2(0, (f3(f4(), "\n") - 1))), "\n");
+			return () => f0(255, 255, 255);
+		},
+		() => "Loader - Initialization",
+		() => "Loader",
+		() => "Logo",
+		() => "fadeIn",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("fadeIn");
+		},
+		() => "Loader - Loading",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			const v4 = p._GetNode(4).GetVar();
+			const v5 = p._GetNode(5).GetVar();
+			const v6 = p._GetNode(6).GetVar();
+			return () => (((((((f0() + v1.GetValue()) + v2.GetValue()) + v3.GetValue()) + v4.GetValue()) + v5.GetValue()) + v6.GetValue()) / 7);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			const v4 = p._GetNode(4).GetVar();
+			const f5 = p._GetNode(5).GetBoundMethod();
+			return () => C3.lerp(n0.ExpObject(), (n1.ExpInstVar() + ((n2.ExpInstVar() - n3.ExpInstVar()) * v4.GetValue())), (f5() * 5));
 		},
 		() => "loading",
 		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			const v4 = p._GetNode(4).GetVar();
+			const v5 = p._GetNode(5).GetVar();
+			const v6 = p._GetNode(6).GetVar();
+			return () => and((and("Loading... ", ((((((Math.floor(f0()) + v1.GetValue()) + v2.GetValue()) + v3.GetValue()) + v4.GetValue()) + v5.GetValue()) + v6.GetValue())) + "/"), 7);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and(Math.round((v0.GetValue() * 100)), "%");
+		},
+		() => "timeout",
+		p => {
 			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpBehavior("timeout");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpBehavior("timeout") / 4);
+		},
+		() => 156,
+		() => 0.75,
+		() => "Click anywhere to begin",
+		() => "Bar",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (and("ERROR (", v0.GetValue()) + ") - Click anywhere to reload");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(255, 128, 128);
+		},
+		() => "fadeOut",
+		() => "Loader - Transition",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("fadeOut");
+		},
+		() => "Menu - Initialization",
+		() => "link",
+		() => " $",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() + Math.round((n1.ExpObject() / 2)));
+		},
+		() => "Options",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
 			const n2 = p._GetNode(2);
-			const f3 = p._GetNode(3).GetBoundMethod();
-			return () => C3.lerp(n0.ExpObject(), ((f1() * (n2.ExpObject() - 24)) + 14), (10 * f3()));
+			const n3 = p._GetNode(3);
+			const n4 = p._GetNode(4);
+			return () => ((v0.GetValue() * (n1.ExpObject() - n2.ExpObject())) + (n3.ExpObject() + Math.round((n4.ExpObject() / 2))));
 		},
-		() => "shrink",
-		() => 24,
-		() => "fade",
-		() => "grow",
-		() => 80,
+		() => "refreshSliders",
+		() => "Menu - Individual Items",
+		() => "Menu - Individual Items (Sliders)",
+		() => "menuSelect",
+		() => 0.02,
+		() => "cooldown",
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 10);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => ((n0.ExpObject() + n1.ExpObject()) - Math.round((n2.ExpObject() / 2)));
 		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
-			return () => (n0.ExpObject() - (n1.ExpObject() / 2));
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			const n4 = p._GetNode(4);
+			return () => (((n0.ExpObject() - Math.round((n1.ExpObject() / 2))) - n2.ExpObject()) / (n3.ExpObject() - n4.ExpObject()));
+		},
+		() => "Menu - Individual Items (Toggles)",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ("Fullscreen: " + ((v0.GetValue()) ? ("On") : ("Off")));
+		},
+		() => "disabled",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ("Pickup Flash: " + ((v0.GetValue()) ? ("On") : ("Off")));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ("Ingame Timer: " + ((v0.GetValue()) ? ("On") : ("Off")));
+		},
+		() => "Unlocks",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ("DOOM Music: " + ((v0.GetValue()) ? ("On") : ("Off")));
+		},
+		() => "???????????: ???",
+		() => "Menu - Individual Items (Arrows)",
+		() => "title",
+		() => "description",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			const n3 = p._GetNode(3);
+			const v4 = p._GetNode(4).GetVar();
+			return () => ((((v0.GetValue()) === ("Skins") ? 1 : 0)) ? (n1.ExpObject(v2.GetValue(), 2)) : (n3.ExpObject(v4.GetValue(), 2)));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			const n4 = p._GetNode(4);
+			const n5 = p._GetNode(5);
+			return () => f0(((((v1.GetValue()) === ("Skins") ? 1 : 0)) ? (n2.ExpObject(n3.ExpInstVar(), 3)) : (n4.ExpObject(n5.ExpInstVar(), 3))));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			const n3 = p._GetNode(3);
+			const v4 = p._GetNode(4).GetVar();
+			return () => ((((v0.GetValue()) === ("Skins") ? 1 : 0)) ? (n1.ExpObject(v2.GetValue(), 4)) : (n3.ExpObject(v4.GetValue(), 4)));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			const n3 = p._GetNode(3);
+			const v4 = p._GetNode(4).GetVar();
+			return () => ((((v0.GetValue()) === ("Skins") ? 1 : 0)) ? (n1.ExpObject(v2.GetValue(), 5)) : (n3.ExpObject(v4.GetValue(), 5)));
+		},
+		() => "???",
+		() => "IT'S A SECRET!",
+		() => "Menu - Individual Items (Skins)",
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			return () => n0.ExpObject((v1.GetValue() + n2.ExpInstVar()), 0);
+		},
+		() => "Grayscale",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => (v0.GetValue() + n1.ExpInstVar());
+		},
+		() => 65,
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 0);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((v0.GetValue() + "/") + v1.GetValue());
+		},
+		() => "default/default",
+		() => "Menu - Individual Items (Medals)",
+		() => "normal",
+		() => "Menu - Individual Items (Controls)",
+		() => "keyboard",
+		() => "mobile",
+		() => "gamepad",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => (v0.GetValue() + n1.ExpObject(0));
+		},
+		() => "Menu - Individual Items (Modal)",
+		() => "modal",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((v0.GetValue()) ? (0) : ((-44)));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((v0.GetValue()) ? (60) : (16));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((v0.GetValue()) ? (244) : (288));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			return () => f0(n1.ExpObject(v2.GetValue(), 1));
+		},
+		() => "buy",
+		() => 1000,
+		() => "artwork",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("https://scum.dog/games/doom_tge/art?=", v0.GetValue());
+		},
+		() => " #",
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject(v1.GetValue(), 2);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			const v3 = p._GetNode(3).GetVar();
+			return () => and(and(n0.ExpObject(v1.GetValue(), 3), " - $"), n2.ExpObject(v3.GetValue(), 4));
 		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
-			return () => ((n0.ExpObject() - n1.ExpObject()) - 5);
+			const n2 = p._GetNode(2);
+			return () => ((n0.ExpObject() - 1) + (n1.ExpObject() - n2.ExpObject()));
 		},
-		() => "Logo",
-		() => 1.5,
-		() => "final",
-		() => 0.5
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => (C3.distanceTo(n0.ExpObject(), 0, ((n1.ExpObject() - 1) + (n2.ExpObject() - n3.ExpObject())), 0) / 15);
+		},
+		() => "Menu - Controls",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(192, 192, 255);
+		},
+		() => 40,
+		() => "down",
+		() => -40,
+		() => "up",
+		() => "toggle",
+		() => "navigate",
+		() => 0.2,
+		() => "back",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpObject() - Math.round((n1.ExpObject() / 2))) - 4);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpInstVar() + 1);
+		},
+		() => "Menu - Control Down",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((v0.GetValue() + 1) % v1.GetValue());
+		},
+		() => "Menu - Control Up",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			return () => (((v0.GetValue() - 1) + v1.GetValue()) % v2.GetValue());
+		},
+		() => "Menu - Control Right",
+		() => "slider",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 5);
+		},
+		() => "arrows",
+		() => "Menu - Control Left",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 5);
+		},
+		() => "Menu - Core Functions",
+		() => "Menu - Select",
+		() => "Menu - Select (Main)",
+		() => "Level",
+		() => "Controls",
+		() => "Menu - Select (Options)",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (1 - v0.GetValue());
+		},
+		() => "Menu - Select (Controls)",
+		() => "Menu - Select (Unlocks)",
+		() => "Medals",
+		() => "Menu - Select (Skins)",
+		() => "Menu - Select (Medals)",
+		() => "Menu - Select (Credits)",
+		() => "Menu - Select (Modal)",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpObject(), 4);
+		},
+		() => "Menu",
+		() => "Menu - Updating",
+		() => "label",
+		() => 320,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 1);
+		},
+		() => "unlocks",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => (((n0.ExpObject() + n1.ExpObject()) + Math.round((n2.ExpObject() / 2))) + 4);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 2);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 8);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => C3.clamp((n0.ExpObject() + 2), 0, 288);
+		},
+		() => 17,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => (("V" + f0()) + ((v1.GetValue()) ? (" NG") : ("")));
+		}
 ];
 
 

@@ -64,5 +64,813 @@
 // scripts/plugins/FileSystem/dom/domSide.js
 "use strict";{const e="filesystem";async function t(e,t,r){const i=await e["createWritable"]({"keepExistingData":!!r});if(r){const t=await e["getFile"]();await i["seek"](t.size)}await i["write"](t),await i["close"]()}function r(e){let t=e.replaceAll("\\","/");return t.startsWith("/")&&(t=t.substring(1)),t.endsWith("/")&&(t=t.substring(0,t.length-1)),t}async function i(e,t){"prompt"===await e["queryPermission"]({"mode":t})&&await e["requestPermission"]({"mode":t})}const a=["<app>","<web-resource>","<current-app-data>","<local-app-data>","<roaming-app-data>","<desktop>","<documents>","<downloads>","<pictures>","<profile>","<saved-games>","<screenshots>","<videos>"],n=class extends self.DOMHandler{constructor(t){super(t,e),this._pickerMap=new Map,this.AddRuntimeMessageHandlers([["init",e=>this._Init(e)],["show-save-file-picker",e=>this._ShowSaveFilePicker(e)],["show-open-file-picker",e=>this._ShowOpenFilePicker(e)],["show-folder-picker",e=>this._ShowFolderPicker(e)],["write-text-file",e=>this._WriteTextFile(e)],["write-binary-file",e=>this._WriteBinaryFile(e)],["read-text-file",e=>this._ReadTextFile(e)],["read-binary-file",e=>this._ReadBinaryFile(e)],["create-folder",e=>this._CreateFolder(e)],["copy-file",e=>this._CopyFile(e)],["delete",e=>this._Delete(e)],["list-content",e=>this._ListContent(e)]])}_Init(e){const t=e["pickerMap"];t&&(this._pickerMap=t);const r=this._iRuntime._GetDirectoryHandles(),i=new Set;for(let e=0,t=Math.min(r.length,a.length);e<t;++e){const t=r[e],n=a[e];t&&(this._pickerMap.set(n,[t]),i.add(n))}return{"isFSAPISupported":!!window["showSaveFilePicker"],"additionalPickerTags":i,"builtInPickerTags":a}}async _ShowSaveFilePicker(e){const t=e["pickerTag"],r=e["pickerOpts"];try{const e=await window["showSaveFilePicker"](r);return this._pickerMap.set(t,[e]),this._SavePickerMap(),{"isOk":!0,"pickedFileNames":[e["name"]]}}catch(e){return console.warn("[Construct] Error showing save file picker: ",e),{"isOk":!1}}}async _ShowOpenFilePicker(e){const t=e["pickerTag"],r=e["pickerOpts"];try{const e=await window["showOpenFilePicker"](r);return this._pickerMap.set(t,e),this._SavePickerMap(),{"isOk":!0,"pickedFileNames":e.map(e=>e["name"])}}catch(e){return console.warn("[Construct] Error showing open file picker: ",e),{"isOk":!1}}}async _ShowFolderPicker(e){const t=e["pickerTag"],r=e["pickerOpts"];try{const e=await window["showDirectoryPicker"](r);return this._pickerMap.set(t,[e]),this._SavePickerMap(),{"isOk":!0,"pickedFolderNames":[e["name"]]}}catch(e){return console.warn("[Construct] Error showing folder picker: ",e),{"isOk":!1}}}_SavePickerMap(){this.PostToRuntime("save-picker-map",{"pickerMap":this._pickerMap})}async _FollowPath(e,t,r){const i=t.split("/"),a=i.pop();for(const t of i)e=await e["getDirectoryHandle"](t,{"create":r});return{folderHandle:e,lastName:a}}async _GetFileHandleFor(e,t,a){const n=this._pickerMap.get(e);if(!Array.isArray(n)||0===n.length)throw new Error(`nothing picked for tag '${e}'`);if(1===n.length&&"directory"===n[0]["kind"]){const e=n[0];if(await i(e,a?"readwrite":"read"),!(t=r(t)))throw new Error("empty folder path");const o=await this._FollowPath(e,t,a);return await o.folderHandle["getFileHandle"](o.lastName,{"create":a})}if(1!==n.length||t){for(const e of n)if(e["name"]===t)return await i(e,a?"readwrite":"read"),e;throw new Error(`no file with name '${t}'`)}{const e=n[0];return await i(e,a?"readwrite":"read"),e}}async _GetFolderHandleFor(e,t,a){const n=this._pickerMap.get(e);if(!Array.isArray(n)||0===n.length)throw new Error(`nothing picked for tag '${e}'`);if(1===n.length&&"directory"===n[0]["kind"]){const e=n[0];return await i(e,a?"readwrite":"read"),t=r(t),await this._FollowPath(e,t,a)}throw new Error(`picker tag '${e}' is not for a folder`)}async _WriteTextFile(e){const r=e["pickerTag"],i=e["folderPath"],a=e["text"],n=e["keepExisting"];try{const e=await this._GetFileHandleFor(r,i,!0);return await t(e,a,n),{"isOk":!0}}catch(e){return console.error("[Construct] Error writing text file: ",e),{"isOk":!1}}}async _WriteBinaryFile(e){const r=e["pickerTag"],i=e["folderPath"],a=e["arrayBuffer"];try{const e=await this._GetFileHandleFor(r,i,!0);return await t(e,a),{"isOk":!0}}catch(e){return console.error("[Construct] Error writing binary file: ",e),{"isOk":!1}}}async _ReadTextFile(e){const t=e["pickerTag"],r=e["folderPath"];try{const e=await this._GetFileHandleFor(t,r,!1),i=await e["getFile"]();return{"isOk":!0,"text":await i["text"]()}}catch(e){return console.error("[Construct] Error reading text file: ",e),{"isOk":!1}}}async _ReadBinaryFile(e){const t=e["pickerTag"],r=e["folderPath"];try{const e=await this._GetFileHandleFor(t,r,!1),i=await e["getFile"]();return{"isOk":!0,"arrayBuffer":await i["arrayBuffer"]()}}catch(e){return console.error("[Construct] Error reading binary file: ",e),{"isOk":!1}}}async _CreateFolder(e){const t=e["pickerTag"],r=e["folderPath"];try{const{folderHandle:e,lastName:i}=await this._GetFolderHandleFor(t,r,!0);if(!i)throw new Error("empty folder path");return await e["getDirectoryHandle"](i,{"create":!0}),{"isOk":!0}}catch(e){return console.error("[Construct] Error creating folder: ",e),{"isOk":!1}}}async _CopyFile(e){const t=e["pickerTag"],r=e["srcFolderPath"],i=e["destFolderPath"];try{const e=await this._GetFolderHandleFor(t,i,!0),a=await this._GetFolderHandleFor(t,r,!1);if(!a.lastName||!e.lastName)throw new Error("empty folder path");const n=await a.folderHandle["getFileHandle"](a.lastName,{"create":!1}),o=await e.folderHandle["getFileHandle"](e.lastName,{"create":!0}),s=await n["getFile"](),c=await o["createWritable"]();return await s.stream().pipeTo(c),{"isOk":!0}}catch(e){return console.error("[Construct] Error copying file: ",e),{"isOk":!1}}}async _Delete(e){const t=e["pickerTag"],r=e["folderPath"],i=e["isRecursive"];try{const{folderHandle:e,lastName:a}=await this._GetFolderHandleFor(t,r,!1);if(!a)throw new Error("empty folder path");return await e["removeEntry"](a,{"recursive":i}),{"isOk":!0}}catch(e){return console.error("[Construct] Error deleting: ",e),{"isOk":!1}}}async _DoListContent(e,t,r,i,a){const n=[];try{for await(const a of e.values())"file"===a["kind"]?i.push(t+a["name"]):"directory"===a["kind"]?(r.push(t+a["name"]),n.push(a)):console.warn(`unknown folder entry kind '${a["kind"]}' (name '${a["name"]}')`)}catch(e){if(console.warn(`Error listing contents for path '${t}': `,e),""===t)throw e}a&&await Promise.all(n.map(e=>this._DoListContent(e,t+e["name"]+"/",r,i,a)))}async _ListContent(e){const t=e["pickerTag"],r=e["folderPath"],i=e["isRecursive"];try{let{folderHandle:e,lastName:a}=await this._GetFolderHandleFor(t,r,!1);a&&(e=await e["getDirectoryHandle"](a,{"create":!1}));const n=[],o=[];return await this._DoListContent(e,"",n,o,i),{"isOk":!0,"folderNames":n,"fileNames":o}}catch(e){return console.error("[Construct] Error listing content: ",e),{"isOk":!1}}}};self.RuntimeInterface.AddDOMHandlerClass(n)}
 
+// scripts/plugins/ppstudio_newgroundsio_plugin/c3runtime/domSide.js
+/**
+ * This plugin is distributed under an MIT license.
+ * Developed by TristanMX/Pixel Perfect Studio
+ * Website: https://www.pixelperfectstudio.mx/ 
+ * Docs: https://smartui-docs.pixelperfectstudio.mx/miscellaneous-addons/newgrounds.io-plugin
+ */
+"use strict";
+{
+	const DOM_COMPONENT_ID = "ppstudio_newgroundsio_plugin";
+
+	const HANDLER_CLASS = class ppstudio_newgroundsio_pluginDOMHandler extends globalThis.DOMElementHandler
+	{
+        _preventFn=this.onPreventKeyDefaults.bind(this);
+        #medalsStringified=null;
+        //#scoresStringified=null; //Use perhaps?
+        #saveDataQueued=null;
+        #timeoutLogin=null;
+        #windowClosedTimeout=null;
+        #pluginWaiting=false;
+        #justLoggedin=false;
+        #justLoggedOut=false;
+        #isNativeNotificationsEnabled=null;
+
+		constructor(iRuntime)
+		{
+			super(iRuntime, DOM_COMPONENT_ID);	
+			//Listeners to the DOM events must be registered
+            this.isInitialized=false;
+            this.windowCheckIntervalID=null;
+            this.isLoginRequested=false;
+            this.isReady=false;
+
+			window.addEventListener("ng-action",this._dispatchAction.bind(this));
+            window.addEventListener("beforeunload",this._closeNGWindow.bind(this));
+            window.addEventListener("c3plugin-session-cancelled",this._cancelLogin.bind(this)); //NGIO modification
+            window.addEventListener("c3resume-runtime",this._resumeRuntime.bind(this));
+
+			this.AddRuntimeMessageHandlers([
+					["set-properties", d => this._setProperties(d)],
+                    ["cancel-login", d => this._cancelLogin(d)],
+                    ["skip-login", d => this._skipLogin(d)],
+                    ["open-login-page", d => this._login(d)],
+                    ["logout", d => this._logout(d)],
+                    ["get-scores", d => this._getScores(d)],
+                    ["post-score", d => this._postScore(d)],
+                    ["destroy-ngio-window", d => this._closeNGWindow(d)],
+                    ["unlock-medal", d => this._unlockMedal(d)],          
+                    ["show-native-scoreboard", d => this._showNativeScoreboard(d)],
+                    ["show-native-medals", d => this._showNativeMedals(d)],
+                    ["get-slotsaved-data", d => this._getSlotSavedData(d)],
+                    ["show-saved-slots", d => this._showNativeSavedSlots(d)],
+                    ["set-queued-slots-data", d => this._setSavedDataQueued(d)],
+                    ["set-slotsaved-data", d => this._setSlotSavedData(d)],
+                    ["log-event", d => this._logEvent(d)],
+                    ["load-author-url", d => NGIO.loadAuthorUrl()],
+                    ["load-official-url", d => NGIO.loadOfficialUrl()],
+                    ["load-more-games", d => NGIO.loadMoreGames()],
+                    ["load-referral", d => NGIO.loadReferral(d["name"])]
+				]
+			);
+
+            console.log('%cNEW%cGROUNDS%cio%c Powered by %cPixel %cPerfect %cStudio \n%cWebSite: https://www.pixelperfectstudio.mx \n%cDocumentation:https://smartui-docs.pixelperfectstudio.mx/',
+                'color: red; font-weight: bold; background-color:orange; font-size:18px', 
+                'color: black; font-weight: bold; background-color:orange; font-size:18px', 
+                'color: white; font-weight: bold; background-color:red; font-size:18px', 
+                'color: white; font-weight: bold; background-color:black; font-size:18px', 
+                'color: cyan; font-weight: bold; background-color:black; font-size:18px',
+                'color: purple; font-weight: bold; background-color:black; font-size:18px', 
+                'color: plum; font-weight: bold; background-color:black; font-size:18px', 
+                'color: yellow; font-weight: bold; background-color:blue; ',
+                'color: yellow; font-weight: bold; background-color:blue',
+            );
+		}
+
+		_setProperties(d){
+            const has=d.hasOwnProperty.bind(d);
+            if (has("prevent-default")) this._setPreventDefaults(d["prevent-default"]);
+            if (has("ngio")) this._initNGIO(d["ngio"]);
+            if (has("native-notifications")) this._enableNativeNotifications(d["native-notifications"]);            
+        }
+
+        _resumeRuntime(){
+            if (!DOMUtils.isModalOpen)
+                this.PostToRuntime("resume-runtime",{});
+        }
+        _enableNativeNotifications(e){
+            this.#isNativeNotificationsEnabled=e;
+        }
+
+        isNotifEnabled(){
+            return this.#isNativeNotificationsEnabled;
+        }
+
+        _logEvent(d){
+            NGIO.logEvent(d["event"],
+                (e,response)=>{
+                    if (response.result.error!==null){
+                        console.error(response.result.error);
+                        const msg={
+                            code:response.result.error.code,
+                            message:response.result.error.message
+                        };
+                        this.#pluginWaiting=false;
+                        this._updatePreloadedItems().then(
+                            ()=>this.PostToRuntime("on-bypass-error",msg)
+                        )
+                        
+                    }
+                }
+            )
+        }
+
+        _setSavedDataQueued(d){
+            this.#saveDataQueued=d;
+        }
+
+        _setSlotSavedData(data){
+            NGIO.setSaveSlotData(data["id"],data["data"],
+                (d)=>{
+                    if (d){
+                        if (data["showNotification"]||this.isNotifEnabled())
+                            NGIONotificationManager.instance.showNotification(
+                            {
+                                "title":"Cloud Save",
+                                "message":"Game saved",
+                                "type": "savegame",
+                                "tokens": {"dummy":""},
+                                "duration": 10000,
+                                "imageURL":NGIONotificationManager.FILE_ICON
+                            });
+                    }
+                    else {
+                        return this.PostToRuntimeAsync("cancel-datasave",{});
+                    }
+                    return this.PostToRuntimeAsync("on-slotsaved-set",d?d["data"]??{}:{}); 
+                }
+            );
+        }
+
+        _getSlotSavedData(data){
+            NGIO.getSaveSlotData(data["id"],
+                (d)=>{
+                    if (data["showNotification"]||this.isNotifEnabled())
+                        NGIONotificationManager.instance.showNotification(
+                        {
+                            "title":"Cloud Save",
+                            "message":"Game Loaded",
+                            "type": "savegame",
+                            "tokens": {"dummy":""},
+                            "duration": 10000,
+                            "imageURL":NGIONotificationManager.FILE_ICON
+                        });
+                    return this.PostToRuntimeAsync("on-slotsaved-get",d); 
+                }
+            );
+        }
+
+        _dispatchAction(event){
+            /**
+             * event.detail - Custom DAta
+             * event.detail.action - Action/Button fired
+             * event.detail.data - Table row data
+             */
+            this._resumeRuntime();
+            switch(event.detail["action"]){
+                case "Load":{
+                    const data=event.detail["data"];
+                    data["showNotification"]=true;
+                    this._getSlotSavedData(data);
+                }; break; //this.#saveDataQueued
+                case "Save": {
+                    if (this.#saveDataQueued!==null){
+                        this._setSlotSavedData(
+                            {
+                                "id":event.detail["data"]["id"],
+                                "data":this.#saveDataQueued,
+                                "showNotification":true
+                            }
+                        );
+                    } else {
+                        console.warn("NGIO - No save-data queded for built-in dialog. Save-data action cancelled.")
+                    }
+                } break;
+            }
+        }
+        _showNativeMedals(d){
+            const medals=JSON.parse(JSON.stringify(NGIO.medals)); //Serialized
+            const medalsSerialized=[];
+
+            let title="All Game Medals - Status Requires Login";;
+            if (NGIO.user.id!==null){
+                title="Medals Summary - "+NGIO.user.name;
+            }
+
+            for (const m of medals){
+                let diff="";
+                switch(m["difficulty"]){
+                    case 1:diff="Easy";break
+                    case 2:diff="Moderate";break
+                    case 3:diff="Challenging";break
+                    case 4:diff="Difficult";break
+                    case 5:diff="Brutal";break
+                }
+
+                let lock="img:"+NGIONotificationManager.QUESTIONMARK_ICON;
+                if (NGIO.user.id!==null){
+                     lock="img:"+NGIONotificationManager.LOCKED_ICON;
+                    if (m.unlocked){
+                        lock="img:"+NGIONotificationManager.UNLOCKED_ICON;
+                    }
+                }               
+
+                medalsSerialized.push(
+                    {
+                        "lock": lock,
+                        "icon":"img:"+m["icon"],
+                        "name":m["name"],
+                        "description":m["description"],
+                        "value":m["value"],
+                        "difficulty":diff
+                    }
+                );
+            }
+
+            if (medalsSerialized.length==0){
+                DOMUtils.displayTableModal(title,[""],[{"nodata":"No Data Found"}]);
+            }
+            else {                        
+                DOMUtils.displayTableModal(title,["","Icon","Medal","Description","Value","Difficulty"],medalsSerialized);
+            }  
+        }
+        
+        _showNativeScoreboard(d){
+            const board=NGIO.getScoreBoard(d["id"]);
+            if (board==null) { 
+                const msg="Board ID not found. Check your game API Tools section to get a valid board id.";
+                this._resumeRuntime();
+                this.PostToRuntime("cancel-scores-get",{code:-1,message:msg});
+                return; //invalid scoreboard
+            }
+
+            let p=null;
+
+            switch(d["period"]){
+                case 0:p=NGIO.PERIOD_ALL_TIME; break;
+                case 1:p=NGIO.PERIOD_CURRENT_YEAR; break;
+                case 2:p=NGIO.PERIOD_CURRENT_MONTH; break;
+                case 3:p=NGIO.PERIOD_CURRENT_WEEK; break;
+                case 4:p=NGIO.PERIOD_TODAY; break;
+            }
+            const options={
+                "period":p,				
+				"social":d["social"],
+				"skip":d["skip"],
+				"limit":d["limit"]
+            }
+
+            if (d["tag"]!==""){
+                options["tag"]=d["tag"]; //add only if provided
+            }
+
+            board.getScores(options,
+                (b,s)=>{
+                    const scoresSerialized=[];
+
+                    for (const s of b.result.scores){
+                        scoresSerialized.push(
+                            {
+                                "icon":"img:"+s["user"]["icons"]["small"],
+                                "user":s["user"]["name"],
+                                "value":s["formatted_value"]                                
+                            }
+                        );
+                    }
+
+                    const periodText=["All time","Current Year","Current Month","Current Week","Today"]
+                    let title=board.name+"-"+periodText[d["period"]];
+                    if (d["tag"]!=="")
+                        title+=" - Tag:"+d["tag"];
+
+                    if (scoresSerialized.length==0){
+                        DOMUtils.displayTableModal(title,[""],[{"nodata":"No Data Found"}]);
+                    }
+                    else {                        
+                        DOMUtils.displayTableModal(title,["","User","Score"],scoresSerialized);
+                    }                    
+                }
+            )            
+        }
+
+        _showNativeSavedSlots(d){
+            let slots=JSON.parse(JSON.stringify(NGIO.saveSlots))??[]; //Serialized
+            const savedSlotsSerialized=[];
+
+            let title="Saved Slots";
+            if (NGIO.user.id==null){
+                title="Saved Slots - Login Required";
+                slots=[];
+            }
+
+            for (const s of slots){
+                savedSlotsSerialized.push({
+                    "icon":"img:"+NGIONotificationManager.FILE_ICON,                    
+                    "id":s["id"],
+                    "datetime ":s["size"]<=0?"Empty":s["datetime"],
+                    "size ":s["size"],
+                    "save":"btn:Save,ng-close",
+                    "load":s["size"]<=0?"":"btn:Load,ng-close",
+                })
+            }
+
+            if (savedSlotsSerialized.length==0){
+                DOMUtils.displayTableModal(title,[""],[{"nodata":"No Data Found"}]);
+            }
+            else {                        
+                DOMUtils.displayTableModal(title,["","Id","Date/Time","Size (bytes)","",""],savedSlotsSerialized);
+            }  
+        }
+
+        _initNGIO(d){
+            this.#pluginWaiting=true;
+            // Set up the options for NGIO.
+            var options = {
+                version: d["version"],
+                checkHostLicense: d["checkHostLicense"],
+                autoLogNewView: d["autoLogNewView"],
+                preloadMedals: d["preloadMedals"],
+                preloadScoreBoards: d["preloadScoreBoards"],
+                preloadSaveSlots: d["preloadSaveSlots"]
+            };
+
+            // initialize the API, using the App ID and AES key from your Newgrounds project
+            NGIO.init(d["appID"], d["aesKey"], options);
+            setInterval(this.#checkSession.bind(this),500);
+        }
+
+        _setPreventDefaults(e){
+            if (e) document.addEventListener("keydown",this._preventFn);
+                else document.removeEventListener("keydown",this._preventFn);
+        }
+
+        #updateWaitingStatus(){
+            this.PostToRuntime("update-waiting-status",{"waiting":NGIO.isWaitingStatus}||this.#pluginWaiting);
+        }
+
+        #checkSession(){
+            this.#updateWaitingStatus();
+            
+            NGIO.getConnectionStatus(
+                (status)=>{
+                    if (!this.isInitialized) {
+                        this.isInitialized=true;
+                        this.PostToRuntime("on-initialized",{});
+                    }
+                    switch (status) {
+                        case NGIO.STATUS_LOCAL_VERSION_CHECKED:
+                            if (NGIO.isDeprecated) {
+                                this.PostToRuntime("on-outdated",{"current":NGIO.version,"newest":NGIO.newestVersion});
+                            }
+            
+                            if (!NGIO.legalHost) {
+                                const msg="💣💣Invalid host!!💣💣 You filty pirate 🏴‍☠️🦜⛵"
+                                this.PostToRuntime("on-invalid-host",{code:-1,message:msg});
+                            }
+            
+                        break;
+        
+                        // user needs to log in
+                        case NGIO.STATUS_LOGIN_SUCCESSFUL:{
+                            this._closeNGWindow();
+                            this._stopNGWindowCheck();
+                            window.focus();
+                            if (this.#windowClosedTimeout!==null)
+                                clearTimeout(this.#windowClosedTimeout);
+
+                            this.#windowClosedTimeout=null;
+                            this.#pluginWaiting=false;
+
+                            if (NGIO.user.id!==null){
+                                this.PostToRuntime("update-user-data",{"user": this.getUserData()});
+                                this.#justLoggedin=true;
+                            }
+                            else {
+                                this._resumeRuntime();
+                                this.PostToRuntime("on-login-success",{"user": this.getUserData()});
+                            }
+                        } break;
+                        case NGIO.STATUS_LOGIN_REQUIRED:
+                            /*if (!this.isInitialized) {
+                                this.isInitialized=true;
+                                this.PostToRuntime("on-initialized",{});
+                            }*/
+                            
+                            this.PostToRuntime("on-loginrequired",{});                            
+                            break;
+                        case NGIO.STATUS_WAITING_FOR_USER:
+                            //this.PostToRuntime("on-waitingforuser",{});
+                            break;
+                        case NGIO.STATUS_READY:
+                            this._updatePreloadedItems().then(
+                                ()=>{
+                                    if (!this.isReady){
+                                        this.isReady=true;
+                                        setTimeout(()=>{this.PostToRuntime("on-ready",{});},1000);
+                                    }
+                                    if (this.#justLoggedin){
+                                        this.#justLoggedin=false;
+                                        this.PostToRuntime("on-login-success",{"user": this.getUserData()});
+                                        this._resumeRuntime();
+                                        if (this.isNotifEnabled()){
+                                            NGIONotificationManager.instance.showNotification(
+                                                {
+                                                    "title":"Session",
+                                                    "message":"Welcome back {user}!",
+                                                    "type": "session",
+                                                    "tokens": {"user":NGIO.user.name},
+                                                    "duration": 10000,
+                                                    "imageURL": NGIO.user.icons.large
+                                                });
+                                        }
+                                    }
+                                    if (this.#justLoggedOut){
+                                        this.#justLoggedOut=false;                                        
+                                        this.PostToRuntimeAsync("update-user-data",{ "user": this.getUserData()})
+                                            .then(
+                                                ()=>{
+                                                    this.PostToRuntimeAsync("on-logged-out",{}).then(()=>this.#pluginWaiting=false);
+                                                    if (this.isNotifEnabled())
+                                                    {
+                                                        this._resumeRuntime();
+                                                        NGIONotificationManager.instance.showNotification(
+                                                            {
+                                                                "title":"Session",
+                                                                "message":"Session closed. Bye bye!",
+                                                                "type": "session",
+                                                                "tokens": {"dummy":""},
+                                                                "duration": 10000,
+                                                                "imageURL": NGIONotificationManager.NG_DEFAULT
+                                                            });
+                                                    }
+                                                }
+                                            );                                        
+                                    }
+                                }   
+                            )
+                            break;
+                    }
+                }
+            );
+        }
+
+        _updatePreloadedItems(){
+            return new Promise(
+                (resolve,reject)=>{
+                    this._stringifyMedals()
+                    .then(
+                        ()=>{
+                            this.PostToRuntimeAsync("update-preload-list",
+                                {
+                                    "scoreboards":JSON.parse(JSON.stringify(NGIO.scoreBoards)), //Serialized
+                                    "medals":this.#medalsStringified,
+                                    "savedslots":JSON.parse(JSON.stringify(NGIO.saveSlots)) //Serialized
+                                }
+                            ); 
+                            resolve();
+                        }
+                    )
+                    .catch((e)=>{
+                        reject(e);
+                    });
+                }
+            );
+        }
+
+        _stringifyMedals(){
+            return new Promise((resolve,reject)=>{
+
+                if (NGIO.medals==null) resolve();
+
+                const data=JSON.parse(JSON.stringify(NGIO.medals));
+                const urls=[];
+
+                for (const e of data){
+                    urls.push(e["icon"]);
+                }
+
+                DOMUtils.convertMultipleImagesToBase64(urls).then(
+                    (u)=>{                        
+                        for (let i=0;i<data.length;i++){
+                            data[i]["icon64"]=u[i];
+                        }
+                        this.#medalsStringified=data; //Stringified Medals attribute
+                        resolve();
+                    }
+                ).catch(
+                    (e)=>{reject(e);}
+                )
+            });
+        }
+        
+
+        getUserData(){
+            if (NGIO.user.id==null)
+                return null;
+
+            return { //Serializing data
+                "id": NGIO.user.id,
+                "name":NGIO.user.name,
+                "supporter":NGIO.user.supporter,
+                "icons":this.getUserIcons()
+            }
+        }
+
+        getUserIcons(){
+            if (NGIO.user==null){
+                return null;
+            }
+
+            if (NGIO.user.icons==null){
+                return null;
+            }
+            
+            return { //Serializing data
+                "small":NGIO.user.icons.small,
+                "medium":NGIO.user.icons.medium,
+                "large":NGIO.user.icons.large
+            }
+        }
+
+        _login(d){
+            if (NGIO.user!==null)
+                if (NGIO.user.id!==null) return;
+
+            this.isLoginRequested=true;
+            this.#pluginWaiting=true;
+            NGIO.openLoginPage(d["mode"]==1?"popup":undefined);
+            this._startNGWindowCheck();
+
+            if (this.#timeoutLogin==null)
+                this.#timeoutLogin=
+                    setTimeout(()=>{
+                            if (NGIO.user.id==null&&this.isLoginRequested){
+                                this.isLoginRequested=false;
+                                this._cancelLogin();
+                                if (this.#timeoutLogin!==null)
+                                    clearTimeout(this.#timeoutLogin);
+                                this.#timeoutLogin=null;                                
+                            }
+                        },30000);
+        }
+
+        _logout(d){
+            if (NGIO.user==null) return;
+            if (NGIO.user.id==null) return;
+            this.isLoginRequested=false;
+            this.#pluginWaiting=true;            
+            NGIO.logOut(()=>{
+                this._closeNGWindow();                
+                this.#justLoggedOut=true; //Flag for the #checksession method.
+            });
+        }
+
+        _getScores(d){
+            this.#pluginWaiting=true;
+            let p=null;
+
+            switch(d["period"]){
+                case 0:p=NGIO.PERIOD_ALL_TIME; break;
+                case 1:p=NGIO.PERIOD_CURRENT_YEAR; break;
+                case 2:p=NGIO.PERIOD_CURRENT_MONTH; break;
+                case 3:p=NGIO.PERIOD_CURRENT_WEEK; break;
+                case 4:p=NGIO.PERIOD_TODAY; break;
+            }
+            const options={
+                "period":p,				
+				"social":d["social"],
+				"skip":d["skip"],
+				"limit":d["limit"]
+            }
+
+            if (d["tag"]!==""){
+                options["tag"]=d["tag"]; //add only if provided
+            }
+            
+            //NGIO.getScores(d["id"],options,this._onScoresReady.bind(this)) //Broken API
+            
+            const board=NGIO.getScoreBoard(d["id"]);
+            if (board==null){
+                this.#pluginWaiting=false;
+                const msg="Board ID not found. Check your game API Tools section to get a valid board id."
+                this.PostToRuntime("cancel-scores-get",{code:-1,message:msg});
+                return;
+            }
+            
+            board.getScores(options,this._onScoresReady.bind(this))
+        }
+
+        _unlockMedal(d){
+            const medal=NGIO.getMedal(d["id"]);
+            if (medal!==null&&medal!==undefined){
+                medal.unlock((response)=>{
+                    if (!response.result.success){
+                        let msg={};                        
+                        if (response.result.error!=null){
+                            console.error(response.result.error);
+                            msg={
+                                code:response.result.error.code,
+                                message:response.result.error.message
+                            };
+                        }
+                        this.#pluginWaiting=false;
+                        this._updatePreloadedItems().then(
+                            ()=>this.PostToRuntime("cancel-medal-unlock",msg)
+                        )
+                        
+                    }
+                    else{
+                        this.#pluginWaiting=false;
+                        this._updatePreloadedItems().then(
+                            ()=>{
+                                const medal=response.result.medal;
+                                if (d["showNotification"]||this.isNotifEnabled()){
+                                    if (medal.secret)
+                                        NGIONotificationManager.instance.showNotification(
+                                            {
+                                                "title":"Secret Medal",
+                                                "message":"Unlocked! {name}",
+                                                "type": "secretmedalunlock",
+                                                "tokens": {"name":medal.name},
+                                                "duration": 10000,
+                                                "imageURL": medal.icon
+                                            });
+                                    else 
+                                        NGIONotificationManager.instance.showNotification(
+                                            {
+                                                "title":"Medal",
+                                                "message":"Unlocked! {name}",
+                                                "type": "medalunlock",
+                                                "tokens": {"name":medal.name},
+                                                "duration": 10000,
+                                                "imageURL": medal.icon
+                                            });
+                                }
+                                this.PostToRuntime("on-medal-unlocked",JSON.parse(JSON.stringify(medal))); //Serializing
+                            }
+                        )                        
+                    }
+                })
+            }
+            else {
+                const msg="Invalid Medal Id";
+                console.log(msg);
+                this.PostToRuntime("cancel-medal-unlock",{code:-1,message:msg});
+            }
+        }
+
+        _postScore(d){
+            if (d["board"]<=0){
+                const msg="Board ID "+d["board"]+" is invalid. Check your game API Tools section to get a valid board id.";
+                console.warn("NGIO:",msg);
+                this.PostToRuntime("cancel-score-post",{code:-1,message:msg});
+                return;
+            }
+
+            if (d["value"]==0){
+                const msg="Invalid value "+d["value"]+". Why would you post a zero? You shall not pass! 🧙🏼‍♂️✋🐲";
+                console.warn("NGIO:",msg);
+                this.PostToRuntime("cancel-score-post",{code:-1,message:msg});
+                return;
+            }
+
+            this.#pluginWaiting=true;
+            const board=NGIO.getScoreBoard(d["board"]);
+
+            board.postScore(d["value"],d["tag"],
+                (response)=>{
+                    if (!response.result.success){
+                        let msg={};                        
+                        if (response.result.error!=null){
+                            console.error(response.result.error);
+                            msg={
+                                code:response.result.error.code,
+                                message:response.result.error.message
+                            };
+                        }
+                        this.#pluginWaiting=false;
+                        this.PostToRuntime("cancel-score-post",msg);
+                    }
+                    else{
+                        this.#pluginWaiting=false;
+                        this.PostToRuntime("on-score-posted",d);
+                    }
+                },
+                this);
+        }
+
+        _onScoresReady(response){ 
+            
+            const board=response.result.scoreboard;
+            const scores=response.result.scores;
+            const scoresSerialized=[];
+            const urls=[];
+            for (const i of scores){ //Serializing scores
+                const obj=i.toJSON();
+                obj["tag"]=i.tag==null?"":i.tag;
+                urls.push(obj["user"]["icons"]["large"]);
+                scoresSerialized.push(obj);
+            }
+            this.#pluginWaiting=false;
+            this._updatePreloadedItems().then(
+                ()=>{
+                    this.PostToRuntime("on-scores-ready",
+                        {
+                            "board":{
+                                "id":board.id,
+                                "name":board.name
+                            },
+                            "scores":scoresSerialized
+                        }
+                    );
+                }
+            );
+        }
+
+        _startNGWindowCheck(){
+            this.windowCheckIntervalID=setInterval(this._checkNGWindow.bind(this),100);
+        }
+
+        _checkNGWindow(){
+            if (NGIO.ngWindow==null) {
+                return;
+            }
+            if (NGIO.ngWindow.closed&&NGIO.user.id==null){ //A potential cancellation
+                this._resumeRuntime();
+                this._stopNGWindowCheck();
+                if (this.isLoginRequested){
+                    this.#windowClosedTimeout=setTimeout(()=>{
+                            if (NGIO.user.id==null){ //If no user has logged in, then cancell the request.                                
+                                this._cancelLogin();
+                                this.isLoginRequested=false;
+                                this.#windowClosedTimeout=null;                                
+                            }     
+                        },5000);
+                }                
+            }
+        }
+
+        _stopNGWindowCheck(){            
+            if (this.#timeoutLogin!==null)
+                clearTimeout(this.#timeoutLogin);
+
+            this.#timeoutLogin=null;
+            if (this.windowCheckIntervalID!==null){
+                clearInterval(this.windowCheckIntervalID);
+                this.windowCheckIntervalID=null;
+            }
+        }
+
+        _cancelLogin(){
+            this._closeNGWindow();
+            if (NGIO.session!==null)
+                NGIO.cancelLogin();
+            this.#pluginWaiting=false;
+            const msg="Login request cancelled";
+            this._resumeRuntime();
+
+            if (this.isNotifEnabled())
+            {
+                NGIONotificationManager.instance.showNotification(
+                    {
+                        "title":"Session",
+                        "message":"Login cancelled.",
+                        "type": "session",
+                        "tokens": {"dummy":""},
+                        "duration": 10000,
+                        "imageURL": NGIONotificationManager.NG_DEFAULT
+                    });
+            }
+            this.PostToRuntime("on-login-cancelled",{code:-1,message:msg})
+        }
+
+        _closeNGWindow(){
+            if (NGIO.ngWindow!==null)
+                if (!NGIO.ngWindow.closed)
+                    NGIO.ngWindow.close();
+        }
+
+        _skipLogin(){            
+            NGIO.cancelLogin();
+            this._closeNGWindow();
+        }
+
+        onPreventKeyDefaults(e){
+            if (e.code=="ArrowRight"||
+                e.code=="ArrowLeft"||
+                e.code=="ArrowDown"||
+                e.code=="ArrowUp"||
+                e.code=="Spacebar"
+            ) {
+                e.preventDefault();
+            }
+        }
+	};
+	
+	globalThis.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS);
+}
+
 // start-export.js
 "use strict";if(window["C3_IsSupported"]){const e=false;window["c3_runtimeInterface"]=new self.RuntimeInterface({useWorker:e,workerMainUrl:"workermain.js",runtimeScriptList:["scripts/c3main.js"],scriptFolder:"scripts/",exportType:"html5"})}
