@@ -1675,7 +1675,7 @@ self.C3_ExpressionFuncs = [
 		() => "inputMixed",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() + "Grunt");
+			return () => (v0.GetValue() + "_grunt");
 		},
 		() => "grunt",
 		p => {
@@ -1704,28 +1704,33 @@ self.C3_ExpressionFuncs = [
 			return () => (((v0.GetValue() + ((((v1.GetValue()) === ("right") ? 1 : 0)) ? (1) : ((-1)))) + n2.ExpObject()) % n3.ExpObject());
 		},
 		() => "false",
-		() => "Level - Drinks (Drinking)",
-		() => 5,
-		() => "sip",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("wine");
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() + "Wine");
-		},
-		() => -1,
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() + "Beer");
-		},
-		() => "reach",
 		() => 6,
+		() => 5,
 		() => -98,
 		() => "wink",
 		() => 0.5,
 		() => "default",
+		() => "Level - Drinks (Drinking)",
+		() => "cooldown",
+		() => "sip",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			return () => and((v0.GetValue() + "_"), n1.ExpObject(v2.GetValue(), 0));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject(v1.GetValue(), 0);
+		},
+		() => -1,
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => add(n0.ExpObject(v1.GetValue(), 3), 1);
+		},
+		() => "reach",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -1748,6 +1753,12 @@ self.C3_ExpressionFuncs = [
 		() => "Results",
 		() => -99,
 		() => 0.15,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			return () => f0((v1.GetValue() - 0.05), (v2.GetValue() + 0.05));
+		},
 		() => "cat",
 		() => "francis",
 		() => 1.5,
@@ -1804,6 +1815,10 @@ self.C3_ExpressionFuncs = [
 		() => "cheese",
 		() => 10,
 		() => "bigcheese",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + "Beer");
+		},
 		() => "popup",
 		() => 0.25,
 		() => "flash",
@@ -1865,14 +1880,41 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			const f2 = p._GetNode(2).GetBoundMethod();
 			const n3 = p._GetNode(3);
-			return () => ((Math.cos(C3.toRadians(f0())) * n1.ExpInstVar()) + (Math.cos(C3.toRadians((f2() + 90))) * n3.ExpInstVar()));
+			const n4 = p._GetNode(4);
+			return () => (((Math.cos(C3.toRadians(f0())) * n1.ExpInstVar()) + (Math.cos(C3.toRadians((f2() + 90))) * n3.ExpInstVar())) + n4.ExpInstVar());
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			const f2 = p._GetNode(2).GetBoundMethod();
 			const n3 = p._GetNode(3);
-			return () => ((Math.sin(C3.toRadians(f0())) * n1.ExpInstVar()) + (Math.sin(C3.toRadians((f2() + 90))) * n3.ExpInstVar()));
+			const n4 = p._GetNode(4);
+			return () => (((Math.sin(C3.toRadians(f0())) * n1.ExpInstVar()) + (Math.sin(C3.toRadians((f2() + 90))) * n3.ExpInstVar())) + n4.ExpInstVar());
+		},
+		() => "wasted",
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => C3.lerp(n0.ExpInstVar(), v1.GetValue(), (f2() * 5));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(0.25, 1);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0((-50), 50);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(0.35, 0.8);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => f0((Math.abs(n1.ExpInstVar()) - (480 * f2())), 0);
 		},
 		() => "Level - Collision",
 		p => {
@@ -1926,7 +1968,7 @@ self.C3_ExpressionFuncs = [
 		() => -256,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() + "ScreamBig");
+			return () => (v0.GetValue() + "_screamBig");
 		},
 		() => "Level - Camera",
 		p => {
@@ -1986,6 +2028,10 @@ self.C3_ExpressionFuncs = [
 			return () => f0(f1(), "^(https?:\\/\\/|\\/\\/)?([a-z0-9-]+\\.)?(newgrounds\\.com|ungrounded\\.net)($|[\\/?#])", "gi");
 		},
 		() => "Global - AJAX",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("tankman");
+		},
 		() => "SCUMDOG/doom_tge/saveData1.txt",
 		() => "load",
 		() => "saveData1",
@@ -2033,6 +2079,8 @@ self.C3_ExpressionFuncs = [
 			return () => f0("HUD");
 		},
 		() => "Global - NGIO",
+		() => "skin",
+		() => "tankman",
 		p => {
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
@@ -2041,17 +2089,15 @@ self.C3_ExpressionFuncs = [
 		() => "Global - Unlocks",
 		p => {
 			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => n0.ExpObject(v1.GetValue(), 0);
+			return () => n0.ExpObject("francis");
 		},
 		() => "Global - Saving",
-		() => "saving",
 		() => "sound",
-		() => "skin",
 		() => "fullscreen",
 		() => "flashing",
 		() => "doomUnlock",
 		() => "doomMusic",
+		() => "saving",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -2062,7 +2108,6 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => n0.ExpObject(n1.ExpObject(), 5);
 		},
-		() => "tankman",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
@@ -2112,8 +2157,21 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Results - Initialization",
 		() => "Results - Unlocks",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("classic");
+		},
 		() => 999,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("wine");
+		},
 		() => 64,
+		() => 12,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("wasted");
+		},
 		() => 20,
 		() => 7,
 		() => 600,
@@ -2161,6 +2219,10 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(255, 255, 255);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + "_scream");
 		},
 		() => "Loader - Initialization",
 		() => "Loader",
@@ -2254,7 +2316,6 @@ self.C3_ExpressionFuncs = [
 		() => "Menu - Individual Items (Sliders)",
 		() => "menuSelect",
 		() => 0.02,
-		() => "cooldown",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -2340,11 +2401,15 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => (v0.GetValue() + n1.ExpInstVar());
 		},
-		() => 65,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => n0.ExpObject(n1.ExpInstVar(), 0);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 9);
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -2486,6 +2551,7 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject(n1.ExpObject(), 4);
 		},
 		() => "Menu",
+		() => 65,
 		() => "Menu - Updating",
 		() => "label",
 		() => 320,
