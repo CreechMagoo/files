@@ -1,0 +1,263 @@
+import { COUNTRIES, MONTHS, SEXES, RACES, ETHNICITIES, EYE_COLORS, HAIR_COLORS, CHARACTER_NAME_MAX_LENGTH, CHARACTER_NAME_REGEX, CHARACTER_NAME_ERROR_MESSAGE, BANNED_WORDS, } from "./constants.js";
+/**
+ * checks if a given country is in the approved country list
+ * @param country - country string to validate
+ * @returns true if country is valid, false otherwise
+ */
+export function isValidCountry(country) {
+    return COUNTRIES.includes(country);
+}
+/**
+ * validate character name with error messages
+ * @param name - character name to validate
+ * @returns validation result with specific error message
+ */
+export function validateCharacterName(name) {
+    if (!name || name.length === 0) {
+        return { valid: false, error: "Character name is required" };
+    }
+    if (name.length > CHARACTER_NAME_MAX_LENGTH) {
+        return {
+            valid: false,
+            error: `Name must be ${CHARACTER_NAME_MAX_LENGTH} characters or less`,
+        };
+    }
+    if (!CHARACTER_NAME_REGEX.test(name)) {
+        return { valid: false, error: CHARACTER_NAME_ERROR_MESSAGE };
+    }
+    if (/[ ]{2,}|[-]{2,}|['][ ']/.test(name) ||
+        name.includes("..") ||
+        name.includes("--") ||
+        name.includes("''")) {
+        return {
+            valid: false,
+            error: "Name cannot have consecutive punctuation or spaces",
+        };
+    }
+    if (/\./.test(name)) {
+        const invalidPeriodPattern = /[a-z]{2,}\.[a-z]/;
+        if (invalidPeriodPattern.test(name)) {
+            return {
+                valid: false,
+                error: "Periods can only be used for abbreviations (e.g., 'H. W.' or 'J.K.')",
+            };
+        }
+    }
+    return { valid: true };
+}
+/**
+ * sanitize text input to conform to type rules
+ * @param runtime - C3 runtime instance
+ * @returns sanitized text that conforms to type's rules
+ */
+export function validateInputName(runtime) {
+    const input_text = runtime.getElement().value;
+    if (!input_text || typeof input_text !== "string") {
+        return "";
+    }
+    // remove all invalid characters
+    let sanitized = input_text.replace(/[^A-Za-z'. -]/g, "");
+    // remove leading non-letters
+    sanitized = sanitized.replace(/^[^A-Za-z]+/, "");
+    // remove consecutive punctuation
+    sanitized = sanitized.replace(/\s{2,}/g, " ");
+    sanitized = sanitized.replace(/-{2,}/g, "-");
+    sanitized = sanitized.replace(/'{2,}/g, "'");
+    sanitized = sanitized.replace(/\.{2,}/g, ".");
+    // truncate to max length
+    if (sanitized.length > CHARACTER_NAME_MAX_LENGTH) {
+        sanitized = sanitized.substring(0, CHARACTER_NAME_MAX_LENGTH).trim();
+    }
+    // if no letters remain, return empty string
+    if (!/[A-Za-z]/.test(sanitized)) {
+        return "";
+    }
+    return sanitized;
+}
+/**
+ * get the value of provided JSON key
+ * @param runtime - C3 runtime instance (JSON)
+ * @param key - JSON key path
+ */
+export function getJSONValue(runtime, key) {
+    const json_object = runtime;
+    const json_data = json_object.getJsonDataCopy();
+    const parts = key.split(".");
+    let ref = json_data;
+    for (const p of parts) {
+        if (ref == null || typeof ref !== "object")
+            return "";
+        ref = ref[p];
+    }
+    return ref;
+}
+/**
+ * set the value of provided JSON key
+ * @param runtime - C3 runtime instance (JSON)
+ * @param key - JSON key path
+ * @param value - JSON value
+ */
+export function setJSONValue(runtime, key, value) {
+    const json_object = runtime;
+    let json_data = json_object.getJsonDataCopy();
+    const parts = key.split(".");
+    let ref = json_data;
+    for (let i = 0; i < parts.length - 1; i++) {
+        ref = ref[parts[i]];
+        if (ref === undefined)
+            return;
+    }
+    ref[parts[parts.length - 1]] = value;
+    json_object.setJsonDataCopy(json_data);
+}
+/**
+ * delete the provided JSON key
+ * @param runtime - C3 runtime instance (JSON)
+ * @param key - JSON key path to delete
+ */
+export function deleteJSONValue(runtime, key) {
+    const json_object = runtime;
+    let json_data = json_object.getJsonDataCopy();
+    const parts = key.split(".");
+    let ref = json_data;
+    for (let i = 0; i < parts.length - 1; i++) {
+        ref = ref[parts[i]];
+        if (ref === undefined)
+            return;
+    }
+    const lastKey = parts[parts.length - 1];
+    if (Array.isArray(ref) && !isNaN(parseInt(lastKey))) {
+        const index = parseInt(lastKey);
+        ref.splice(index, 1);
+    }
+    else {
+        delete ref[lastKey];
+    }
+    json_object.setJsonDataCopy(json_data);
+}
+/**
+ * build date string from component changes
+ * @param listType - which date component is being changed (month/day/year)
+ * @param selectedText - the selected dropdown text
+ * @param currentDate - current date_of_birth value
+ * @returns formatted YYYY-MM-DD date string
+ */
+export function buildDateFromComponents(listType, selectedText, currentDate) {
+    let [year, month, day] = currentDate.split("-");
+    switch (listType) {
+        case "year":
+            year = selectedText;
+            break;
+        case "month":
+            const monthIndex = MONTHS.indexOf(selectedText) + 1;
+            month = (monthIndex || 0).toString().padStart(2, "0");
+            break;
+        case "day":
+            day = selectedText;
+            break;
+    }
+    const maxDays = new Date(Number(year), Number(month), 0).getDate();
+    day = Math.min(Number(day), maxDays).toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+/**
+ * format date from YYYY-MM-DD to MM/DD/YYYY
+ * @param dateString - date in YYYY-MM-DD format
+ * @returns date in MM/DD/YYYY format, or empty string if invalid
+ */
+export function formatDateForDisplay(dateString) {
+    if (!dateString || typeof dateString !== "string") {
+        return "";
+    }
+    const dateParts = dateString.split("-");
+    if (dateParts.length !== 3) {
+        return "";
+    }
+    const [year, month, day] = dateParts;
+    return `${month.padStart(2, "0")}/${day.padStart(2, "0")}/${year}`;
+}
+/**
+ * map dropdown selected text to appropriate JSON value
+ * @param listType - the dropdown type
+ * @param selectedText - the selected dropdown text
+ * @returns the JSON value to store, or null for deletion
+ */
+export function mapDropdownValueToKey(listType, selectedText) {
+    switch (listType) {
+        case "location":
+            return selectedText;
+        case "sex":
+            return (Object.entries(SEXES).find((entry) => entry[1].label === selectedText)?.[0] ?? "");
+        case "race#1":
+        case "race#2":
+            return (Object.entries(RACES).find((entry) => entry[1].label === selectedText)?.[0] ?? "");
+        case "ethnicity":
+            return (Object.entries(ETHNICITIES).find((entry) => entry[1].label === selectedText)?.[0] ?? "");
+        case "eye_color":
+            return (Object.entries(EYE_COLORS).find((entry) => entry[1].label === selectedText)?.[0] ?? "");
+        case "hair_color":
+            return (Object.entries(HAIR_COLORS).find((entry) => entry[1].label === selectedText)?.[0] ?? "");
+        default:
+            return "";
+    }
+}
+/**
+ * check if a field should be deleted based on its value
+ * @param value - the mapped value
+ * @param listType - optional list type for context-specific deletion rules
+ * @returns true if field should be deleted
+ */
+export function shouldDeleteField(value, listType) {
+    return value === null || (listType?.startsWith("race") && value === "none");
+}
+/**
+ * handle race mutual exclusivity logic
+ * @param runtime - C3 runtime instance (JSON)
+ * @param changingRace - which race dropdown is being changed (race#1 or race#2)
+ * @param value - the new value being set (null for N/A)
+ */
+export function handleRaceMutualExclusivity(runtime, changingRace, value) {
+    if (value === null && changingRace.startsWith("race")) {
+        const otherRacePath = changingRace === "race#1"
+            ? "character_data.info.race.1"
+            : "character_data.info.race.0";
+        const otherRaceValue = getJSONValue(runtime, otherRacePath);
+        if (!otherRaceValue || otherRaceValue === "none") {
+            deleteJSONValue(runtime, otherRacePath);
+        }
+    }
+}
+/**
+ * sanitize character name by replacing profanities with asterisks
+ * @param name - character name to sanitize
+ * @returns sanitized name
+ */
+export function sanitizeCharacterName(name) {
+    if (!name || typeof name !== "string") {
+        return "";
+    }
+    let sanitized = name;
+    for (const bannedWord of BANNED_WORDS) {
+        const regexPattern = bannedWord
+            .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+            .replace(/\\\*/g, ".*");
+        const regex = new RegExp(`\\b${regexPattern}\\b`, "gi");
+        sanitized = sanitized.replace(regex, (match) => {
+            return "*".repeat(match.length);
+        });
+    }
+    return sanitized;
+}
+/**
+ * check if the game is being played on Newgrounds
+ * @returns true if playing on newgrounds.com or ungrounded.net, false otherwise
+ */
+export function isPlayingOnNewgrounds() {
+    try {
+        const hostname = window.location.hostname.toLowerCase();
+        return (hostname.includes("newgrounds.com") || hostname.includes("ungrounded.net"));
+    }
+    catch {
+        return false;
+    }
+}
